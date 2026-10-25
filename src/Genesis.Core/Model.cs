@@ -32,15 +32,20 @@ public sealed record Rules
     public double MigrationThreshold { get; init; } = .1;
     public double TravelPenalty { get; init; } = .03;
 }
+public sealed record InitialPopulation(RegionId Region, SpeciesId Species, long[] StageCounts,
+    double[]? VariantWeights = null, long[][]? StageVariantCounts = null);
 public sealed record Scenario(int SchemaVersion, string Name, Rules Rules,
     RegionDefinition[] Regions, SpeciesDefinition[] Species, long[] InitialStageCounts,
-    double[] InitialVariantWeights, double InitialStockFraction);
+    double[] InitialVariantWeights, double InitialStockFraction, InitialPopulation[]? InitialPopulations = null);
 public sealed record RegionState(RegionId Id, double Temperature, double Rainfall, double Forage);
 public sealed record Cohort(CohortId Id, long Count);
 public sealed record GroupMemory(RegionId Region, SpeciesId Species, int HungryMonths, bool Famine);
+public sealed record PopulationWindow(RegionId Region, SpeciesId Species, int StartTick,
+    long Start, long Births, long Deaths, long Inward, long Outward, double Demand, double Consumed);
+public sealed record PopulationSummary(PopulationWindow Window, int EndTick, long End);
 public sealed record WorldState(int SchemaVersion, string EngineVersion, string RulesetHash,
     ulong Seed, int CurrentTick, string RngAlgorithm, Scenario Scenario, RegionState[] Regions,
-    Cohort[] Cohorts, GroupMemory[] Memory, long EventCount, string EventHash)
+    Cohort[] Cohorts, GroupMemory[] Memory, long EventCount, string EventHash, PopulationWindow[] Windows)
 {
     [JsonIgnore] public long Population => Cohorts.Sum(c => c.Count);
 }
@@ -57,5 +62,8 @@ public sealed record Transfer(CohortId Origin, RegionId Destination, long Count,
     double OriginScore, double DestinationScore);
 public sealed record CohortAudit(CohortId Cohort, long Start, double ExposureDegrees,
     double DeathProbability, long Deaths, long Survivors);
+public sealed record FoodForecast(RegionId Region, int Tick, double Stock, double Temperature,
+    double Rainfall, double Regrowth, double Available);
 public sealed record TickResult(WorldState State, PopulationFlow[] Populations, FoodFlow[] Food,
-    Transfer[] Transfers, SimEvent[] Events, CohortAudit[] Audit);
+    Transfer[] Transfers, SimEvent[] Events, CohortAudit[] Audit, FoodForecast[] Forecasts,
+    PopulationSummary[] Summaries);

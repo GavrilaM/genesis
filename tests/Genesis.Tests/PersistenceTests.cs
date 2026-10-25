@@ -28,6 +28,10 @@ public class PersistenceTests
             var w = Simulation.Create(MechanicsTests.Baseline(), 1);
             RunArchive.Run(w, 36, path, 12, 12, 1, 0); RunArchive.Verify(path);
             Assert.True(File.Exists(Path.Combine(path, "trace.json")));
+            var summary = Path.Combine(path, "summaries.jsonl"); var original = File.ReadAllText(summary);
+            File.AppendAllText(summary, "{}\n");
+            Assert.Throws<InvalidDataException>(() => RunArchive.Verify(path));
+            File.WriteAllText(summary, original); RunArchive.Verify(path);
             var ledger = Path.Combine(path, "events.jsonl");
             Assert.NotEmpty(File.ReadAllLines(ledger));
             File.AppendAllText(ledger, File.ReadLines(ledger).First() + Environment.NewLine);

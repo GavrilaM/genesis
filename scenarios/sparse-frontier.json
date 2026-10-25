@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 1,
+  "name": "sparse-frontier",
+  "rules": {
+    "productivity": 3,
+    "rainMultiplier": 1,
+    "droughtStart": 120,
+    "droughtEnd": 240,
+    "droughtMultiplier": 1,
+    "temperatureOffset": 0,
+    "starvationMortality": 0.07,
+    "climateMortality": 0.0015,
+    "mutationRate": 0.01,
+    "resistanceDegrees": 5,
+    "resistanceFoodCost": 0.04,
+    "famineStart": 0.65,
+    "famineEnd": 0.9,
+    "migrationThreshold": 0.1,
+    "travelPenalty": 0.03
+  },
+  "regions": [
+    {
+      "id": {
+        "value": 0
+      },
+      "name": "Region 0",
+      "terrain": "plain",
+      "area": 1000,
+      "fertility": 0.45,
+      "baseTemperature": -2,
+      "baseRainfall": 65,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 1
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 6
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 11
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 1
+      },
+      "name": "Region 1",
+      "terrain": "forest",
+      "area": 1000,
+      "fertility": 0.5,
+      "baseTemperature": 1,
+      "baseRainfall": 75,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 0
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 2
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 7
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 2
+      },
+      "name": "Region 2",
+      "terrain": "highland",
+      "area": 1000,
+      "fertility": 0.55,
+      "baseTemperature": 4,
+      "baseRainfall": 85,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 1
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 3
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 8
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 3
+      },
+      "name": "Region 3",
+      "terrain": "wetland",
+      "area": 1000,
+      "fertility": 0.6000000000000001,
+      "baseTemperature": 7,
+      "baseRainfall": 95,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 2
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 4
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 9
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 4
+      },
+      "name": "Region 4",
+      "terrain": "plain",
+      "area": 1000,
+      "fertility": 0.65,
+      "baseTemperature": 10,
+      "baseRainfall": 105,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 3
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 5
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 10
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 5
+      },
+      "name": "Region 5",
+      "terrain": "forest",
+      "area": 1000,
+      "fertility": 0.7,
+      "baseTemperature": 13,
+      "baseRainfall": 65,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 4
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 6
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 11
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 6
+      },
+      "name": "Region 6",
+      "terrain": "highland",
+      "area": 1000,
+      "fertility": 0.45,
+      "baseTemperature": 16,
+      "baseRainfall": 75,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 0
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 5
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 7
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 7
+      },
+      "name": "Region 7",
+      "terrain": "wetland",
+      "area": 1000,
+      "fertility": 0.5,
+      "baseTemperature": 19,
+      "baseRainfall": 85,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 1
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 6
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 8
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 8
+      },
+      "name": "Region 8",
+      "terrain": "plain",
+      "area": 1000,
+      "fertility": 0.55,
+      "baseTemperature": 22,
+      "baseRainfall": 95,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 2
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 7
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 9
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 9
+      },
+      "name": "Region 9",
+      "terrain": "forest",
+      "area": 1000,
+      "fertility": 0.6000000000000001,
+      "baseTemperature": 25,
+      "baseRainfall": 105,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 3
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 8
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 10
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 10
+      },
+      "name": "Region 10",
+      "terrain": "highland",
+      "area": 1000,
+      "fertility": 0.65,
+      "baseTemperature": 28,
+      "baseRainfall": 65,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 4
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 9
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 11
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 11
+      },
+      "name": "Region 11",
+      "terrain": "wetland",
+      "area": 1000,
+      "fertility": 0.7,
+      "baseTemperature": 31,
+      "baseRainfall": 75,
+      "capacity": 15000,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 0
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 5
+          },
+          "cost": 1
+        },
+        {
+          "destination": {
+            "value": 10
+          },
+          "cost": 1
+        }
+      ]
+    }
+  ],
+  "species": [
+    {
+      "id": {
+        "value": 0
+      },
+      "name": "human",
+      "foodDemand": 1,
+      "maturationMonths": 192,
+      "adultMonths": 432,
+      "elderMonths": 180,
+      "annualBirthRate": 0.09,
+      "naturalMortality": 0.0003,
+      "coldTolerance": 0,
+      "heatTolerance": 30,
+      "migrationRate": 0.08,
+      "maxTravelCost": 3
+    },
+    {
+      "id": {
+        "value": 1
+      },
+      "name": "orc",
+      "foodDemand": 1.15,
+      "maturationMonths": 168,
+      "adultMonths": 360,
+      "elderMonths": 156,
+      "annualBirthRate": 0.1,
+      "naturalMortality": 0.0003,
+      "coldTolerance": -2,
+      "heatTolerance": 32,
+      "migrationRate": 0.08,
+      "maxTravelCost": 3
+    },
+    {
+      "id": {
+        "value": 2
+      },
+      "name": "elf",
+      "foodDemand": 0.85,
+      "maturationMonths": 288,
+      "adultMonths": 720,
+      "elderMonths": 300,
+      "annualBirthRate": 0.065,
+      "naturalMortality": 0.0003,
+      "coldTolerance": 2,
+      "heatTolerance": 28,
+      "migrationRate": 0.08,
+      "maxTravelCost": 3
+    },
+    {
+      "id": {
+        "value": 3
+      },
+      "name": "dwarf",
+      "foodDemand": 1.05,
+      "maturationMonths": 216,
+      "adultMonths": 600,
+      "elderMonths": 240,
+      "annualBirthRate": 0.075,
+      "naturalMortality": 0.0003,
+      "coldTolerance": -5,
+      "heatTolerance": 27,
+      "migrationRate": 0.08,
+      "maxTravelCost": 3
+    }
+  ],
+  "initialStageCounts": [
+    180,
+    540,
+    80
+  ],
+  "initialVariantWeights": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333334
+  ],
+  "initialStockFraction": 0.5,
+  "initialPopulations": [
+    {
+      "region": {
+        "value": 0
+      },
+      "species": {
+        "value": 0
+      },
+      "stageCounts": [
+        120,
+        360,
+        40
+      ],
+      "variantWeights": [
+        0.5,
+        0.3,
+        0.2
+      ]
+    },
+    {
+      "region": {
+        "value": 3
+      },
+      "species": {
+        "value": 1
+      },
+      "stageCounts": [
+        100,
+        300,
+        50
+      ]
+    },
+    {
+      "region": {
+        "value": 6
+      },
+      "species": {
+        "value": 2
+      },
+      "stageCounts": [
+        60,
+        180,
+        20
+      ]
+    },
+    {
+      "region": {
+        "value": 9
+      },
+      "species": {
+        "value": 3
+      },
+      "stageCounts": [
+        80,
+        240,
+        30
+      ]
+    }
+  ]
+}

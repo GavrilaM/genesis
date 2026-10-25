@@ -35,3 +35,22 @@ provisional simulation assumptions, not empirically calibrated biology.
 Not claimed: calibrated ecology, cross-runtime determinism, adaptive stepping,
 replay-on-demand for uncaptured traces, intervention logs or save-schema migrations.
 Future individual/cultural/divine/visual systems remain outside this milestone.
+
+## Phase 0.5 status
+
+Implemented and tested: optional sparse/exact starting cohorts, capacity-bounded
+next-month migration forecasts, canonical annual flow accounting, measured
+migration-wave/population-change events, history summaries and summary checksums.
+Engine 0.2.0 / snapshot schema 2 explicitly rejects incompatible old saves.
+
+Controlled experiments identify reproduction and thermal tolerance as strong
+contributors to orc dominance; maturation and geography also matter. No baseline
+species parameter was retuned. Demographic assays demonstrate premature maturation
+under geometric stages and suppressed stochastic variance. These are documented
+limitations, with evidence-backed recommendations for a minimum-age/staged cohort
+model and a bounded-count stochastic model before using the simulator to infer
+juvenile timing or extinction probabilities. Alternatives remain offline assays.
+
+See `docs/PHASE05_REPORT.md` and `docs/results/phase05/` for exact results and
+commands. This closes the requested calibration pass, not the research questions
+about empirical ecology or the authorization boundary for future systems.

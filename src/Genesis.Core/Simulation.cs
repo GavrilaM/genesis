@@ -2,7 +2,8 @@ namespace Genesis.Core;
 
 public static class Simulation
 {
-    public const string Version = "0.1.0";
+    public const string Version = "0.2.0";
+    public const int SnapshotSchema = 2;
     public static int Index(int r, int s, int a, int v, int ns) => ((r * ns + s) * 3 + a) * 3 + v;
 
     public static WorldState Create(Scenario scenario, ulong seed)
@@ -11,23 +12,30 @@ public static class Simulation
         var s = Persistence.Decode<Scenario>(Persistence.Encode(scenario));
         Validation.Scenario(s);
         var cohorts = new List<Cohort>(); var memory = new List<GroupMemory>();
+        var windows = new List<PopulationWindow>();
+        var configured = s.InitialPopulations?.ToDictionary(p => (p.Region, p.Species));
         foreach (var r in s.Regions) foreach (var sp in s.Species)
         {
             memory.Add(new(r.Id, sp.Id, 0, false));
+            var entry = configured?.GetValueOrDefault((r.Id, sp.Id));
+            var stages = configured is null ? s.InitialStageCounts : entry?.StageCounts ?? [0L, 0L, 0L];
+            var weights = entry?.VariantWeights ?? s.InitialVariantWeights;
+            windows.Add(new(r.Id, sp.Id, 0, stages.Sum(), 0, 0, 0, 0, 0, 0));
             for (int a = 0; a < 3; a++)
             {
-                long remaining = s.InitialStageCounts[a];
+                long remaining = stages[a];
                 for (int v = 0; v < 3; v++)
                 {
-                    long n = v == 2 ? remaining : (long)Math.Floor(s.InitialStageCounts[a] * s.InitialVariantWeights[v]);
+                    long n = entry?.StageVariantCounts is not null ? entry.StageVariantCounts[a][v]
+                        : v == 2 ? remaining : (long)Math.Floor(stages[a] * weights[v]);
                     remaining -= n;
                     cohorts.Add(new(new(r.Id, sp.Id, a, v), n));
                 }
             }
         }
-        var w = new WorldState(1, Version, Persistence.Hash(s), seed, 0, DeterministicRandom.Algorithm, s,
+        var w = new WorldState(SnapshotSchema, Version, Persistence.Hash(s), seed, 0, DeterministicRandom.Algorithm, s,
             s.Regions.Select(r => new RegionState(r.Id, r.BaseTemperature, r.BaseRainfall, r.Capacity * s.InitialStockFraction)).ToArray(),
-            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash);
+            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash, windows.ToArray());
         Validation.State(w);
         return w;
     }
@@ -71,12 +79,10 @@ public static class Simulation
         for (int r = 0; r < nr; r++)
         {
             var def = w.Scenario.Regions[r];
-            double season = Math.Sin(2 * Math.PI * ((tick - 1) % 12) / 12);
-            double temp = def.BaseTemperature + rules.TemperatureOffset + 8 * season + (Rand(1, r) - .5) * 4;
-            double drought = tick > rules.DroughtStart && tick <= rules.DroughtEnd ? rules.DroughtMultiplier : 1;
-            double rain = def.BaseRainfall * rules.RainMultiplier * drought * (.8 + .4 * Rand(1, r, draw: 1));
+            double temp = EnvironmentModel.MeanTemperature(def, rules, tick) + (Rand(1, r) - .5) * 4;
+            double rain = EnvironmentModel.MeanRainfall(def, rules, tick) * (.8 + .4 * Rand(1, r, draw: 1));
             double regrowth = Math.Min(def.Capacity - w.Regions[r].Forage,
-                def.Area * def.Fertility * rules.Productivity * Math.Min(1.5, rain / 100) * Math.Clamp((temp + 10) / 25, 0, 1));
+                EnvironmentModel.Production(def, rules, temp, rain));
             double available = w.Regions[r].Forage + regrowth;
             var demands = Enumerable.Range(0, ns).Select(s => Demand(r, s)).ToArray();
             double totalDemand = demands.Sum();
@@ -133,7 +139,14 @@ public static class Simulation
 
         // Forecast is frozen for all origins; incoming migrants cannot migrate again this month.
         var forecastDemand = Enumerable.Range(0, nr).Select(r => Enumerable.Range(0, ns).Sum(s => Demand(r, s, counts))).ToArray();
-        double Score(int r, int s, int v) => Math.Min(2, (regions[r].Forage + food[r].Regrowth) / Math.Max(1, forecastDemand[r])) - .04 * Exposure(r, s, v);
+        var forecasts = Enumerable.Range(0, nr).Select(r => EnvironmentModel.Forecast(w.Scenario.Regions[r], rules, regions[r], checked(tick + 1))).ToArray();
+        double Score(int r, int s, int v)
+        {
+            var sp = w.Scenario.Species[s]; double temperature = forecasts[r].Temperature;
+            double exposure = Math.Max(0, sp.ColdTolerance - v * rules.ResistanceDegrees - temperature)
+                + Math.Max(0, temperature - sp.HeatTolerance);
+            return Math.Min(2, forecasts[r].Available / Math.Max(1, forecastDemand[r])) - .04 * exposure;
+        }
         var transfers = new List<Transfer>(); var delta = new long[counts.Length];
         for (int r = 0; r < nr; r++) for (int s = 0; s < ns; s++) for (int v = 0; v < 3; v++)
         {
@@ -175,10 +188,33 @@ public static class Simulation
             if (before > 0 && after == 0) Emit("species-extinction", -1, s, before, 0,
                 [new("deaths", flows.Where(f => f.Species.Value == s).Sum(f => f.Deaths))], "population", "no-surviving-cohorts", "critical");
         }
+        // Annual accounting is canonical state so a mid-year snapshot cannot lose evidence.
+        var windows = new PopulationWindow[flows.Length]; var summaries = new List<PopulationSummary>();
+        for (int g = 0; g < flows.Length; g++)
+        {
+            var f = flows[g]; var old = w.Windows[g];
+            var sum = old with { Births = old.Births + f.Births, Deaths = old.Deaths + f.Deaths,
+                Inward = old.Inward + f.Inward, Outward = old.Outward + f.Outward,
+                Demand = old.Demand + f.Demand, Consumed = old.Consumed + f.Consumed };
+            windows[g] = sum;
+            if (tick % 12 != 0) continue;
+            summaries.Add(new(sum, tick, f.End));
+            Evidence[] evidence = [new("fromTick", sum.StartTick), new("births", sum.Births), new("deaths", sum.Deaths),
+                new("inward", sum.Inward), new("outward", sum.Outward), new("demandRations", sum.Demand),
+                new("consumedRations", sum.Consumed), new("nutrition", sum.Demand == 0 ? 1 : sum.Consumed / sum.Demand)];
+            if (Math.Abs(f.End - sum.Start) >= Math.Max(50, sum.Start * .2))
+                Emit("population-change", f.Region.Value, f.Species.Value, sum.Start, f.End, evidence,
+                    "annual-accounting", "annual-change-at-least-20-percent-and-50", "info");
+            // Throughput, not a count of unique migrants; a person may move more than once.
+            if (sum.Outward >= Math.Max(50, sum.Start * .5))
+                Emit("migration-wave", f.Region.Value, f.Species.Value, sum.Start, f.End, evidence,
+                    "annual-accounting", "annual-outflow-at-least-half-start-and-50", "info");
+            windows[g] = new(f.Region, f.Species, tick, f.End, 0, 0, 0, 0, 0, 0);
+        }
         string eventHash = w.EventHash;
         foreach (var ev in events) eventHash = Persistence.Chain(eventHash, ev);
-        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash };
-        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? []);
+        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash, Windows = windows };
+        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? [], audit ? forecasts : [], summaries.ToArray());
         if (validate) { Validation.State(state); Validation.Transition(result); }
         return result;
     }

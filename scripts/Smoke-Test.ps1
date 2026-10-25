@@ -23,11 +23,16 @@ $missing = Invoke-Genesis @('explain','event','999999999','--run',$RunDirectory)
 if ($missing -ne 'not recorded') { throw 'Missing event was invented' }; $checks++
 $trace = Invoke-Genesis @('trace','--run',$RunDirectory,'--year','0','--month','1','--region','0') | ConvertFrom-Json
 if ($trace.survival.Count -ne 36) { throw 'Missing survival audit' }; $checks++
+if ($trace.forecasts.Count -ne 1 -or $trace.forecasts[0].tick -ne 2 -or $trace.forecasts[0].available -gt $region.definition.capacity) { throw 'Invalid migration forecast audit' }; $checks++
 $absent = Invoke-Genesis @('trace','--run',$RunDirectory,'--year','0','--month','2','--region','0')
 if ($absent -ne 'not recorded') { throw 'Uncaptured trace was invented' }; $checks++
 if ((Invoke-Genesis @('verify',$RunDirectory)) -ne 'verified') { throw 'Archive verification failed' }; $checks++
 $comparison = Invoke-Genesis @('compare',$save,$save) | ConvertFrom-Json
 if (!$comparison.sameState -or !$comparison.sameEventHistory) { throw 'Self comparison failed' }; $checks++
+$annual = @(Invoke-Genesis @('history-summary','--run',$RunDirectory,'--from','0','--to','1','--region','0','--species','0'))
+if ($annual.Count -ne 1 -or $annual[0] -eq 'not recorded') { throw 'Missing annual accounting' }
+$entry = $annual[0] | ConvertFrom-Json
+if ($entry.end -ne $entry.window.start + $entry.window.births - $entry.window.deaths + $entry.window.inward - $entry.window.outward) { throw 'Annual accounting failed' }; $checks++
 $export = Join-Path (Split-Path $RunDirectory) ('smoke-export-' + [Guid]::NewGuid().ToString('N'))
 Invoke-Genesis @('export','--run',$RunDirectory,'--format','csv','--out',$export) | Out-Null
 if ((Get-FileHash (Join-Path $export 'population.csv')).Hash -ne (Get-FileHash (Join-Path $RunDirectory 'population.csv')).Hash) { throw 'CSV export mismatch' }; $checks++

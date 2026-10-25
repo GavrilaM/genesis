@@ -53,6 +53,15 @@ try
             var found = Events().FirstOrDefault(e => e.Id.Value == long.Parse(cli.Pos(2)));
             if (found is null) Console.WriteLine("not recorded");
             else Print(new { recordedEvent = found, interpretation = "Contributors are model-logged inputs; no experimental causal attribution or personal thoughts were recorded." }); break;
+        case "history-summary":
+            cli.Allow("run", "from", "to", "region", "species");
+            var summaryPath = RunPath("summaries.jsonl");
+            var summaries = File.Exists(summaryPath) ? File.ReadLines(summaryPath).Select(Persistence.Decode<PopulationSummary>) : [];
+            var matching = summaries.Where(s => s.Window.StartTick >= cli.Int("from", 0) * 12L && s.EndTick <= cli.Int("to", int.MaxValue / 12) * 12L
+                && (cli.OptionalInt("region") is null || s.Window.Region.Value == cli.OptionalInt("region"))
+                && (cli.OptionalInt("species") is null || s.Window.Species.Value == cli.OptionalInt("species"))).ToArray();
+            if (matching.Length == 0) Console.WriteLine("not recorded"); else foreach (var summary in matching) Print(summary);
+            break;
         case "trace":
             cli.Allow("run", "region", "year", "month");
             int month = cli.Int("month", 1); Validation.Require(month is >= 1 and <= 12, "month must be 1..12; year is zero-based.");
@@ -88,8 +97,18 @@ try
             using (var writer = new StreamWriter(experimentPath))
                 foreach (var row in Experiments.Run(Scenario(), cli.Int("seeds", 16), checked(cli.Int("years", 30) * 12))) writer.WriteLine(Persistence.Encode(row));
             Print(new { output = Path.GetFullPath(experimentPath), seeds = cli.Int("seeds", 16), years = cli.Int("years", 30), treatments = Experiments.Treatments }); break;
+        case "calibrate":
+            cli.Allow("scenario", "seeds", "years", "out", "cases");
+            Calibration.Run(Scenario(), cli.Int("seeds", 8), checked(cli.Int("years", 300) * 12), cli.Required("out"), cli.Has("cases") ? cli.Required("cases") : null);
+            Print(new { output = Path.GetFullPath(cli.Required("out")), status = "complete" }); break;
+        case "demography-assay":
+            cli.Allow("scenario", "seeds", "out");
+            var assayPath = cli.Required("out"); Validation.Require(!File.Exists(assayPath), "Assay output exists.");
+            var assay = DemographyAssay.Report(Scenario().Species[0], cli.Int("seeds", 64));
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(assayPath))!);
+            File.WriteAllText(assayPath, Persistence.Encode(assay)); Print(new { output = Path.GetFullPath(assayPath) }); break;
         case "help":
-            Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
+            Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nhistory-summary --run DIRECTORY [--from YEAR --to YEAR --region ID --species ID]\ncalibrate --seeds N --years N --out NEW_DIRECTORY [--cases baseline,swap-birth,...]\ndemography-assay --seeds N --out JSON\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
         default: throw new ArgumentException($"Unknown command '{verb}'. Use help.");
     }
     return 0;

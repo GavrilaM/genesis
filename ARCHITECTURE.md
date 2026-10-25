@@ -1,5 +1,9 @@
 # Architecture and blueprint validation
 
+Current engine: **0.2.0**, snapshot schema **2** (Phase 0.5). Scenario schema 1
+continues to load; omitted `initialPopulations` retains the original initialization.
+The previous 0.1.0 engine remains available at Git commit `b0f8d4e` for its saves.
+
 The blueprint is internally compatible with a small single-threaded monthly
 engine. Its equations, thresholds, initialization and age transition distributions
 are unspecified; these are explicit provisional rules, not new feature scope.
@@ -65,8 +69,14 @@ Disconnected and directed graphs are allowed for controlled experiments.
    plus one Bernoulli draw for the fractional remainder. This is unbiased stochastic
    rounding, **not binomial demographic sampling**; variance is deliberately small.
 6. **Migration.** After births/deaths/aging, freeze all regional demand. Forecast
-   score per region/species/variant = min(2, (remaining food + this month's regrowth)
-   / max(1, post-demography demand)) - 0.04 x thermal exposure. A neighboring score
+   score per region/species/variant = min(2, forecast available food
+   / max(1, post-demography demand)) - 0.04 x forecast thermal exposure. Forecast
+   available food = remaining food + min(capacity - remaining food, next month's
+   estimated production). Production uses next month's season, scheduled drought
+   multiplier and mean weather, without consuming RNG or seeing future draws. It
+   is a plug-in estimate, not a mathematical expectation through nonlinear clamps.
+   Forecast thermal exposure likewise uses next month's mean temperature. Current
+   production is never re-added as a historical flow. A neighboring score
    pays edge cost x travel penalty; inaccessible edges exceed the species travel
    limit. Pick the greatest net score, ties by lowest stable ID. Move only if gain
    exceeds the threshold; expected movers = count x migration rate x min(1,gain).
@@ -77,7 +87,7 @@ Disconnected and directed graphs are allowed for controlled experiments.
 
 All probabilities, rates and durations have validated ranges in `Validation.cs`.
 Configurable parameters live in `Rules` and scenario species/region definitions.
-Fixed formula coefficients above belong to engine version 0.1.0. Scenario hashes
+Fixed formula coefficients above belong to engine version 0.2.0. Scenario hashes
 cover defaults as materialized rules, configuration order and initial conditions.
 Changing formulas requires an engine-version change; cross-version compatibility
 is deliberately rejected. Exact reproducibility is claimed only on the measured
@@ -95,8 +105,15 @@ Famine emits start below nutrition 0.65 and end at 0.9, or when the group is
 absent. Hysteresis suppresses monthly repeats while a famine persists. Events
 contain measured nutrition, stock/demand, rain and hunger inputs. Regional
 collapse requires a >=50% monthly loss from >=20 people. Global species extinction
-emits only on transition from positive to zero. Migration remains in measured
-flows and audit transfers; there is no separate migration-wave event in this slice.
+emits only on transition from positive to zero. At each 12-month boundary, exact
+region/species totals produce a `population-change` event for absolute change of
+at least max(50 people, 20% of starting population). A `migration-wave` summary
+requires outward throughput of at least max(50, 50% of starting population).
+There is at most one of each per group/year; these are annual interval summaries,
+not precise onset/end dates. Throughput can count repeated movement by one person.
+Events include births, deaths, inward/outward flows, total demand/consumption and
+the start tick. The accounting explains the arithmetic change, without attributing
+individual deaths or claiming experimentally established causes from correlations.
 Events include stable IDs, severity, source system, reason and before/after values.
 
 The event ledger is append-only within a run segment. Snapshots store a sequential
@@ -104,6 +121,9 @@ event ID and SHA-256 chain cursor, not the ledger itself. Continuation creates a
 new segment with its own `initial.json`, so it never rewrites earlier history.
 `verify DIRECTORY` checks segment snapshots, ledger ordering, references and chain.
 It detects corruption; it is not authentication and does not re-simulate the run.
+The report additionally stores a SHA-256 checksum for `summaries.jsonl`, checked
+by `verify`. This detects accidental summary corruption, not malicious editing
+of both summary and report.
 
 Metrics are sampled monthly transactions at every Nth tick (default 12), plus the
 last tick. **Do not sum annual samples as annual flow totals.** `--sample-every 1`
@@ -111,8 +131,17 @@ records every month; report.json holds cumulative flows for the entire run. Two
 CSVs separate shared regional food/climate from population flows, preventing
 accidental duplicate resource summation. Trait counts appear in population.csv.
 
+`summaries.jsonl` records EVERY complete calendar year's exact region/species
+flows regardless of CSV sampling. Pending yearly totals are in canonical snapshot
+`windows`, so continuation across a year boundary preserves identical summaries
+and events. A summary emitted after a mid-year resume still describes its full
+calendar year, including the prefix recorded in the input snapshot. Its explicit
+start/end ticks prevent confusion with segment-local totals in `report.json`.
+Incomplete final years remain in the latest snapshot; the query never invents a
+complete-year record. `history-summary` filters only wholly contained intervals.
+
 Audit capture is opt-in for one tick and optionally one region; it includes food,
-demand, cohort exposure/death probabilities and transfers. It consumes no random
+demand, cohort exposure/death probabilities, explicit next-month forecasts and transfers. It consumes no random
 draws. Uncaptured queries say `not recorded`; historical reconstruction is absent.
 Snapshot checksums cover canonical serialized data. The writer flushes a temporary
 file, reload-validates, then replaces the destination on the same filesystem.
@@ -123,7 +152,18 @@ archive. Incomplete run directories are explicitly marked and cannot verify.
 
 Terrain is descriptive; fertility, climate and area drive current mechanics.
 Species values and initial distributions are illustrative, not calibrated fantasy
-biology. Starting per-region population is uniform. Initial trait allocation uses
+biology. Starting per-region population is uniform only when `initialPopulations`
+is omitted or null. When supplied, that array is the complete sparse allocation:
+unlisted region/species pairs are empty, and `[]` creates an empty world. Entries
+must be unique, sorted by region then species, and refer to valid IDs. Each entry
+supplies three integer `stageCounts` and optional `variantWeights` (otherwise the
+global weights apply). Global stage counts remain required as the legacy fallback.
+For exact geography controls or imported cohort counts, `stageVariantCounts`
+supplies a 3x3 integer matrix (stage rows, variant columns). Its row totals must
+equal `stageCounts`; it cannot be combined with entry-specific `variantWeights`.
+This avoids re-rounding traits when several regional cohorts are concentrated.
+Zero cohorts are always retained. See `scenarios/sparse-frontier.json`.
+Initial trait allocation uses
 floors and gives the final bucket the remainder; this introduces at most two
 persons' rounding imbalance per stage. No genealogy, sex model, exact age bins,
 individual entities, settlement simulation or narrative generation is implemented.

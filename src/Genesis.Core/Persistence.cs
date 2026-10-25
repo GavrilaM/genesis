@@ -47,7 +47,13 @@ public static class Persistence
     }
     public static WorldState Load(string path)
     {
-        var envelope = Decode<Envelope>(File.ReadAllText(path));
+        var json = File.ReadAllText(path);
+        using var document = JsonDocument.Parse(json);
+        if (!document.RootElement.TryGetProperty("state", out var state) ||
+            !state.TryGetProperty("schemaVersion", out var schema) || schema.GetInt32() != Simulation.SnapshotSchema ||
+            !state.TryGetProperty("engineVersion", out var engine) || engine.GetString() != Simulation.Version)
+            throw new InvalidDataException($"Incompatible snapshot: expected schema {Simulation.SnapshotSchema}, engine {Simulation.Version}. Use the original engine for older saves; scenario JSON remains supported.");
+        var envelope = Decode<Envelope>(json);
         if (Hash(envelope.State) != envelope.Checksum) throw new InvalidDataException("Snapshot checksum mismatch.");
         Validation.State(envelope.State);
         return envelope.State;

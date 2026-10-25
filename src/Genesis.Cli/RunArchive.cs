@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using Genesis.Core;
 
 namespace Genesis.Cli;
@@ -23,6 +24,7 @@ public static class RunArchive
         using (var events = new StreamWriter(Path.Combine(output, "events.jsonl")))
         using (var population = new StreamWriter(Path.Combine(output, "population.csv")))
         using (var food = new StreamWriter(Path.Combine(output, "food.csv")))
+        using (var summaries = new StreamWriter(Path.Combine(output, "summaries.jsonl")))
         {
             population.WriteLine("tick,region,species,start,births,deaths,inward,outward,end,demand,consumed,nutrition,hungry_months,trait0,trait1,trait2");
             food.WriteLine("tick,region,start,regrowth,consumed,end,temperature_c,rainfall_mm");
@@ -30,6 +32,7 @@ public static class RunArchive
             {
                 var step = Simulation.Step(w, audit: traceTick == w.CurrentTick + 1); w = step.State;
                 foreach (var ev in step.Events) { events.WriteLine(Persistence.Encode(ev)); eventCount++; }
+                foreach (var summary in step.Summaries) summaries.WriteLine(Persistence.Encode(summary));
                 births += step.Populations.Sum(f => f.Births); deaths += step.Populations.Sum(f => f.Deaths);
                 migrations += step.Populations.Sum(f => f.Outward);
                 produced += step.Food.Sum(f => f.Regrowth); consumed += step.Food.Sum(f => f.Consumed);
@@ -45,6 +48,7 @@ public static class RunArchive
                         populations = step.Populations.Where(f => traceRegion is null || f.Region.Value == traceRegion),
                         food = step.Food.Where(f => traceRegion is null || f.Region.Value == traceRegion),
                         survival = step.Audit.Where(f => traceRegion is null || f.Cohort.Region.Value == traceRegion),
+                        forecasts = step.Forecasts.Where(f => traceRegion is null || f.Region.Value == traceRegion),
                         transfers = step.Transfers.Where(f => traceRegion is null || f.Origin.Region.Value == traceRegion || f.Destination.Value == traceRegion)
                     }));
                 if (w.CurrentTick % snapshotEvery == 0) Persistence.Save(Path.Combine(output, $"snapshot-{w.CurrentTick:D8}.json"), w);
@@ -59,12 +63,14 @@ public static class RunArchive
             startTick = start.CurrentTick, endTick = w.CurrentTick, months, regions = w.Regions.Length, cohorts = w.Cohorts.Length,
             initialPopulation = start.Population, finalPopulation = w.Population, births, deaths, migrations,
             foodProduced = produced, foodConsumed = consumed,
+            species = w.Scenario.Species.Select(s => new { s.Id, s.Name, initialPopulation = start.Cohorts.Where(c => c.Id.Species == s.Id).Sum(c => c.Count), finalPopulation = w.Cohorts.Where(c => c.Id.Species == s.Id).Sum(c => c.Count) }).ToArray(),
             extinctSpecies = w.Scenario.Species.Count(s => w.Cohorts.Where(c => c.Id.Species == s.Id).Sum(c => c.Count) == 0),
             stateHash = Persistence.Hash(w), w.EventHash, eventCount, totalEventCount = w.EventCount,
             sampleEveryMonths = sampleEvery, sampleSemantics = "monthly flows at sampled ticks; not interval totals",
             elapsedSeconds = watch.Elapsed.TotalSeconds, ticksPerSecond = months / watch.Elapsed.TotalSeconds,
             peakWorkingSetBytes = process.PeakWorkingSet64, snapshotBytes = new FileInfo(Path.Combine(output, "latest.json")).Length,
             eventBytes = new FileInfo(Path.Combine(output, "events.jsonl")).Length,
+            summarySha256 = FileHash(Path.Combine(output, "summaries.jsonl")),
             runtime = RuntimeInformation.FrameworkDescription, os = RuntimeInformation.OSDescription,
             architecture = RuntimeInformation.ProcessArchitecture.ToString(), logicalProcessors = Environment.ProcessorCount,
             validation = "full every tick; file IO included; process peak memory includes startup"
@@ -74,6 +80,10 @@ public static class RunArchive
         return report;
     }
     public static string Csv(params object[] fields) => string.Join(',', fields.Select(f => Convert.ToString(f, CultureInfo.InvariantCulture)));
+    private static string FileHash(string path)
+    {
+        using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream));
+    }
 
     public static void Verify(string directory)
     {
@@ -91,5 +101,8 @@ public static class RunArchive
         }
         Validation.Require(hash == final.EventHash && count == final.EventCount, "Event ledger hash/count mismatch.");
         Validation.Require(initial.RulesetHash == final.RulesetHash && initial.Seed == final.Seed && final.CurrentTick >= initial.CurrentTick, "Run inputs changed.");
+        using var report = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "report.json")));
+        Validation.Require(report.RootElement.GetProperty("summarySha256").GetString() == FileHash(Path.Combine(directory, "summaries.jsonl")),
+            "Historical summary checksum mismatch.");
     }
 }

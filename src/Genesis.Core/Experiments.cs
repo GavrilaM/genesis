@@ -59,7 +59,9 @@ public static class Experiments
     public static Scenario DoubleRegions(Scenario s)
     {
         int nr = s.Regions.Length;
-        return s with { Name = s.Name + "-double-regions", Regions = Enumerable.Range(0, nr * 2).Select(i =>
+        return s with { Name = s.Name + "-double-regions",
+            InitialPopulations = s.InitialPopulations is null ? null : s.InitialPopulations.Concat(s.InitialPopulations.Select(p => p with { Region = new(p.Region.Value + nr) })).ToArray(),
+            Regions = Enumerable.Range(0, nr * 2).Select(i =>
         {
             int offset = i >= nr ? nr : 0; var r = s.Regions[i % nr];
             return r with { Id = new(i), Name = r.Name + "-" + offset,

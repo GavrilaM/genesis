@@ -21,6 +21,31 @@ public static class Validation
         Require(s.InitialVariantWeights.Length == 3 && s.InitialVariantWeights.All(v => double.IsFinite(v) && v >= 0)
             && Math.Abs(s.InitialVariantWeights.Sum() - 1) < 1e-9, "Trait weights must sum to one.");
         Range(s.InitialStockFraction, 0, 1, "initial stock fraction");
+        if (s.InitialPopulations is not null)
+        {
+            int previous = -1;
+            foreach (var entry in s.InitialPopulations)
+            {
+                if (entry is null || entry.StageCounts is null) throw new InvalidDataException("Null initial population entry.");
+                Require(entry.Region.Value >= 0 && entry.Region.Value < s.Regions.Length && entry.Species.Value >= 0 && entry.Species.Value < s.Species.Length, "Unknown initial population region/species.");
+                int key = entry.Region.Value * s.Species.Length + entry.Species.Value;
+                Require(key > previous, "Initial populations must be unique and ordered by region then species."); previous = key;
+                Require(entry.StageCounts.Length == 3 && entry.StageCounts.All(n => n is >= 0 and <= 1000000000), "Invalid initial population stage counts.");
+                if (entry.StageVariantCounts is not null)
+                {
+                    Require(entry.VariantWeights is null && entry.StageVariantCounts.Length == 3, "Explicit stage/variant counts require three rows and cannot also specify variant weights.");
+                    for (int a = 0; a < 3; a++)
+                    {
+                        var row = entry.StageVariantCounts[a];
+                        Require(row is not null && row.Length == 3 && row.All(n => n is >= 0 and <= 1000000000), "Invalid explicit trait counts.");
+                        Require(row!.Sum() == entry.StageCounts[a], "Explicit trait counts must sum to their stage count.");
+                    }
+                }
+                if (entry.VariantWeights is not null)
+                    Require(entry.VariantWeights.Length == 3 && entry.VariantWeights.All(v => double.IsFinite(v) && v >= 0 && v <= 1)
+                        && Math.Abs(entry.VariantWeights.Sum() - 1) < 1e-9, "Invalid initial population variant weights.");
+            }
+        }
         for (int i = 0; i < s.Regions.Length; i++)
         {
             var r = s.Regions[i];
@@ -65,15 +90,15 @@ public static class Validation
     public static void State(WorldState w)
     {
         ArgumentNullException.ThrowIfNull(w);
-        if (w.Scenario is null || w.Regions is null || w.Cohorts is null || w.Memory is null || w.EventHash is null)
+        if (w.Scenario is null || w.Regions is null || w.Cohorts is null || w.Memory is null || w.EventHash is null || w.Windows is null)
             throw new InvalidDataException("Snapshot contains null required fields.");
-        Require(w.SchemaVersion == 1 && w.EngineVersion == Simulation.Version, "Incompatible snapshot schema or engine version.");
+        Require(w.SchemaVersion == Simulation.SnapshotSchema && w.EngineVersion == Simulation.Version, "Incompatible snapshot schema or engine version.");
         Require(w.RngAlgorithm == DeterministicRandom.Algorithm, "Incompatible random stream version.");
         Scenario(w.Scenario);
         Require(w.RulesetHash == Persistence.Hash(w.Scenario), "Ruleset hash mismatch.");
         Require(w.CurrentTick >= 0 && w.EventCount >= 0 && w.EventHash.Length == 64 && w.EventHash.All(Uri.IsHexDigit), "Invalid clock/event cursor.");
         var nr = w.Scenario.Regions.Length; var ns = w.Scenario.Species.Length;
-        Require(w.Regions.Length == nr && w.Cohorts.Length == nr * ns * 9 && w.Memory.Length == nr * ns, "Incomplete canonical state.");
+        Require(w.Regions.Length == nr && w.Cohorts.Length == nr * ns * 9 && w.Memory.Length == nr * ns && w.Windows.Length == nr * ns, "Incomplete canonical state.");
         for (int r = 0; r < nr; r++)
         {
             var region = w.Regions[r];
@@ -86,12 +111,22 @@ public static class Validation
                 var m = w.Memory[r * ns + s];
                 if (m is null) throw new InvalidDataException("Group memory cannot be null.");
                 Require(m.Region.Value == r && m.Species.Value == s && m.HungryMonths is >= 0 and <= 120, "Invalid group memory.");
+                long population = 0;
                 for (int a = 0; a < 3; a++) for (int v = 0; v < 3; v++)
                 {
                     var c = w.Cohorts[Simulation.Index(r, s, a, v, ns)];
                     if (c is null) throw new InvalidDataException("Cohort cannot be null.");
                     Require(c.Id == new CohortId(new(r), new(s), a, v) && c.Count is >= 0 and <= 1000000000000, "Invalid cohort identity or count.");
+                    population += c.Count;
                 }
+                var window = w.Windows[r * ns + s];
+                if (window is null) throw new InvalidDataException("Null population window.");
+                Require(window.Region.Value == r && window.Species.Value == s && window.StartTick == w.CurrentTick / 12 * 12,
+                    "Invalid population window identity/clock.");
+                Require(window.Start is >= 0 and <= 1000000000000000 && window.Births is >= 0 and <= 1000000000000000
+                    && window.Deaths is >= 0 and <= 1000000000000000 && window.Inward is >= 0 and <= 1000000000000000 && window.Outward is >= 0 and <= 1000000000000000
+                    && population == window.Start + window.Births - window.Deaths + window.Inward - window.Outward, "Annual population accounting failed.");
+                Range(window.Demand, 0, 1e18, "window demand"); Range(window.Consumed, 0, window.Demand + 1e-6, "window consumed");
             }
         }
     }
