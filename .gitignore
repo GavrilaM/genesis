@@ -4,3 +4,37 @@ artifacts/
 TestResults/
 .vs/
 *.tmp
+
+# Local editor state and generated diagnostics
+.idea/
+*.user
+*.suo
+*.log
+*.dmp
+*.coverage
+*.coveragexml
+coverage/
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Local environment configuration, credentials and signing keys
+.env
+.env.*
+!.env.example
+!.env.template
+.secrets/
+.ssh/
+.aws/
+.azure/
+credentials.json
+secrets.json
+appsettings.Local.json
+*.pem
+*.key
+*.pfx
+*.p12
+*.publishsettings
+*.pubxml.user
