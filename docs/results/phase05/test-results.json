@@ -1,0 +1,11 @@
+{
+  "implementationCommit": "31e2aefd336583c6d8a27df42ae2e13de016a9c2",
+  "engineVersion": "0.2.0",
+  "sdk": "10.0.101",
+  "total": 37,
+  "passed": 37,
+  "failed": 0,
+  "outcome": "Completed",
+  "cliSmokeChecks": 15,
+  "sourceLog": "artifacts/phase05/tests/phase05-final.trx"
+}

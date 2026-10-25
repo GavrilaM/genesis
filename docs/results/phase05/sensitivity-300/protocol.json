@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "engine": "0.2.0",
+  "seeds": 8,
+  "months": 3600,
+  "cases": [
+    "baseline",
+    "orc-birth-low",
+    "orc-birth-high",
+    "orc-maturation-short",
+    "orc-maturation-long",
+    "orc-demand-low",
+    "orc-demand-high",
+    "orc-tolerance-narrow",
+    "orc-tolerance-wide",
+    "swap-birth",
+    "swap-maturation",
+    "swap-demand",
+    "swap-tolerance",
+    "swap-biology",
+    "geography-0",
+    "geography-1",
+    "geography-2",
+    "geography-3"
+  ],
+  "implementationCommit": "31e2aefd336583c6d8a27df42ae2e13de016a9c2",
+  "geographyControl": "Exact species/stage/variant totals preserved; only initial location changes."
+}

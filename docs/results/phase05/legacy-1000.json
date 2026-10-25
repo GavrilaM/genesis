@@ -1,0 +1,106 @@
+[
+  {
+    "seed": 1,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      8.0,
+      11725.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "B2B99433D7458A0C74258C203F22A587D87F0C19AAACE174B579297B34AE36F2"
+  },
+  {
+    "seed": 2,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      48.0,
+      11667.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "43B5E602EF48C3B171866DAF280EC9DF8BE6E065F93F10C09ED501E8CAC903E6"
+  },
+  {
+    "seed": 3,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      22.0,
+      11722.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "3CFB7E071BF7C10EDC3352A791762479FC24BC848A5B0E59A16AFD504CD563C9"
+  },
+  {
+    "seed": 4,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      2.0,
+      11539.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "4F77547969F7B564DD9D97E7B53334EFD65AB73A47E34CE51EEE5D0A367AA8CA"
+  },
+  {
+    "seed": 5,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      28.0,
+      11719.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "6EE9FC6CB7A138F7AA88BE3D8B1C8743E852CF534BADA3A38F20851EE041F84C"
+  },
+  {
+    "seed": 6,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      3.0,
+      11761.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "53935816983B05B54341F97530AFC58A91AF00B628550D4E9E0A0B336EDE5330"
+  },
+  {
+    "seed": 7,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      48.0,
+      11781.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "BEEEC4F124155ED04E6969BE944DD2DA03B4FDB74724F27F789A60E70BD195E0"
+  },
+  {
+    "seed": 8,
+    "engineVersion": "0.1.0",
+    "rulesetHash": "FE271C407FAC8641A730625C2BA61841BDA1ED64AE4E2784FD15C6F3FF8DC994",
+    "months": 12000,
+    "species": [
+      14.0,
+      11988.0,
+      0.0,
+      0.0
+    ],
+    "eventHash": "EBD74F638C504E7CC0435D44678F70FDDCE5351DB924693A09FC1FE1AFF39051"
+  }
+]
