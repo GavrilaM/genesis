@@ -1,0 +1,4 @@
+{"name":"original","meanPopulationEffect":-102.5,"meanMixedResistantFrequency":0.31367157882780855}
+{"name":"abundant-only","meanPopulationEffect":12833.75,"meanMixedResistantFrequency":0.36891285446654054}
+{"name":"uniform-cold-only","meanPopulationEffect":1992,"meanMixedResistantFrequency":0.5540347076805385}
+{"name":"both-controls","meanPopulationEffect":47271.25,"meanMixedResistantFrequency":0.5558639533465694}

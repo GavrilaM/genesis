@@ -1,0 +1,72 @@
+[
+  {
+    "treatment": "cold-resistance",
+    "pairs": 16,
+    "metric": "population",
+    "controlMean": 8743.5625,
+    "treatmentMean": 73724.4375,
+    "pairedMeanDifference": 64980.875,
+    "pairedSampleSd": 181.08814612410902,
+    "pairedMinimum": 64743.0,
+    "pairedMaximum": 65323.0,
+    "positivePairs": 16,
+    "negativePairs": 0,
+    "zeroPairs": 0
+  },
+  {
+    "treatment": "connectivity",
+    "pairs": 16,
+    "metric": "migration",
+    "controlMean": 90893.0,
+    "treatmentMean": 0.0,
+    "pairedMeanDifference": -90893.0,
+    "pairedSampleSd": 3467.9541711697016,
+    "pairedMinimum": -95464.0,
+    "pairedMaximum": -86478.0,
+    "positivePairs": 0,
+    "negativePairs": 16,
+    "zeroPairs": 0
+  },
+  {
+    "treatment": "drought",
+    "pairs": 16,
+    "metric": "meanScarcity",
+    "controlMean": 0.04015639871468897,
+    "treatmentMean": 0.06517404996473175,
+    "pairedMeanDifference": 0.02501765125004277,
+    "pairedSampleSd": 0.0007592409883118316,
+    "pairedMinimum": 0.024039614533497893,
+    "pairedMaximum": 0.026224721541966874,
+    "positivePairs": 16,
+    "negativePairs": 0,
+    "zeroPairs": 0
+  },
+  {
+    "treatment": "food-loss",
+    "pairs": 16,
+    "metric": "population",
+    "controlMean": 12221.5,
+    "treatmentMean": 0.0,
+    "pairedMeanDifference": -12221.5,
+    "pairedSampleSd": 108.55966101641991,
+    "pairedMinimum": -12406.0,
+    "pairedMaximum": -11998.0,
+    "positivePairs": 0,
+    "negativePairs": 16,
+    "zeroPairs": 0
+  },
+  {
+    "treatment": "productivity",
+    "pairs": 16,
+    "metric": "population",
+    "controlMean": 13018.125,
+    "treatmentMean": 19516.625,
+    "pairedMeanDifference": 6498.5,
+    "pairedSampleSd": 175.21187174389755,
+    "pairedMinimum": 6254.0,
+    "pairedMaximum": 6861.0,
+    "positivePairs": 16,
+    "negativePairs": 0,
+    "zeroPairs": 0
+  }
+]
