@@ -163,6 +163,12 @@
           "xunit.v3.runner.common": "[3.2.2]"
         }
       },
+      "genesis.cli": {
+        "type": "Project",
+        "dependencies": {
+          "Genesis.Core": "[1.0.0, )"
+        }
+      },
       "genesis.core": {
         "type": "Project"
       }

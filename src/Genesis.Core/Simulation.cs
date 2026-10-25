@@ -32,7 +32,7 @@ public static class Simulation
         return w;
     }
 
-    public static TickResult Step(WorldState w, bool validate = true)
+    public static TickResult Step(WorldState w, bool validate = true, bool audit = false)
     {
         if (validate) Validation.State(w);
         int nr = w.Regions.Length, ns = w.Scenario.Species.Length, tick = checked(w.CurrentTick + 1);
@@ -40,6 +40,7 @@ public static class Simulation
         var regions = new RegionState[nr]; var food = new FoodFlow[nr];
         var memory = new GroupMemory[nr * ns]; var flows = new PopulationFlow[nr * ns];
         var counts = new long[w.Cohorts.Length]; var events = new List<SimEvent>();
+        List<CohortAudit>? auditRows = audit ? [] : null;
         double Rand(int system, int r, int s = 0, int draw = 0) => DeterministicRandom.Unit(w.Seed, tick, system, r, s, draw);
         long Round(double expected, int system, int r, int s, int draw) => DeterministicRandom.Round(expected, Rand(system, r, s, draw));
         long Total(int r, int s, long[]? source = null)
@@ -101,6 +102,7 @@ public static class Simulation
                         + rules.ClimateMortality * Exposure(r, s, v), 0, 1);
                     long dead = Round(w.Cohorts[i].Count * deathRate, 2, r, s, slot);
                     survivors[slot] = w.Cohorts[i].Count - dead; deaths += dead;
+                    auditRows?.Add(new(w.Cohorts[i].Id, w.Cohorts[i].Count, Exposure(r, s, v), deathRate, dead, survivors[slot]));
                 }
                 // Age existing survivors once. New adults do not reproduce until next month.
                 for (int a = 0; a < 3; a++) for (int v = 0; v < 3; v++)
@@ -176,7 +178,7 @@ public static class Simulation
         string eventHash = w.EventHash;
         foreach (var ev in events) eventHash = Persistence.Chain(eventHash, ev);
         var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash };
-        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray());
+        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? []);
         if (validate) { Validation.State(state); Validation.Transition(result); }
         return result;
     }

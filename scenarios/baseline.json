@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
   "name": "baseline",
-  "rules": {},
+  "rules": {
+    "productivity": 3,
+    "rainMultiplier": 1,
+    "droughtStart": 120,
+    "droughtEnd": 240,
+    "droughtMultiplier": 1,
+    "temperatureOffset": 0,
+    "starvationMortality": 0.07,
+    "climateMortality": 0.0015,
+    "mutationRate": 0.01,
+    "resistanceDegrees": 5,
+    "resistanceFoodCost": 0.04,
+    "famineStart": 0.65,
+    "famineEnd": 0.9,
+    "migrationThreshold": 0.1,
+    "travelPenalty": 0.03
+  },
   "regions": [
     {
       "id": {
@@ -16,22 +32,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 1
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 6
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 11
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -48,22 +64,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 0
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 2
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 7
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -80,22 +96,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 1
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 3
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 8
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -112,22 +128,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 2
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 4
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 9
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -144,22 +160,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 3
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 5
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 10
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -176,22 +192,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 4
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 6
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 11
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -208,22 +224,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 0
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 5
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 7
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -240,22 +256,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 1
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 6
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 8
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -272,22 +288,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 2
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 7
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 9
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -304,22 +320,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 3
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 8
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 10
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -336,22 +352,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 4
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 9
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 11
-          }
+          },
+          "cost": 1
         }
       ]
     },
@@ -368,22 +384,22 @@
       "capacity": 15000,
       "neighbors": [
         {
-          "cost": 1.0,
           "destination": {
             "value": 0
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 5
-          }
+          },
+          "cost": 1
         },
         {
-          "cost": 1.0,
           "destination": {
             "value": 10
-          }
+          },
+          "cost": 1
         }
       ]
     }
@@ -394,7 +410,7 @@
         "value": 0
       },
       "name": "human",
-      "foodDemand": 1.0,
+      "foodDemand": 1,
       "maturationMonths": 192,
       "adultMonths": 432,
       "elderMonths": 180,
@@ -403,7 +419,7 @@
       "coldTolerance": 0,
       "heatTolerance": 30,
       "migrationRate": 0.08,
-      "maxTravelCost": 3.0
+      "maxTravelCost": 3
     },
     {
       "id": {
@@ -419,7 +435,7 @@
       "coldTolerance": -2,
       "heatTolerance": 32,
       "migrationRate": 0.08,
-      "maxTravelCost": 3.0
+      "maxTravelCost": 3
     },
     {
       "id": {
@@ -435,7 +451,7 @@
       "coldTolerance": 2,
       "heatTolerance": 28,
       "migrationRate": 0.08,
-      "maxTravelCost": 3.0
+      "maxTravelCost": 3
     },
     {
       "id": {
@@ -451,7 +467,7 @@
       "coldTolerance": -5,
       "heatTolerance": 27,
       "migrationRate": 0.08,
-      "maxTravelCost": 3.0
+      "maxTravelCost": 3
     }
   ],
   "initialStageCounts": [

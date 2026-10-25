@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Genesis.Core\Genesis.Core.csproj" />
+    <ProjectReference Include="..\..\src\Genesis.Cli\Genesis.Cli.csproj" />
     <None Include="../../scenarios/*.json" Link="scenarios/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

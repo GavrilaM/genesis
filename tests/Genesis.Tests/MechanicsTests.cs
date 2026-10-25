@@ -82,4 +82,30 @@ public class MechanicsTests
         Assert.True(end.Population > 0);
         Assert.All(end.Cohorts.Where(c => c.Id.Variant != 1), c => Assert.Equal(0, c.Count));
     }
+    [Fact] public void AuditIsBoundedAndDoesNotChangeCanonicalResults()
+    {
+        var w = Simulation.Create(Baseline(), 3);
+        var plain = Simulation.Step(w); var traced = Simulation.Step(w, audit: true);
+        Assert.Empty(plain.Audit); Assert.Equal(w.Cohorts.Length, traced.Audit.Length);
+        Assert.Equal(Persistence.Hash(plain.State), Persistence.Hash(traced.State));
+        Assert.All(traced.Audit, a => Assert.Equal(a.Start, a.Deaths + a.Survivors));
+    }
+    [Fact] public void EqualCohortsUnderColdHaveDifferentialThermalMortality()
+    {
+        var s = Baseline();
+        s = s with { InitialStockFraction = 1, InitialStageCounts = [300, 300, 300],
+            Regions = s.Regions.Select(r => r with { Capacity = 1e9, BaseTemperature = -15 }).ToArray() };
+        var step = Simulation.Step(Simulation.Create(s, 1), audit: true);
+        for (int r = 0; r < 12; r++) for (int sp = 0; sp < 4; sp++) for (int age = 0; age < 3; age++)
+        {
+            var low = step.Audit[Simulation.Index(r, sp, age, 0, 4)];
+            var high = step.Audit[Simulation.Index(r, sp, age, 2, 4)];
+            Assert.True(high.DeathProbability < low.DeathProbability);
+        }
+    }
+    [Fact] public void InvalidNullAndUnknownScenarioFieldsAreRejected()
+    {
+        Assert.Throws<InvalidDataException>(() => Simulation.Create(Baseline() with { Regions = null! }, 0));
+        Assert.Throws<System.Text.Json.JsonException>(() => Persistence.Decode<Scenario>("{\"unexpected\":true}"));
+    }
 }

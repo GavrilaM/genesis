@@ -55,5 +55,7 @@ public sealed record FoodFlow(RegionId Region, double Start, double Regrowth, do
     double End, double Temperature, double Rainfall);
 public sealed record Transfer(CohortId Origin, RegionId Destination, long Count, double Cost,
     double OriginScore, double DestinationScore);
+public sealed record CohortAudit(CohortId Cohort, long Start, double ExposureDegrees,
+    double DeathProbability, long Deaths, long Survivors);
 public sealed record TickResult(WorldState State, PopulationFlow[] Populations, FoodFlow[] Food,
-    Transfer[] Transfers, SimEvent[] Events);
+    Transfer[] Transfers, SimEvent[] Events, CohortAudit[] Audit);

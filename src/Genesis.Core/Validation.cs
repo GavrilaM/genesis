@@ -10,6 +10,10 @@ public static class Validation
         Require(double.IsFinite(x) && x >= min && x <= max, $"Invalid {name}: expected [{min}, {max}].");
     public static void Scenario(Scenario s)
     {
+        ArgumentNullException.ThrowIfNull(s);
+        if (s.Rules is null || s.Regions is null || s.Species is null || s.InitialStageCounts is null || s.InitialVariantWeights is null)
+            throw new InvalidDataException("Scenario contains null required fields.");
+        Require(!string.IsNullOrWhiteSpace(s.Name), "Scenario name is required.");
         Require(s.SchemaVersion == 1, "Unsupported scenario schema version.");
         Require(s.Regions.Length is > 0 and <= 1000 && s.Species.Length is > 0 and <= 100,
             "Unsupported region/species count.");
@@ -20,6 +24,9 @@ public static class Validation
         for (int i = 0; i < s.Regions.Length; i++)
         {
             var r = s.Regions[i];
+            if (r is null || r.Neighbors is null) throw new InvalidDataException("Region or edges cannot be null.");
+            Require(!string.IsNullOrWhiteSpace(r.Name) && !string.IsNullOrWhiteSpace(r.Terrain), "Region metadata required.");
+            if (r.Neighbors.Any(e => e is null)) throw new InvalidDataException("Edge cannot be null.");
             Require(r.Id.Value == i, "Regions must have contiguous, canonical IDs starting at zero.");
             Range(r.Area, .01, 1e6, "area"); Range(r.Fertility, 0, 1, "fertility");
             Range(r.Capacity, 0, 1e12, "capacity"); Range(r.BaseTemperature, -80, 80, "temperature");
@@ -34,6 +41,8 @@ public static class Validation
         for (int i = 0; i < s.Species.Length; i++)
         {
             var d = s.Species[i];
+            if (d is null) throw new InvalidDataException("Species cannot be null.");
+            Require(!string.IsNullOrWhiteSpace(d.Name), "Species name required.");
             Require(d.Id.Value == i, "Species must have contiguous, canonical IDs starting at zero.");
             Range(d.FoodDemand, .01, 100, "food demand");
             Range(d.MaturationMonths, 1, 12000, "maturation"); Range(d.AdultMonths, 1, 12000, "adult duration");
@@ -55,6 +64,9 @@ public static class Validation
     }
     public static void State(WorldState w)
     {
+        ArgumentNullException.ThrowIfNull(w);
+        if (w.Scenario is null || w.Regions is null || w.Cohorts is null || w.Memory is null || w.EventHash is null)
+            throw new InvalidDataException("Snapshot contains null required fields.");
         Require(w.SchemaVersion == 1 && w.EngineVersion == Simulation.Version, "Incompatible snapshot schema or engine version.");
         Require(w.RngAlgorithm == DeterministicRandom.Algorithm, "Incompatible random stream version.");
         Scenario(w.Scenario);
@@ -65,16 +77,19 @@ public static class Validation
         for (int r = 0; r < nr; r++)
         {
             var region = w.Regions[r];
+            if (region is null) throw new InvalidDataException("Region state cannot be null.");
             Require(region.Id.Value == r, "Invalid region state order.");
             Range(region.Forage, 0, w.Scenario.Regions[r].Capacity, "stock");
             Range(region.Temperature, -200, 200, "current temperature"); Range(region.Rainfall, 0, 12000, "current rainfall");
             for (int s = 0; s < ns; s++)
             {
                 var m = w.Memory[r * ns + s];
+                if (m is null) throw new InvalidDataException("Group memory cannot be null.");
                 Require(m.Region.Value == r && m.Species.Value == s && m.HungryMonths is >= 0 and <= 120, "Invalid group memory.");
                 for (int a = 0; a < 3; a++) for (int v = 0; v < 3; v++)
                 {
                     var c = w.Cohorts[Simulation.Index(r, s, a, v, ns)];
+                    if (c is null) throw new InvalidDataException("Cohort cannot be null.");
                     Require(c.Id == new CohortId(new(r), new(s), a, v) && c.Count is >= 0 and <= 1000000000000, "Invalid cohort identity or count.");
                 }
             }
