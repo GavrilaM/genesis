@@ -1,7 +1,8 @@
 # Project Genesis — Prototype 001: The World Lives
 
-**Phase 0.5:** engine 0.2.0 / snapshot schema 2. See
-`docs/PHASE05_REPORT.md` for calibration findings, compatibility and current results.
+**Phase 0.6:** engine 0.3.0 / snapshot schema 3. See
+`docs/PHASE06_REPORT.md` for demographic findings, compatibility and current results.
+Phase 0.5 evidence remains in `docs/PHASE05_REPORT.md`.
 The initial Prototype 001 handoff remains a historical 0.1.0 record.
 
 Local, headless C#/.NET 10 simulation. Simulate causes, not stories.
@@ -68,8 +69,8 @@ resistance, isolated food loss, productivity and connectivity. The cold assay
 uses uniform cold and ample finite food to isolate thermal fitness; the original
 mixed-climate failed experiment is documented in `docs/HANDOFF.md`.
 
-Core models are provisional, including geometric age stages, low-variance
-stochastic rounding, local hunger memory and migration forecasts. See
+Core models remain provisional, including geometric adult/elder residence times,
+rounded migration/mutation counts, local hunger memory and migration forecasts. See
 `ARCHITECTURE.md` for equations and limits, `docs/HANDOFF.md` for measured results,
 and `docs/results/` for compact retained evidence. Large run artifacts are local
 and Git-ignored. Source and review history: https://github.com/GavrilaM/genesis (branch `codex/genesis-prototype-001`).
@@ -123,8 +124,48 @@ is an offline diagnostic: its binomial/fixed-age alternatives do not change the
 production world model. None of these commands automatically retunes the baseline.
 
 **Save compatibility:** new mechanics produce different future trajectories.
-Engine 0.2.0 requires snapshot schema 2; 0.1.0 snapshots are explicitly rejected
-before checksum verification. Use Git commit `b0f8d4e` in a separate checkout to
-continue old worlds, or create a fresh world with the old scenario and seed under
-0.2.0. Existing scenario inputs and their starting cohort counts remain supported.
+Engine 0.3.0 requires snapshot schema 3; older snapshots are explicitly rejected
+before checksum verification. Use Git commit `855c478` for 0.2.0 saves or `b0f8d4e`
+for 0.1.0 saves in a separate checkout, or create a fresh world with the old scenario
+and seed under 0.3.0. Existing scenario inputs and starting stage/variant counts
+remain supported; `maturationMonths` now specifies a minimum juvenile residence
+time instead of a geometric mean. Initial juveniles default to a uniform age mix.
 There is no silent save conversion or cross-version determinism claim.
+
+## Phase 0.6 demographic integrity
+
+The default uses aggregate monthly juvenile age bins and binomial birth/death
+sampling. Newborns mature after the species minimum age and can reproduce starting
+one month later. Migration carries the age bins; bins partition existing cohorts
+and never add people. Monthly/annual reports include exact maturation counts.
+
+Optional scenario configuration (these are the defaults):
+
+```json
+"demography": {
+  "juvenileBinMonths": 1,
+  "binomialEvents": true,
+  "initialJuvenilesAreNewborn": false
+}
+```
+
+Width 0 (geometric) and 12 (annual deadlines), and `binomialEvents: false`, are
+available as explicit research controls. Annual deadlines cause synchronization
+and are not recommended. Adult/elder duration, mutation and migration policies
+were not replaced by this pass. No baseline species was retuned.
+
+`demography-study` runs the production transition with factorial controls,
+recording complete configurations, per-seed hashes/flows and summary statistics.
+Use new output directories:
+
+```powershell
+dotnet $genesis demography-study --suite worlds --seeds 8 --years 300 --out artifacts/demographic-worlds
+dotnet $genesis demography-study --suite worlds --seeds 8 --years 1000 --models geometric-rounding,monthly-binomial --out artifacts/demographic-confirmation
+dotnet $genesis demography-study --suite pulse --seeds 64 --years 50 --out artifacts/demographic-pulse
+dotnet $genesis demography-study --suite extinction --seeds 512 --years 50 --out artifacts/demographic-extinction
+dotnet $genesis demography-study --suite bottleneck --seeds 512 --years 50 --out artifacts/demographic-bottleneck
+dotnet $genesis demography-study --suite death-only --seeds 4096 --years 2 --out artifacts/demographic-deaths
+```
+
+Phase 1 is a review-only proposal in `docs/PHASE1_ARCHITECTURE_PROPOSAL.md`.
+Individual intelligence is not implemented or authorized by the Phase 0.6 work.

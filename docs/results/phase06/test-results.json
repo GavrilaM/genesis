@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-26",
+  "timeZone": "Asia/Jakarta",
+  "engineVersion": "0.3.0",
+  "snapshotSchema": 3,
+  "implementationCommit": "82098fe1e4e45aeecc03088720146596457a1d0d",
+  "lockedRestore": "passed",
+  "releaseBuild": {
+    "status": "passed",
+    "warnings": 0,
+    "errors": 0
+  },
+  "automatedTests": {
+    "total": 60,
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0,
+    "started": "2026-10-26T04:49:09.6184635+07:00",
+    "finished": "2026-10-26T04:50:16.9870713+07:00",
+    "rawEvidence": "artifacts/phase06/tests/phase06-final.trx",
+    "rawEvidenceSha256": "490BAB201F0FCEEA84FD2443069D6891197385D91463192D62B4FA0B1B071ED7"
+  },
+  "cliSmokeChecks": {
+    "passed": 17,
+    "failed": 0,
+    "command": "./scripts/Smoke-Test.ps1 -RunDirectory artifacts/phase06/benchmark-1000"
+  },
+  "archiveVerification": [
+    "benchmark-100",
+    "benchmark-1000",
+    "benchmark-double-1000",
+    "resume-900-to-1000"
+  ],
+  "continuation": {
+    "fromTick": 10800,
+    "endTick": 12000,
+    "sameState": true,
+    "sameEvents": true,
+    "stateHash": "48AB41B6FD5C6CBA6A1D357A0ECFAD4AFAFF7E85A48ACED739C5A86D92D1600B",
+    "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4"
+  },
+  "studyObservations": {
+    "worlds300": 48,
+    "worlds1000": 16,
+    "pulse": 384,
+    "extinction": 3072,
+    "bottleneck": 3072,
+    "deathOnly": 8192,
+    "total": 14784
+  },
+  "commands": [
+    "dotnet restore --locked-mode",
+    "dotnet build -c Release --no-restore",
+    "dotnet test -c Release --no-build --no-restore --logger \"trx;LogFileName=phase06-final.trx\" --results-directory artifacts/phase06/tests"
+  ]
+}

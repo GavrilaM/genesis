@@ -1,0 +1,11 @@
+{
+  "analyticExtinction": 0.18965370050785776,
+  "observedBinomialExtinction": 0.195068359375,
+  "months": 24,
+  "analyticMean": 1.595328861537451,
+  "analyticVariance": 1.468075152714732,
+  "passed": true,
+  "deathProbability": 0.1,
+  "initial": 20,
+  "sixStandardErrorMargin": 0.03675253192707392
+}

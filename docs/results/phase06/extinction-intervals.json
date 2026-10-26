@@ -1,0 +1,522 @@
+[
+  {
+    "suite": "worlds-300",
+    "model": "annual-binomial",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-binomial",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-binomial",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-binomial",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-rounding",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-rounding",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-rounding",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "annual-rounding",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-binomial",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-binomial",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-binomial",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-binomial",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-rounding",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-rounding",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-rounding",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "geometric-rounding",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-binomial",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-binomial",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-binomial",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-rounding",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-rounding",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-rounding",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-300",
+    "model": "monthly-rounding",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "geometric-rounding",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 1,
+    "rate": 0.125,
+    "wilson95Low": 0.02241749145005667,
+    "wilson95High": 0.4708881822128535
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "geometric-rounding",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "geometric-rounding",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 8,
+    "rate": 1.0,
+    "wilson95Low": 0.6755924351161198,
+    "wilson95High": 1.0
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "geometric-rounding",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 8,
+    "rate": 1.0,
+    "wilson95Low": 0.6755924351161198,
+    "wilson95High": 1.0
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "monthly-binomial",
+    "species": 1,
+    "n": 8.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.32440756488388023
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "monthly-binomial",
+    "species": 2,
+    "n": 8.0,
+    "extinct": 8,
+    "rate": 1.0,
+    "wilson95Low": 0.6755924351161198,
+    "wilson95High": 1.0
+  },
+  {
+    "suite": "worlds-1000",
+    "model": "monthly-binomial",
+    "species": 3,
+    "n": 8.0,
+    "extinct": 8,
+    "rate": 1.0,
+    "wilson95Low": 0.6755924351161198,
+    "wilson95High": 1.0
+  },
+  {
+    "suite": "pulse",
+    "model": "annual-binomial",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "pulse",
+    "model": "annual-rounding",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "pulse",
+    "model": "geometric-binomial",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "pulse",
+    "model": "geometric-rounding",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "pulse",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "pulse",
+    "model": "monthly-rounding",
+    "species": 0,
+    "n": 64.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.05662405979280534
+  },
+  {
+    "suite": "extinction",
+    "model": "annual-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 2,
+    "rate": 0.00390625,
+    "wilson95Low": 0.0010718890803936704,
+    "wilson95High": 0.014129407144654047
+  },
+  {
+    "suite": "extinction",
+    "model": "annual-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 4,
+    "rate": 0.0078125,
+    "wilson95Low": 0.003042201929655798,
+    "wilson95High": 0.0199134147975569
+  },
+  {
+    "suite": "extinction",
+    "model": "geometric-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 0,
+    "rate": 0.0,
+    "wilson95Low": 0.0,
+    "wilson95High": 0.007446975722882739
+  },
+  {
+    "suite": "extinction",
+    "model": "geometric-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 2,
+    "rate": 0.00390625,
+    "wilson95Low": 0.0010718890803936704,
+    "wilson95High": 0.014129407144654047
+  },
+  {
+    "suite": "extinction",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 1,
+    "rate": 0.001953125,
+    "wilson95Low": 0.00034485776154337486,
+    "wilson95High": 0.010979278212421853
+  },
+  {
+    "suite": "extinction",
+    "model": "monthly-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 2,
+    "rate": 0.00390625,
+    "wilson95Low": 0.0010718890803936704,
+    "wilson95High": 0.014129407144654047
+  },
+  {
+    "suite": "bottleneck",
+    "model": "annual-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 339,
+    "rate": 0.662109375,
+    "wilson95Low": 0.6200671299136647,
+    "wilson95High": 0.7017371709261818
+  },
+  {
+    "suite": "bottleneck",
+    "model": "annual-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 335,
+    "rate": 0.654296875,
+    "wilson95Low": 0.612089698324885,
+    "wilson95High": 0.6942059615106316
+  },
+  {
+    "suite": "bottleneck",
+    "model": "geometric-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 268,
+    "rate": 0.5234375,
+    "wilson95Low": 0.48016210712441953,
+    "wilson95High": 0.5663638158885704
+  },
+  {
+    "suite": "bottleneck",
+    "model": "geometric-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 290,
+    "rate": 0.56640625,
+    "wilson95Low": 0.5231431740585111,
+    "wilson95High": 0.6086802744782935
+  },
+  {
+    "suite": "bottleneck",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 335,
+    "rate": 0.654296875,
+    "wilson95Low": 0.612089698324885,
+    "wilson95High": 0.6942059615106316
+  },
+  {
+    "suite": "bottleneck",
+    "model": "monthly-rounding",
+    "species": 0,
+    "n": 512.0,
+    "extinct": 332,
+    "rate": 0.6484375,
+    "wilson95Low": 0.6061145993456434,
+    "wilson95High": 0.6885495797366259
+  },
+  {
+    "suite": "death-only",
+    "model": "monthly-binomial",
+    "species": 0,
+    "n": 4096.0,
+    "extinct": 799,
+    "rate": 0.195068359375,
+    "wilson95Low": 0.18322136030319566,
+    "wilson95High": 0.20748678656291716
+  },
+  {
+    "suite": "death-only",
+    "model": "monthly-rounding",
+    "species": 0,
+    "n": 4096.0,
+    "extinct": 469,
+    "rate": 0.114501953125,
+    "wilson95Low": 0.10510960372650699,
+    "wilson95High": 0.12461670844450357
+  }
+]

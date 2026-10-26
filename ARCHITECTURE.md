@@ -1,8 +1,10 @@
 # Architecture and blueprint validation
 
-Current engine: **0.2.0**, snapshot schema **2** (Phase 0.5). Scenario schema 1
-continues to load; omitted `initialPopulations` retains the original initialization.
-The previous 0.1.0 engine remains available at Git commit `b0f8d4e` for its saves.
+Current engine: **0.3.0**, snapshot schema **3** (Phase 0.6). Scenario schema 1
+continues to load; omitted `initialPopulations` retains the original stage/variant
+counts. Juveniles now have minimum ages. The 0.2.0 engine at `855c478` and 0.1.0
+at `b0f8d4e` remain available for their saves. No silent age reconstruction of an
+old save is supported. See `docs/PHASE06_REPORT.md` for the experiments.
 
 The blueprint is internally compatible with a small single-threaded monthly
 engine. Its equations, thresholds, initialization and age transition distributions
@@ -19,7 +21,10 @@ unchanged. Read queries never advance random streams.
 
 Randomness: versioned counter-based SplitMix64, keyed by seed, month,
 system, entity and draw. The seed and next month are the complete RNG cursor.
-No wall-clock entropy, mutable global RNG or unordered state iteration.
+No wall-clock entropy, mutable global RNG or unordered state iteration. Binomial
+variates have their own counter stream per system/cohort/age bin; variable-length
+rejection draws cannot perturb another variate. The RNG identifier is
+`splitmix64-counter-v2-binomial`. Environment's existing uniform draws are unchanged.
 
 Snapshots contain compatible rules, scenario, threshold memory and event-chain
 cursor, allowing exact continuation without embedding the historical ledger.
@@ -55,19 +60,25 @@ Disconnected and directed graphs are allowed for controlled experiments.
    1/elder duration for elders + starvation coefficient x (1-nutrition) x
    (1 + min(hungry months,12)/12) + climate coefficient x total exposure,
    clamped to [0,1]. Temperature thresholds are provisional fitness parameters.
-4. **Age and births.** Surviving juveniles and adults move one stage with
-   probabilities 1/maturation duration and 1/adult duration. Durations are mean
-   residence times (geometric approximation), not exact ages or maximum lifespans.
-   Elders eventually die; no population is immortal. Birth expectation per variant
-   = surviving pre-aging adults x annual birth rate/12 x nutrition² x
-   clamp(1-exposure/30,0,1). The birth rate absorbs sex ratio and eligibility;
-   there are no mating pairs. New adults and newborns cannot reproduce this step.
+4. **Age and births.** Juvenile cohorts contain aggregate monthly maturation
+   queues. Births at tick B enter a bucket due at B + `maturationMonths`. Surviving
+   juveniles become adults at that deadline and first become eligible to reproduce
+   the FOLLOWING month. Adults still move to elders with rounded expected count
+   n/`adultMonths`; elder mortality still includes 1/`elderMonths`. These two
+   durations remain geometric approximations, not fixed lifespans. Births are
+   Binomial(surviving pre-aging adults, annual birth rate/12 x nutrition² x
+   clamp(1-exposure/30,0,1)) per variant. This permits at most one birth per eligible
+   adult per month; the rate absorbs sex ratio/eligibility and no mating pairs
+   are simulated. Existing adults that enter elder stage this step remain eligible
+   for this month's births, as before. No newborn or newly matured adult reproduces.
 5. **Inheritance.** Each child inherits its aggregate parent's variant, except a
    configured fraction mutates uniformly to either other variant. Variants 0/1/2
    shift cold tolerance by 0/5/10 degrees by default, with 0/4/8% extra food demand.
-   No cultural or technological trait is inherited. Counts use floor(expected)
-   plus one Bernoulli draw for the fractional remainder. This is unbiased stochastic
-   rounding, **not binomial demographic sampling**; variance is deliberately small.
+   No cultural or technological trait is inherited. Mutation splits, adult-stage
+   exits and migration totals retain stochastic rounding: floor(expected) plus
+   a Bernoulli fractional remainder. Only births and deaths switch to binomial
+   event sampling. This intentionally leaves their other distributional limitations
+   explicit instead of changing unrelated mechanics in this pass.
 6. **Migration.** After births/deaths/aging, freeze all regional demand. Forecast
    score per region/species/variant = min(2, forecast available food
    / max(1, post-demography demand)) - 0.04 x forecast thermal exposure. Forecast
@@ -83,11 +94,47 @@ Disconnected and directed graphs are allowed for controlled experiments.
    Plan from frozen source counts, then commit all deltas together. Movement is at
    most one edge/month. Crowding enters through demand; arrival crowding is not
    iteratively re-planned, so oscillation is a known approximation. Migrants have
-   no invented personal memory; hunger exposure is location-level.
+   no invented personal memory; hunger exposure is location-level. Juvenile movers
+   carry their maturation deadlines unchanged. A randomized systematic proportional
+   allocation selects bins for the rounded total: each bin's expected share is
+   proportional to its count, all transfers are integer and bounded, and incoming
+   age-bin deltas cannot move again. This allocation is not a hypergeometric sample;
+   age-composition migration variance remains a documented approximation.
+
+Deaths are Binomial(n, death probability), sampled per juvenile age bin or per
+adult/elder variant cohort. The sum of independent binomials with the same p is
+binomial, so age subdivision does not suppress aggregate mortality variance.
+The sampler uses geometric waiting times for n*p < 16 and a recursive beta
+order-statistic decomposition otherwise; gamma variates use Marsaglia–Tsang.
+There is no normal/Poisson approximation to event counts and no loop over people.
+Distributional tests include tails, splitting, endpoints and n=1e12. Floating-point
+and pseudo-random arithmetic still limit mathematical exactness and portability.
+
+Each juvenile cohort's `juvenileBins` is a partition of its `count`, never an
+additional population. Validation checks dimensions, counts, sums and expired
+deadlines. Default ring length is maturationMonths + 1, with slot = deadline
+modulo ring length. All regions of a species share the clock and layout. The
+baseline has 31,248 age cells inside the existing 432 cohorts; configuration is
+bounded to two million cells. Costs scale with configured age span, not population.
+
+Initially, juvenile counts are apportioned uniformly over residence ages
+0..maturationMonths-1 using cumulative integer quotas independently per variant.
+These are declared initial conditions, not recovered personal histories. Set
+`demography.initialJuvenilesAreNewborn` for a newborn pulse. No early-maturity
+claim applies to age-mixed initial juveniles, which legitimately mature sooner.
+Newborns always receive their complete minimum residence time.
+
+Persisted `demography` options default to `juvenileBinMonths: 1`,
+`binomialEvents: true`, `initialJuvenilesAreNewborn: false`. Null/omitted options
+mean those defaults. Bin width 0 retains geometric transitions for comparison;
+width 12 rounds deadlines upward and can delay maturation by 0..11 months, with
+a large calendar synchronization artifact. `binomialEvents: false` retains old
+rounding for controlled studies. These alternatives are reproducible research
+controls, not selected production defaults or 0.2.0 snapshot compatibility modes.
 
 All probabilities, rates and durations have validated ranges in `Validation.cs`.
 Configurable parameters live in `Rules` and scenario species/region definitions.
-Fixed formula coefficients above belong to engine version 0.2.0. Scenario hashes
+Fixed formula coefficients above belong to engine version 0.3.0. Scenario hashes
 cover defaults as materialized rules, configuration order and initial conditions.
 Changing formulas requires an engine-version change; cross-version compatibility
 is deliberately rejected. Exact reproducibility is claimed only on the measured
@@ -124,6 +171,11 @@ It detects corruption; it is not authentication and does not re-simulate the run
 The report additionally stores a SHA-256 checksum for `summaries.jsonl`, checked
 by `verify`. This detects accidental summary corruption, not malicious editing
 of both summary and report.
+
+Maturation is a stage transfer, not a birth or addition to population. Its exact
+monthly count is appended to population CSV and accumulated as `matured` in annual
+summaries, pending windows and annual event contributors. Existing population
+and food identities are unchanged.
 
 Metrics are sampled monthly transactions at every Nth tick (default 12), plus the
 last tick. **Do not sum annual samples as annual flow totals.** `--sample-every 1`
@@ -165,8 +217,9 @@ This avoids re-rounding traits when several regional cohorts are concentrated.
 Zero cohorts are always retained. See `scenarios/sparse-frontier.json`.
 Initial trait allocation uses
 floors and gives the final bucket the remainder; this introduces at most two
-persons' rounding imbalance per stage. No genealogy, sex model, exact age bins,
-individual entities, settlement simulation or narrative generation is implemented.
+persons' rounding imbalance per stage. No genealogy, sex model, individual entities,
+settlement simulation or narrative generation is implemented. Juvenile bins track
+residence age; adult/elder exact ages and lifetime histories are still absent.
 
 There is no intervention API, save migration, adaptive stepping, threading, SQLite,
 remote hosting or replay-on-demand. Future detail must conserve existing IDs,

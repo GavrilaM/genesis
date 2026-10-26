@@ -22,15 +22,14 @@ provisional simulation assumptions, not empirically calibrated biology.
   verification, export, comparisons, five paired experiments and scale benchmark.
 - Evidence: 21 automated tests and 13 CLI smoke checks pass; see handoff.
 
-## Next engineering decisions within Prototype 001
+## Engineering questions identified after the initial prototype
 
 1. Review baseline biological parameters and long-run diversity: seed 847192
    nearly becomes a single-species world. This is an observed competitive result,
    not an intended species destiny or a validated ecological equilibrium.
-2. Quantify sensitivity to stochastic-rounding variance, geometric stage durations
-   and migration oscillation before adding biological complexity.
-3. Add migration-wave summaries or interval-aggregated metrics only if current
-   reports prove insufficient. Existing per-month flows already record migration.
+2. Demographic variance and juvenile timing are addressed in Phase 0.6 below.
+   Adult/elder distributions and migration oscillation remain approximations.
+3. Annual accounting and migration-wave summaries were delivered in Phase 0.5.
 
 Not claimed: calibrated ecology, cross-runtime determinism, adaptive stepping,
 replay-on-demand for uncaptured traces, intervention logs or save-schema migrations.
@@ -54,3 +53,25 @@ juvenile timing or extinction probabilities. Alternatives remain offline assays.
 See `docs/PHASE05_REPORT.md` and `docs/results/phase05/` for exact results and
 commands. This closes the requested calibration pass, not the research questions
 about empirical ecology or the authorization boundary for future systems.
+
+## Phase 0.6 — Demographic Integrity
+
+Implemented: aggregate monthly juvenile maturation queues, binomial birth/death
+sampling, age-preserving migration, canonical maturation counts and strict engine
+0.3.0 / snapshot schema 3 compatibility. Existing scenario files retain their
+stage/variant totals; maturation now means minimum residence time. No biological
+parameter was retuned. Adult/elder timing and mutation/migration rounding remain
+documented approximations.
+
+Evidence compares six age/sampling combinations in full worlds, newborn pulses,
+adult founders, newborn bottlenecks and an analytic extinction reference. Annual
+age buckets are faster but rejected as the default because of calendar pulses.
+See `docs/PHASE06_REPORT.md`, `docs/results/phase06/` and the reproduction scripts.
+
+## Phase 1 — The First Minds (proposal only)
+
+Review `docs/PHASE1_ARCHITECTURE_PROPOSAL.md` before implementation. The proposed
+first slice must prove exclusive population ownership, shared resource allocation,
+representation-neutral passive biology, deterministic detail activation and
+atomic transfers between anonymous cohorts and identified people. It must not
+invent retrospective personal histories. No Phase 1 code is included in Phase 0.6.
