@@ -68,10 +68,17 @@ adult founders, newborn bottlenecks and an analytic extinction reference. Annual
 age buckets are faster but rejected as the default because of calendar pulses.
 See `docs/PHASE06_REPORT.md`, `docs/results/phase06/` and the reproduction scripts.
 
-## Phase 1 — The First Minds (proposal only)
+## Phase 1A — Persistent Individual Identity and Population Ownership
 
-Review `docs/PHASE1_ARCHITECTURE_PROPOSAL.md` before implementation. The proposed
-first slice must prove exclusive population ownership, shared resource allocation,
-representation-neutral passive biology, deterministic detail activation and
-atomic transfers between anonymous cohorts and identified people. It must not
-invent retrospective personal histories. No Phase 1 code is included in Phase 0.6.
+Architecture approved with the user's refinements. Phase 1A implements exclusive
+population ownership, shared demographic/resource transactions, atomic promotion,
+persistent lifecycle records, passive biological equivalence, read-only inspection
+and local-only observation. Budgets reserve representation capacity; no cognition
+executes. See `docs/PHASE1A_HANDOFF.md` for verification and benchmarks.
+
+## Phase 1B — First decisions (not implemented)
+
+Use the Phase 1A interfaces and invariants in the handoff. Future perception,
+memory, uncertain exploration and intentions must not mint people, consume food
+twice, bypass biological deadlines or query omniscient destination conditions.
+Phase 1A completion does not authorize Phase 1B implementation.

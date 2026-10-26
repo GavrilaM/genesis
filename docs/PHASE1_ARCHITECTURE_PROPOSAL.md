@@ -1,8 +1,11 @@
 # Phase 1 — The First Minds: architecture proposal
 
-Status: **proposed for review, not approved or implemented**. Date: 2026-10-26.
+Status: **architecture approved with refinements; Phase 1A authorized, Phase 1B deferred**.
+Date: 2026-10-26. The original proposal below includes later decision-making work;
+the user's approval authorizes persistent identity/ownership first. See
+`PHASE1A_HANDOFF.md` for delivered scope, evidence and the remaining boundary.
 Prepared after Phase 0.6 passed 60 automated tests, 17 CLI checks and its
-reproducibility/benchmark gates. This document does not authorize Phase 1 work.
+reproducibility/benchmark gates. Phase 1B still requires further authorization.
 
 ## Recommendation
 
@@ -226,8 +229,9 @@ historical details return "not recorded". Deceased identities remain resolvable.
 First implement only the passive bridge and its tests, then local perception and
 one action policy. Do not use emergent-looking stories as acceptance criteria.
 
-Review decisions requested before code: approve the exclusive-ownership and
-conditional-allocation design; decide whether retaining every promoted identity
-until death is acceptable for the first slice; agree on the initial identity/mind
-budgets and stay/move-only behavior; approve the snapshot compatibility boundary.
-**Development stops at this proposal until that review is complete.**
+Review resolution: exclusive ownership and conditional allocation are approved;
+retain identities until death, use configurable budgets of 256 living identities
+and 64 active reservations, and version incompatible snapshots. Exact passive
+biological/resource equivalence and observation neutrality are mandatory. Future
+exploration must permit unfamiliar destinations without omniscient knowledge.
+**Implement and validate Phase 1A only; do not implement Phase 1B yet.**

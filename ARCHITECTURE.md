@@ -1,10 +1,11 @@
 # Architecture and blueprint validation
 
-Current engine: **0.3.0**, snapshot schema **3** (Phase 0.6). Scenario schema 1
+Current engine: **0.4.0**, snapshot schema **4** (Phase 1A). Scenario schema 1
 continues to load; omitted `initialPopulations` retains the original stage/variant
-counts. Juveniles now have minimum ages. The 0.2.0 engine at `855c478` and 0.1.0
+counts. Juveniles retain minimum ages. The 0.3.0 engine at `d408813`, 0.2.0 at `855c478` and 0.1.0
 at `b0f8d4e` remain available for their saves. No silent age reconstruction of an
 old save is supported. See `docs/PHASE06_REPORT.md` for the experiments.
+Phase 1A ownership and interfaces are documented in `docs/PHASE1A_HANDOFF.md`.
 
 The blueprint is internally compatible with a small single-threaded monthly
 engine. Its equations, thresholds, initialization and age transition distributions
@@ -18,6 +19,36 @@ Canonical ordering uses stable numeric region/species IDs, then life stage and
 trait variant. Zero cohorts remain present. Stable typed identifiers are distinct
 from names. Each tick constructs a candidate state; failures leave the input
 unchanged. Read queries never advance random streams.
+
+Persistent `Cohort.Count`/juvenile bins now own only anonymous people. `Identity.Living`
+owns each identified person exactly once; `Identity.Deceased` owns no population.
+`PopulationOwnership.CombinedCohorts` derives detached total counts. Each tick uses
+one temporary combined view for all biology and food, conditionally assigns its
+outcomes to identities, then subtracts surviving identities to commit anonymous
+remainders. Combined counts are never persisted as a second population authority.
+
+Identity outcome streams 101 (death), 102 (stage exit), 103 (migration) are separate
+from all biological streams. Within a frozen cohort/deadline bucket, conditional
+selection visits surviving identified IDs in ascending order: select with K/N,
+decrement N and, on selection, K. Remaining outcomes belong to anonymous members.
+No loop enumerates anonymous people. Initial biological groups prevent newly mature
+people aging twice; frozen migration groups prevent arrivals moving again. Juvenile
+migration respects the existing per-deadline aggregate allocation, not a new policy.
+All births enter anonymous queues; parent/family assignments are deliberately absent.
+
+`PopulationOwnership.Apply` stages an entire consecutive command batch against
+copies. It validates source availability, deadlines, budgets and exact biological
+projection preservation before returning the candidate. No rejection advances the
+ID or command allocator. `set-active` changes only future cognition reservations;
+no mind executes in Phase 1A. Death clears the reservation and retains a tombstone.
+Identity events use an independent canonical chain, leaving biological event IDs
+and hashes unchanged. Identity archives retain commands for deterministic replay.
+
+`BiologicalHash` includes combined age/count arrays, all resources/environment,
+group memory, annual accounting and biological events; its TickResult overload also
+includes exact monthly flows, transfers and summaries. It excludes identities,
+representation budgets, schema/engine labels and identity events. Equal projections
+are a deliberate biological equivalence claim, not a full-save compatibility claim.
 
 Randomness: versioned counter-based SplitMix64, keyed by seed, month,
 system, entity and draw. The seed and next month are the complete RNG cursor.
@@ -134,7 +165,7 @@ controls, not selected production defaults or 0.2.0 snapshot compatibility modes
 
 All probabilities, rates and durations have validated ranges in `Validation.cs`.
 Configurable parameters live in `Rules` and scenario species/region definitions.
-Fixed formula coefficients above belong to engine version 0.3.0. Scenario hashes
+Fixed biological coefficients are unchanged from engine version 0.3.0. Scenario hashes
 cover defaults as materialized rules, configuration order and initial conditions.
 Changing formulas requires an engine-version change; cross-version compatibility
 is deliberately rejected. Exact reproducibility is claimed only on the measured
@@ -217,10 +248,11 @@ This avoids re-rounding traits when several regional cohorts are concentrated.
 Zero cohorts are always retained. See `scenarios/sparse-frontier.json`.
 Initial trait allocation uses
 floors and gives the final bucket the remainder; this introduces at most two
-persons' rounding imbalance per stage. No genealogy, sex model, individual entities,
+persons' rounding imbalance per stage. No genealogy, sex model, individual cognition,
 settlement simulation or narrative generation is implemented. Juvenile bins track
 residence age; adult/elder exact ages and lifetime histories are still absent.
 
-There is no intervention API, save migration, adaptive stepping, threading, SQLite,
-remote hosting or replay-on-demand. Future detail must conserve existing IDs,
-populations and stocks; no fake detail objects are introduced now.
+There is no ecological intervention API, save migration, adaptive stepping,
+threading, SQLite, remote hosting or reconstruction of uncaptured history.
+Identity commands are representation transfers only. Future detail must preserve
+the exclusive ownership and shared food ledger introduced in Phase 1A.

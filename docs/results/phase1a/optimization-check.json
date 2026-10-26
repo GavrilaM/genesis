@@ -1,0 +1,41 @@
+{
+  "note": "Initial observations preceded allocation-free sorted-ID validation and ordered tombstone merging. A CLI smoke run overlapped the initial batch; final timings were repeated without other simulation runs. Treat timings as individual end-to-end observations.",
+  "cases": [
+    {
+      "name": "anonymous",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 17.1768208,
+      "afterSeconds": 17.6007726
+    },
+    {
+      "name": "initial-64-passive",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 17.8115815,
+      "afterSeconds": 18.0882213
+    },
+    {
+      "name": "initial-256-passive",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 18.5914488,
+      "afterSeconds": 19.3892287
+    },
+    {
+      "name": "maintained-64-passive",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 35.5552818,
+      "afterSeconds": 31.2628005
+    },
+    {
+      "name": "maintained-256-passive",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 69.0368198,
+      "afterSeconds": 53.560772
+    },
+    {
+      "name": "maintained-256-reserved64",
+      "sameStateAndBothEventChains": true,
+      "beforeSeconds": 75.804957,
+      "afterSeconds": 53.236449
+    }
+  ]
+}

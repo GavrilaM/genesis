@@ -1,7 +1,9 @@
 # Project Genesis — Prototype 001: The World Lives
 
-**Phase 0.6:** engine 0.3.0 / snapshot schema 3. See
-`docs/PHASE06_REPORT.md` for demographic findings, compatibility and current results.
+**Phase 1A:** engine 0.4.0 / snapshot schema 4. Persistent passive identities and
+exclusive population ownership; no individual decision-making yet. See
+`docs/PHASE1A_HANDOFF.md` for verification, benchmarks and Phase 1B interfaces.
+`docs/PHASE06_REPORT.md` retains the accepted demographic evidence.
 Phase 0.5 evidence remains in `docs/PHASE05_REPORT.md`.
 The initial Prototype 001 handoff remains a historical 0.1.0 record.
 
@@ -124,10 +126,11 @@ is an offline diagnostic: its binomial/fixed-age alternatives do not change the
 production world model. None of these commands automatically retunes the baseline.
 
 **Save compatibility:** new mechanics produce different future trajectories.
-Engine 0.3.0 requires snapshot schema 3; older snapshots are explicitly rejected
-before checksum verification. Use Git commit `855c478` for 0.2.0 saves or `b0f8d4e`
+Engine 0.4.0 requires snapshot schema 4; older snapshots are explicitly rejected
+before checksum verification. Use Git commit `d408813` for 0.3.0 saves,
+`855c478` for 0.2.0 saves or `b0f8d4e`
 for 0.1.0 saves in a separate checkout, or create a fresh world with the old scenario
-and seed under 0.3.0. Existing scenario inputs and starting stage/variant counts
+and seed under 0.4.0. Existing scenario inputs and starting stage/variant counts
 remain supported; `maturationMonths` now specifies a minimum juvenile residence
 time instead of a geometric mean. Initial juveniles default to a uniform age mix.
 There is no silent save conversion or cross-version determinism claim.
@@ -167,5 +170,57 @@ dotnet $genesis demography-study --suite bottleneck --seeds 512 --years 50 --out
 dotnet $genesis demography-study --suite death-only --seeds 4096 --years 2 --out artifacts/demographic-deaths
 ```
 
-Phase 1 is a review-only proposal in `docs/PHASE1_ARCHITECTURE_PROPOSAL.md`.
-Individual intelligence is not implemented or authorized by the Phase 0.6 work.
+## Phase 1A persistent identities
+
+Saved cohorts now contain **anonymous counts only**. Living identified people own
+one population member each. Combined totals feed the same food, birth/death,
+maturation and migration algorithms. `inspect region/species` labels the combined
+`cohorts`, their `anonymousCohorts` component and identified `people` separately.
+Do not add combined cohorts to people again.
+
+Promotion is explicit and atomic. Read-only `inspect`, `compare`, history and local
+observation never create identities. Identified people remain retained until death;
+deceased records have zero population weight. Default budgets are 256 living
+identities and 64 active reservations. `active` reserves future mind capacity only;
+all Phase 1A individuals remain behaviorally passive. Births stay anonymous and
+continue normally when the identity budget is full.
+
+```powershell
+dotnet $genesis new --seed 42 --out artifacts/identity-world.json --max-identified 256 --max-active 64
+dotnet $genesis identify --save artifacts/identity-world.json --count 64 --active 16 --out artifacts/promotions
+dotnet $genesis inspect person 1 --save artifacts/promotions/latest.json
+dotnet $genesis inspect local 1 --save artifacts/promotions/latest.json
+dotnet $genesis compare artifacts/identity-world.json artifacts/promotions/latest.json
+dotnet $genesis identity-history --run artifacts/promotions --person 1
+dotnet $genesis verify artifacts/promotions
+dotnet $genesis run --save artifacts/promotions/latest.json --years 100 --out artifacts/identity-run
+./scripts/Benchmark-Identity.ps1 -OutputDirectory artifacts/new-identity-benchmarks
+./scripts/Smoke-Test-Identity.ps1 -OutputDirectory artifacts/new-identity-smoke
+```
+
+`compare.sameBiology` compares canonical biological/resource projections while
+`sameState` includes representation. `identify` plans round-robin cohort promotions
+using the earliest available juvenile deadlines. For exact sources or reservation
+changes, `identity --save SAVE --commands FILE --out NEW_DIRECTORY` accepts a JSON
+array of consecutive commands. Example for a fresh world:
+
+```json
+[
+  {"sequence":1,"tick":0,"type":"promote","source":{"region":{"value":0},"species":{"value":0},"stage":1,"variant":0},"active":false},
+  {"sequence":2,"tick":0,"type":"set-active","person":{"value":1},"active":true}
+]
+```
+
+Juvenile promotions also require an existing absolute `juvenileDeadline`; adult
+promotions cannot supply an invented age. Commands must use the current completed
+tick and next sequence. Repeated, stale, unavailable or over-budget commands reject
+the entire batch without changing the input. The resulting archive records the
+input, commands, identity events and output and supports exact command replay.
+`identity-history --from/--to` uses inclusive **ticks**, unlike biological history's
+year interval. Histories are segment-local; retain earlier archives for earlier events.
+
+`benchmark --identities N --active N` promotes a fixed initial group. Optional
+`--replenish-every 12` is a benchmark driver issuing recorded boundary commands to
+maintain representation occupancy; it is not automatic simulation behavior. Limits
+are configurable at world creation, with a supported maximum of 10,000 identities.
+No Phase 1B policies, goals, memory or autonomous movement are implemented.
