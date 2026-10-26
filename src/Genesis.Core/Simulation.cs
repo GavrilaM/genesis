@@ -2,11 +2,11 @@ namespace Genesis.Core;
 
 public static class Simulation
 {
-    public const string Version = "0.3.0";
-    public const int SnapshotSchema = 3;
+    public const string Version = "0.4.0";
+    public const int SnapshotSchema = 4;
     public static int Index(int r, int s, int a, int v, int ns) => ((r * ns + s) * 3 + a) * 3 + v;
 
-    public static WorldState Create(Scenario scenario, ulong seed)
+    public static WorldState Create(Scenario scenario, ulong seed, IdentityOptions? identityOptions = null)
     {
         // Own a detached copy: caller edits to configuration cannot alter a running world.
         var s = Persistence.Decode<Scenario>(Persistence.Encode(scenario));
@@ -37,7 +37,7 @@ public static class Simulation
         }
         var w = new WorldState(SnapshotSchema, Version, Persistence.Hash(s), seed, 0, DeterministicRandom.Algorithm, s,
             s.Regions.Select(r => new RegionState(r.Id, r.BaseTemperature, r.BaseRainfall, r.Capacity * s.InitialStockFraction)).ToArray(),
-            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash, windows.ToArray());
+            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash, windows.ToArray(), IdentityState.Empty(identityOptions));
         Validation.State(w);
         return w;
     }
@@ -45,6 +45,10 @@ public static class Simulation
     public static TickResult Step(WorldState w, bool validate = true, bool audit = false)
     {
         if (validate) Validation.State(w);
+        // One temporary combined view feeds the unchanged biological algorithms.
+        // Only anonymous remainders + exclusive identities are committed below.
+        var ownership = w.Identity.Living.Length == 0 ? null : new IdentityEvolution(w);
+        if (ownership is not null) w = w with { Cohorts = PopulationOwnership.CombinedCohorts(w) };
         int nr = w.Regions.Length, ns = w.Scenario.Species.Length, tick = checked(w.CurrentTick + 1);
         var rules = w.Scenario.Rules;
         var demography = JuvenileAges.Options(w.Scenario); int quantum = demography.JuvenileBinMonths;
@@ -121,16 +125,25 @@ public static class Simulation
                             {
                                 if (bins[b] == 0) continue;
                                 long loss = Sample(bins[b], deathRate, 12, r, s, v * 12002 + b);
+                                ownership?.Deaths(i, b, bins[b], loss);
                                 bins[b] -= loss; dead += loss;
                             }
                         else
                         {
                             dead = Round(w.Cohorts[i].Count * deathRate, 2, r, s, slot);
                             var losses = JuvenileAges.Allocate(bins, w.Cohorts[i].Count, dead, Rand(13, r, s, v));
-                            for (int b = 0; b < bins.Length; b++) bins[b] -= losses[b];
+                            for (int b = 0; b < bins.Length; b++)
+                            {
+                                ownership?.Deaths(i, b, bins[b], losses[b]);
+                                bins[b] -= losses[b];
+                            }
                         }
                     }
-                    else dead = Sample(w.Cohorts[i].Count, deathRate, 2, r, s, slot);
+                    else
+                    {
+                        dead = Sample(w.Cohorts[i].Count, deathRate, 2, r, s, slot);
+                        ownership?.Deaths(i, -1, w.Cohorts[i].Count, dead);
+                    }
                     survivors[slot] = w.Cohorts[i].Count - dead; deaths += dead;
                     auditRows?.Add(new(w.Cohorts[i].Id, w.Cohorts[i].Count, Exposure(r, s, v), deathRate, dead, survivors[slot]));
                 }
@@ -147,6 +160,7 @@ public static class Simulation
                     }
                     else age = a == 2 ? 0 : Round(alive / (double)(a == 0 ? sp.MaturationMonths : sp.AdultMonths), 3, r, s, a * 3 + v);
                     if (a == 0) matured += age;
+                    ownership?.Age(Index(r, s, a, v, ns), alive, age);
                     counts[Index(r, s, a, v, ns)] += alive - age;
                     if (a < 2) counts[Index(r, s, a + 1, v, ns)] += age;
                 }
@@ -187,6 +201,7 @@ public static class Simulation
         }
         var transfers = new List<Transfer>(); var delta = new long[counts.Length];
         var ageDelta = ageBins.Select(b => b is null ? null : new long[b.Length]).ToArray();
+        ownership?.FreezeMigration();
         for (int r = 0; r < nr; r++) for (int s = 0; s < ns; s++) for (int v = 0; v < 3; v++)
         {
             var sp = w.Scenario.Species[s]; double originScore = Score(r, s, v), bestScore = originScore + rules.MigrationThreshold;
@@ -208,8 +223,13 @@ public static class Simulation
                 if (ageBins[i] is { } bins)
                 {
                     var moved = JuvenileAges.Allocate(bins, counts[i], movers, Rand(14, r, s, v));
-                    for (int b = 0; b < bins.Length; b++) { ageDelta[i]![b] -= moved[b]; ageDelta[to]![b] += moved[b]; }
+                    for (int b = 0; b < bins.Length; b++)
+                    {
+                        ownership?.Move(i, b, bins[b], moved[b], best.Destination);
+                        ageDelta[i]![b] -= moved[b]; ageDelta[to]![b] += moved[b];
+                    }
                 }
+                else ownership?.Move(i, -1, counts[i], movers, best.Destination);
                 transfers.Add(new(w.Cohorts[i].Id, best.Destination, movers, best.Cost, originScore, bestScore));
                 int g = r * ns + s, dest = best.Destination.Value * ns + s;
                 flows[g] = flows[g] with { Outward = flows[g].Outward + movers };
@@ -262,8 +282,9 @@ public static class Simulation
         }
         string eventHash = w.EventHash;
         foreach (var ev in events) eventHash = Persistence.Chain(eventHash, ev);
-        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash, Windows = windows };
-        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? [], audit ? forecasts : [], summaries.ToArray());
+        var (identity, personEvents) = ownership is null ? (w.Identity, Array.Empty<PersonEvent>()) : ownership.Commit(cohorts);
+        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash, Windows = windows, Identity = identity };
+        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? [], audit ? forecasts : [], summaries.ToArray(), personEvents);
         if (validate) { Validation.State(state); Validation.Transition(result); }
         return result;
     }

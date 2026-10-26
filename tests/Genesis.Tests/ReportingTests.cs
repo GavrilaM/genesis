@@ -56,7 +56,7 @@ public class ReportingTests
         }
         finally { File.Delete(path); }
     }
-    [Theory] [InlineData(1, "0.1.0")] [InlineData(2, "0.2.0")]
+    [Theory] [InlineData(1, "0.1.0")] [InlineData(2, "0.2.0")] [InlineData(3, "0.3.0")]
     public void LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(int schema, string engine)
     {
         var path = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".json");

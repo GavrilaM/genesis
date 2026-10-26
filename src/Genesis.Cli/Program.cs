@@ -18,32 +18,57 @@ try
     switch (verb)
     {
         case "new":
-            cli.Allow("seed", "scenario", "out");
+            cli.Allow("seed", "scenario", "out", "max-identified", "max-active");
             var path = cli.Required("out");
             Validation.Require(!File.Exists(path), "Save exists; choose another path.");
-            var created = Simulation.Create(Scenario(), cli.Seed()); Persistence.Save(path, created);
+            var created = Simulation.Create(Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64))); Persistence.Save(path, created);
             Print(new { save = Path.GetFullPath(path), population = created.Population, stateHash = Persistence.Hash(created) }); break;
         case "run":
         case "benchmark":
             if (verb == "run") cli.Allow("save", "years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region");
-            else cli.Allow("years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region", "seed", "scenario", "double-regions");
-            var initial = verb == "run" ? Save() : Simulation.Create(cli.Has("double-regions") ? Experiments.DoubleRegions(Scenario()) : Scenario(), cli.Seed());
+            else cli.Allow("years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region", "seed", "scenario", "double-regions", "identities", "active", "max-identified", "max-active", "replenish-every");
+            var initial = verb == "run" ? Save() : Simulation.Create(cli.Has("double-regions") ? Experiments.DoubleRegions(Scenario()) : Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64)));
+            int identities = cli.Int("identities", 0), active = cli.Int("active", 0);
+            Validation.Require(identities >= 0 && active >= 0 && active <= identities, "Invalid identity benchmark counts.");
+            var setupCommands = identities == 0 ? null : PopulationOwnership.PlanPromotions(initial, identities, active);
+            var replenishment = cli.Has("replenish-every") ? new IdentityBenchmarkPlan(identities, active, cli.Int("replenish-every", 12)) : null;
             Print(RunArchive.Run(initial, checked(cli.Int("years", 1000) * 12), cli.Required("out"), cli.Int("sample-every", 12),
-                checked(cli.Int("snapshot-every", 25) * 12), cli.OptionalInt("trace-tick"), cli.OptionalInt("trace-region"))); break;
+                checked(cli.Int("snapshot-every", 25) * 12), cli.OptionalInt("trace-tick"), cli.OptionalInt("trace-region"), setupCommands, replenishment)); break;
+        case "identify":
+        case "identity":
+            if (verb == "identify") cli.Allow("save", "count", "active", "out");
+            else cli.Allow("save", "commands", "out");
+            var identityInput = Save();
+            var commands = verb == "identify" ? PopulationOwnership.PlanPromotions(identityInput, cli.Int("count", 1), cli.Int("active", 0))
+                : Persistence.Decode<IdentityCommand[]>(File.ReadAllText(cli.Required("commands")));
+            Print(IdentityArchive.Apply(identityInput, commands, cli.Required("out"))); break;
         case "inspect":
-            cli.Allow("save"); var w = Save();
+            cli.Allow("save"); var w = Save(); var combined = PopulationOwnership.CombinedCohorts(w);
             switch (cli.Pos(1))
             {
-                case "world": Print(new { w.CurrentTick, w.Seed, w.RulesetHash, population = w.Population, w.Regions, species = w.Scenario.Species.Select(s => new { s.Id, s.Name, population = w.Cohorts.Where(c => c.Id.Species == s.Id).Sum(c => c.Count) }), w.EventCount, w.EventHash }); break;
+                case "world": Print(new { w.CurrentTick, w.Seed, w.RulesetHash, population = w.Population, anonymous = w.Cohorts.Sum(c => c.Count), identified = w.Identity.Living.Length,
+                    active = w.Identity.Living.Count(p => p.Active), deceased = w.Identity.Deceased.Length, w.Identity.Options,
+                    w.Regions, species = w.Scenario.Species.Select(s => new { s.Id, s.Name, population = combined.Where(c => c.Id.Species == s.Id).Sum(c => c.Count) }), w.EventCount, w.EventHash }); break;
                 case "region":
                     int r = int.Parse(cli.Pos(2)); Validation.Require(r >= 0 && r < w.Regions.Length, "Unknown region.");
-                    Print(new { definition = w.Scenario.Regions[r], state = w.Regions[r], cohorts = w.Cohorts.Where(c => c.Id.Region.Value == r), memory = w.Memory.Where(m => m.Region.Value == r) }); break;
+                    Print(new { definition = w.Scenario.Regions[r], state = w.Regions[r], cohorts = combined.Where(c => c.Id.Region.Value == r), anonymousCohorts = w.Cohorts.Where(c => c.Id.Region.Value == r), people = w.Identity.Living.Where(p => p.Cohort.Region.Value == r), memory = w.Memory.Where(m => m.Region.Value == r) }); break;
                 case "species":
                     int s = int.Parse(cli.Pos(2)); Validation.Require(s >= 0 && s < w.Scenario.Species.Length, "Unknown species.");
-                    Print(new { definition = w.Scenario.Species[s], cohorts = w.Cohorts.Where(c => c.Id.Species.Value == s) }); break;
-                default: throw new ArgumentException("inspect requires world, region <id>, or species <id>.");
+                    Print(new { definition = w.Scenario.Species[s], cohorts = combined.Where(c => c.Id.Species.Value == s), anonymousCohorts = w.Cohorts.Where(c => c.Id.Species.Value == s), people = w.Identity.Living.Where(p => p.Cohort.Species.Value == s) }); break;
+                case "person":
+                    var person = PopulationOwnership.InspectPerson(w, new(long.Parse(cli.Pos(2))));
+                    if (person is null) Console.WriteLine("not recorded"); else Print(person); break;
+                case "local": Print(PopulationOwnership.ObserveLocal(w, new(long.Parse(cli.Pos(2))))); break;
+                default: throw new ArgumentException("inspect requires world, region/species/person/local <id>.");
             }
             break;
+        case "identity-history":
+            cli.Allow("run", "person", "from", "to");
+            var personHistory = File.Exists(RunPath("person-events.jsonl"))
+                ? File.ReadLines(RunPath("person-events.jsonl")).Select(Persistence.Decode<PersonEvent>) : [];
+            var personMatches = personHistory.Where(e => (!cli.Has("person") || e.Person.Value == long.Parse(cli.Required("person")))
+                && e.Tick >= cli.Int("from", 0) && e.Tick <= cli.Int("to", int.MaxValue)).ToArray();
+            if (personMatches.Length == 0) Console.WriteLine("not recorded"); else foreach (var ev in personMatches) Print(ev); break;
         case "history":
             cli.Allow("run", "from", "to", "type");
             var selected = Events().Where(e => e.Tick > cli.Int("from", 0) * 12L && e.Tick <= cli.Int("to", int.MaxValue / 12) * 12L && (!cli.Has("type") || e.Type == cli.Required("type"))).ToArray();
@@ -83,7 +108,9 @@ try
             cli.Allow(); var a = Persistence.Load(cli.Pos(1)); var b = Persistence.Load(cli.Pos(2));
             Print(new { aTick = a.CurrentTick, bTick = b.CurrentTick, sameRules = a.RulesetHash == b.RulesetHash, sameSeed = a.Seed == b.Seed,
                 populationA = a.Population, populationB = b.Population, difference = b.Population - a.Population,
-                sameState = Persistence.Hash(a) == Persistence.Hash(b), sameEventHistory = a.EventHash == b.EventHash }); break;
+                sameState = Persistence.Hash(a) == Persistence.Hash(b), sameEventHistory = a.EventHash == b.EventHash,
+                sameBiology = PopulationOwnership.BiologicalHash(a) == PopulationOwnership.BiologicalHash(b),
+                sameIdentityHistory = a.Identity.EventHash == b.Identity.EventHash }); break;
         case "export":
             cli.Allow("run", "format", "out"); Validation.Require(cli.Get("format", "csv") == "csv", "Only csv export is supported.");
             var dest = cli.Required("out"); Validation.Require(!Directory.Exists(dest), "Export directory exists.");
@@ -112,6 +139,7 @@ try
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(assayPath))!);
             File.WriteAllText(assayPath, Persistence.Encode(assay)); Print(new { output = Path.GetFullPath(assayPath) }); break;
         case "help":
+            Console.WriteLine("Phase 1A identity commands (passive; active only reserves future mind capacity):\nnew ... [--max-identified 256 --max-active 64]\nidentify --save SAVE --count N [--active N] --out NEW_DIRECTORY\nidentity --save SAVE --commands COMMANDS_JSON --out NEW_DIRECTORY\ninspect person|local ID --save SAVE\nidentity-history --run DIRECTORY [--person ID --from TICK --to TICK]\nbenchmark ... [--identities N --active N --max-identified N --max-active N --replenish-every MONTHS]\nReplenishment is benchmark-only explicit commands, retained in identity-commands.json.\ncompare includes canonical biological/resource equivalence. Identity commands never advance time.");
             Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nhistory-summary --run DIRECTORY [--from YEAR --to YEAR --region ID --species ID]\ncalibrate --seeds N --years N --out NEW_DIRECTORY [--cases baseline,swap-birth,...]\ndemography-assay --seeds N --out JSON\ndemography-study --suite worlds|pulse|extinction|bottleneck|death-only --seeds N --years N --out NEW_DIRECTORY [--models geometric-rounding,monthly-binomial]\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
         default: throw new ArgumentException($"Unknown command '{verb}'. Use help.");
     }

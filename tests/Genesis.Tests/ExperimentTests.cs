@@ -38,7 +38,12 @@ public class ExperimentTests
         Assert.Equal(12000, w.CurrentTick); Assert.True(w.Population > 0);
         Assert.Equal(432, w.Cohorts.Length);
         // Versioned reference fingerprint on the supported Windows x64/.NET 10 environment.
-        Assert.Equal("48AB41B6FD5C6CBA6A1D357A0ECFAD4AFAFF7E85A48ACED739C5A86D92D1600B", Persistence.Hash(w));
+        // Fold the no-identity world into the accepted 0.3.0 serialization shape:
+        // Phase 1A may change representation, never the established biology.
+        var phase06Shape = new { schemaVersion = 3, engineVersion = "0.3.0", w.RulesetHash,
+            w.Seed, w.CurrentTick, w.RngAlgorithm, w.Scenario, w.Regions, w.Cohorts,
+            w.Memory, w.EventCount, w.EventHash, w.Windows };
+        Assert.Equal("48AB41B6FD5C6CBA6A1D357A0ECFAD4AFAFF7E85A48ACED739C5A86D92D1600B", Persistence.Hash(phase06Shape));
         Assert.Equal("E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4", w.EventHash);
     }
     [Fact] public void ColdSelectsInheritedResistanceWithoutSpeciesStatChanges()

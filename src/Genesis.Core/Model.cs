@@ -50,9 +50,11 @@ public sealed record PopulationWindow(RegionId Region, SpeciesId Species, int St
 public sealed record PopulationSummary(PopulationWindow Window, int EndTick, long End);
 public sealed record WorldState(int SchemaVersion, string EngineVersion, string RulesetHash,
     ulong Seed, int CurrentTick, string RngAlgorithm, Scenario Scenario, RegionState[] Regions,
-    Cohort[] Cohorts, GroupMemory[] Memory, long EventCount, string EventHash, PopulationWindow[] Windows)
+    Cohort[] Cohorts, GroupMemory[] Memory, long EventCount, string EventHash, PopulationWindow[] Windows,
+    IdentityState Identity)
 {
-    [JsonIgnore] public long Population => Cohorts.Sum(c => c.Count);
+    // Cohorts own anonymous people only. Identities never also belong to a cohort.
+    [JsonIgnore] public long Population => Cohorts.Sum(c => c.Count) + Identity.Living.Length;
 }
 public sealed record Evidence(string Name, double Value);
 public sealed record SimEvent(EventId Id, int Tick, string Type, SpeciesId[] ActorRefs,
@@ -71,4 +73,4 @@ public sealed record FoodForecast(RegionId Region, int Tick, double Stock, doubl
     double Rainfall, double Regrowth, double Available);
 public sealed record TickResult(WorldState State, PopulationFlow[] Populations, FoodFlow[] Food,
     Transfer[] Transfers, SimEvent[] Events, CohortAudit[] Audit, FoodForecast[] Forecasts,
-    PopulationSummary[] Summaries);
+    PopulationSummary[] Summaries, PersonEvent[] PersonEvents);

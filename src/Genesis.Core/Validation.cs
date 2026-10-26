@@ -94,7 +94,7 @@ public static class Validation
     public static void State(WorldState w)
     {
         ArgumentNullException.ThrowIfNull(w);
-        if (w.Scenario is null || w.Regions is null || w.Cohorts is null || w.Memory is null || w.EventHash is null || w.Windows is null)
+        if (w.Scenario is null || w.Regions is null || w.Cohorts is null || w.Memory is null || w.EventHash is null || w.Windows is null || w.Identity is null)
             throw new InvalidDataException("Snapshot contains null required fields.");
         Require(w.SchemaVersion == Simulation.SnapshotSchema && w.EngineVersion == Simulation.Version, "Incompatible snapshot schema or engine version.");
         Require(w.RngAlgorithm == DeterministicRandom.Algorithm, "Incompatible random stream version.");
@@ -104,6 +104,13 @@ public static class Validation
         var nr = w.Scenario.Regions.Length; var ns = w.Scenario.Species.Length;
         int quantum = JuvenileAges.Options(w.Scenario).JuvenileBinMonths;
         Require(w.Regions.Length == nr && w.Cohorts.Length == nr * ns * 9 && w.Memory.Length == nr * ns && w.Windows.Length == nr * ns, "Incomplete canonical state.");
+        IdentityValidation.State(w);
+        var identified = new int[w.Cohorts.Length];
+        foreach (var person in w.Identity.Living)
+        {
+            var c = person.Cohort;
+            identified[Simulation.Index(c.Region.Value, c.Species.Value, c.Stage, c.Variant, ns)]++;
+        }
         for (int r = 0; r < nr; r++)
         {
             var region = w.Regions[r];
@@ -131,7 +138,9 @@ public static class Validation
                         if (w.CurrentTick % quantum == 0) Require(c.JuvenileBins[w.CurrentTick / quantum % c.JuvenileBins.Length] == 0, "Expired juvenile deadline.");
                     }
                     else Require(c.JuvenileBins is null, "Unexpected age bins on a geometric or non-juvenile cohort.");
-                    population += c.Count;
+                    long combined = c.Count + identified[Simulation.Index(r, s, a, v, ns)];
+                    Require(combined <= 1000000000000, "Combined cohort count exceeds supported limit.");
+                    population += combined;
                 }
                 var window = w.Windows[r * ns + s];
                 if (window is null) throw new InvalidDataException("Null population window.");

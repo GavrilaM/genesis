@@ -45,3 +45,6 @@ if ($LASTEXITCODE -eq 0 -or (Test-Path "$export-invalid")) { throw 'Invalid dura
 & dotnet $dll inspect world --save $save --made-up-option 1 2>$null
 if ($LASTEXITCODE -eq 0) { throw 'Unknown option accepted' }; $checks++
 Write-Output "$checks CLI smoke checks passed."
+# The last native invocation intentionally fails (unknown option). Do not leak
+# that expected failure as this successful script's process exit status.
+exit 0
