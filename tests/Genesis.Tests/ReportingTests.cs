@@ -21,6 +21,7 @@ public class ReportingTests
                 Assert.Equal(flows[0].Start, a.Start); Assert.Equal(flows.Sum(f => f.Births), a.Births);
                 Assert.Equal(flows.Sum(f => f.Deaths), a.Deaths); Assert.Equal(flows.Sum(f => f.Outward), a.Outward);
                 Assert.Equal(flows.Sum(f => f.Inward), a.Inward); Assert.Equal(flows.Sum(f => f.Consumed), a.Consumed, 6);
+                Assert.Equal(flows.Sum(f => f.Matured), a.Matured);
                 Assert.Equal(a.Start + a.Births - a.Deaths + a.Inward - a.Outward, summary.End);
             }
         }
@@ -55,12 +56,13 @@ public class ReportingTests
         }
         finally { File.Delete(path); }
     }
-    [Fact] public void LegacySnapshotGetsCompatibilityErrorBeforeChecksumError()
+    [Theory] [InlineData(1, "0.1.0")] [InlineData(2, "0.2.0")]
+    public void LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(int schema, string engine)
     {
         var path = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".json");
         try
         {
-            File.WriteAllText(path, "{\"checksum\":\"legacy\",\"state\":{\"schemaVersion\":1,\"engineVersion\":\"0.1.0\"}}");
+            File.WriteAllText(path, Persistence.Encode(new { checksum = "legacy", state = new { schemaVersion = schema, engineVersion = engine } }));
             var e = Assert.Throws<InvalidDataException>(() => Persistence.Load(path)); Assert.Contains("original engine", e.Message);
         }
         finally { File.Delete(path); }

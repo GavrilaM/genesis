@@ -101,6 +101,10 @@ try
             cli.Allow("scenario", "seeds", "years", "out", "cases");
             Calibration.Run(Scenario(), cli.Int("seeds", 8), checked(cli.Int("years", 300) * 12), cli.Required("out"), cli.Has("cases") ? cli.Required("cases") : null);
             Print(new { output = Path.GetFullPath(cli.Required("out")), status = "complete" }); break;
+        case "demography-study":
+            cli.Allow("scenario", "suite", "seeds", "years", "out", "models");
+            DemographicStudy.Run(Scenario(), cli.Get("suite", "worlds"), cli.Int("seeds", 8), cli.Int("years", 300), cli.Required("out"), cli.Has("models") ? cli.Required("models") : null);
+            Print(new { output = Path.GetFullPath(cli.Required("out")), status = "complete" }); break;
         case "demography-assay":
             cli.Allow("scenario", "seeds", "out");
             var assayPath = cli.Required("out"); Validation.Require(!File.Exists(assayPath), "Assay output exists.");
@@ -108,7 +112,7 @@ try
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(assayPath))!);
             File.WriteAllText(assayPath, Persistence.Encode(assay)); Print(new { output = Path.GetFullPath(assayPath) }); break;
         case "help":
-            Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nhistory-summary --run DIRECTORY [--from YEAR --to YEAR --region ID --species ID]\ncalibrate --seeds N --years N --out NEW_DIRECTORY [--cases baseline,swap-birth,...]\ndemography-assay --seeds N --out JSON\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
+            Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nhistory-summary --run DIRECTORY [--from YEAR --to YEAR --region ID --species ID]\ncalibrate --seeds N --years N --out NEW_DIRECTORY [--cases baseline,swap-birth,...]\ndemography-assay --seeds N --out JSON\ndemography-study --suite worlds|pulse|extinction|bottleneck|death-only --seeds N --years N --out NEW_DIRECTORY [--models geometric-rounding,monthly-binomial]\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
         default: throw new ArgumentException($"Unknown command '{verb}'. Use help.");
     }
     return 0;

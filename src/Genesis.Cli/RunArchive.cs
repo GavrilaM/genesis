@@ -26,7 +26,7 @@ public static class RunArchive
         using (var food = new StreamWriter(Path.Combine(output, "food.csv")))
         using (var summaries = new StreamWriter(Path.Combine(output, "summaries.jsonl")))
         {
-            population.WriteLine("tick,region,species,start,births,deaths,inward,outward,end,demand,consumed,nutrition,hungry_months,trait0,trait1,trait2");
+            population.WriteLine("tick,region,species,start,births,deaths,inward,outward,end,demand,consumed,nutrition,hungry_months,trait0,trait1,trait2,matured");
             food.WriteLine("tick,region,start,regrowth,consumed,end,temperature_c,rainfall_mm");
             for (int i = 0; i < months; i++)
             {
@@ -38,7 +38,7 @@ public static class RunArchive
                 produced += step.Food.Sum(f => f.Regrowth); consumed += step.Food.Sum(f => f.Consumed);
                 if (w.CurrentTick % sampleEvery == 0 || i == months - 1)
                 {
-                    foreach (var f in step.Populations) population.WriteLine(Csv(w.CurrentTick, f.Region.Value, f.Species.Value, f.Start, f.Births, f.Deaths, f.Inward, f.Outward, f.End, f.Demand, f.Consumed, f.Nutrition, f.HungryMonths, f.TraitCounts[0], f.TraitCounts[1], f.TraitCounts[2]));
+                    foreach (var f in step.Populations) population.WriteLine(Csv(w.CurrentTick, f.Region.Value, f.Species.Value, f.Start, f.Births, f.Deaths, f.Inward, f.Outward, f.End, f.Demand, f.Consumed, f.Nutrition, f.HungryMonths, f.TraitCounts[0], f.TraitCounts[1], f.TraitCounts[2], f.Matured));
                     foreach (var f in step.Food) food.WriteLine(Csv(w.CurrentTick, f.Region.Value, f.Start, f.Regrowth, f.Consumed, f.End, f.Temperature, f.Rainfall));
                 }
                 if (traceTick == w.CurrentTick)

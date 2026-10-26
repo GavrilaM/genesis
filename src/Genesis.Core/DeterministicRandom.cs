@@ -3,7 +3,7 @@ namespace Genesis.Core;
 // Counter-based streams: no hidden cursor. IDs and draw slots are part of engine compatibility.
 public static class DeterministicRandom
 {
-    public const string Algorithm = "splitmix64-counter-v1";
+    public const string Algorithm = "splitmix64-counter-v2-binomial";
     private static ulong Mix(ulong x)
     {
         unchecked
@@ -26,5 +26,20 @@ public static class DeterministicRandom
             throw new InvalidDataException("Expected count outside supported range [0, 1e12].");
         var whole = (long)Math.Floor(expected);
         return whole + (unit < expected - whole ? 1 : 0);
+    }
+
+    // Variable-length rejection draws cannot spill into another cohort's stream.
+    // This cursor lives only for a single variate; snapshots need no hidden state.
+    public struct Stream
+    {
+        private readonly ulong key;
+        private ulong counter;
+        public Stream(ulong seed, int tick, int system, int region, int species, int slot)
+        {
+            var h = Mix(seed);
+            h = Mix(h ^ (uint)tick); h = Mix(h ^ (uint)system); h = Mix(h ^ (uint)region);
+            h = Mix(h ^ (uint)species); key = Mix(h ^ (uint)slot); counter = 0;
+        }
+        public double Next() => ((Mix(key ^ Mix(counter++)) >> 12) + .5) * (1.0 / 4503599627370496.0);
     }
 }

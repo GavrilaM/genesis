@@ -38,8 +38,8 @@ public class ExperimentTests
         Assert.Equal(12000, w.CurrentTick); Assert.True(w.Population > 0);
         Assert.Equal(432, w.Cohorts.Length);
         // Versioned reference fingerprint on the supported Windows x64/.NET 10 environment.
-        Assert.Equal("197DA8D3C752026CEA54412E0C37772D6308A4841CCEBB07D08074E4165A83D1", Persistence.Hash(w));
-        Assert.Equal("1FBF9D660016EBC9EA6EAC18A22EFD4B43A9B4AB2F3A751E6369AE3E211AB96E", w.EventHash);
+        Assert.Equal("48AB41B6FD5C6CBA6A1D357A0ECFAD4AFAFF7E85A48ACED739C5A86D92D1600B", Persistence.Hash(w));
+        Assert.Equal("E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4", w.EventHash);
     }
     [Fact] public void ColdSelectsInheritedResistanceWithoutSpeciesStatChanges()
     {

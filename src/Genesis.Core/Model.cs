@@ -34,14 +34,19 @@ public sealed record Rules
 }
 public sealed record InitialPopulation(RegionId Region, SpeciesId Species, long[] StageCounts,
     double[]? VariantWeights = null, long[][]? StageVariantCounts = null);
+// Zero bins is the legacy geometric comparison. 1 is exact monthly minimum age;
+// 12 is the coarse candidate. These switches are persisted for reproducible assays.
+public sealed record DemographyOptions(int JuvenileBinMonths = 1, bool BinomialEvents = true,
+    bool InitialJuvenilesAreNewborn = false);
 public sealed record Scenario(int SchemaVersion, string Name, Rules Rules,
     RegionDefinition[] Regions, SpeciesDefinition[] Species, long[] InitialStageCounts,
-    double[] InitialVariantWeights, double InitialStockFraction, InitialPopulation[]? InitialPopulations = null);
+    double[] InitialVariantWeights, double InitialStockFraction, InitialPopulation[]? InitialPopulations = null,
+    DemographyOptions? Demography = null);
 public sealed record RegionState(RegionId Id, double Temperature, double Rainfall, double Forage);
-public sealed record Cohort(CohortId Id, long Count);
+public sealed record Cohort(CohortId Id, long Count, long[]? JuvenileBins = null);
 public sealed record GroupMemory(RegionId Region, SpeciesId Species, int HungryMonths, bool Famine);
 public sealed record PopulationWindow(RegionId Region, SpeciesId Species, int StartTick,
-    long Start, long Births, long Deaths, long Inward, long Outward, double Demand, double Consumed);
+    long Start, long Births, long Deaths, long Inward, long Outward, double Demand, double Consumed, long Matured = 0);
 public sealed record PopulationSummary(PopulationWindow Window, int EndTick, long End);
 public sealed record WorldState(int SchemaVersion, string EngineVersion, string RulesetHash,
     ulong Seed, int CurrentTick, string RngAlgorithm, Scenario Scenario, RegionState[] Regions,
@@ -55,7 +60,7 @@ public sealed record SimEvent(EventId Id, int Tick, string Type, SpeciesId[] Act
     string SourceSystem, string ReasonCode, string Severity);
 public sealed record PopulationFlow(RegionId Region, SpeciesId Species, long Start, long Births,
     long Deaths, long Inward, long Outward, long End, double Demand, double Consumed,
-    double Nutrition, int HungryMonths, long[] TraitCounts);
+    double Nutrition, int HungryMonths, long[] TraitCounts, long Matured = 0);
 public sealed record FoodFlow(RegionId Region, double Start, double Regrowth, double Consumed,
     double End, double Temperature, double Rainfall);
 public sealed record Transfer(CohortId Origin, RegionId Destination, long Count, double Cost,

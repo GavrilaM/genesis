@@ -2,8 +2,8 @@ namespace Genesis.Core;
 
 public static class Simulation
 {
-    public const string Version = "0.2.0";
-    public const int SnapshotSchema = 2;
+    public const string Version = "0.3.0";
+    public const int SnapshotSchema = 3;
     public static int Index(int r, int s, int a, int v, int ns) => ((r * ns + s) * 3 + a) * 3 + v;
 
     public static WorldState Create(Scenario scenario, ulong seed)
@@ -11,6 +11,7 @@ public static class Simulation
         // Own a detached copy: caller edits to configuration cannot alter a running world.
         var s = Persistence.Decode<Scenario>(Persistence.Encode(scenario));
         Validation.Scenario(s);
+        var demography = JuvenileAges.Options(s);
         var cohorts = new List<Cohort>(); var memory = new List<GroupMemory>();
         var windows = new List<PopulationWindow>();
         var configured = s.InitialPopulations?.ToDictionary(p => (p.Region, p.Species));
@@ -29,7 +30,8 @@ public static class Simulation
                     long n = entry?.StageVariantCounts is not null ? entry.StageVariantCounts[a][v]
                         : v == 2 ? remaining : (long)Math.Floor(stages[a] * weights[v]);
                     remaining -= n;
-                    cohorts.Add(new(new(r.Id, sp.Id, a, v), n));
+                    cohorts.Add(new(new(r.Id, sp.Id, a, v), n, a == 0 && demography.JuvenileBinMonths > 0
+                        ? JuvenileAges.Initialize(n, sp.MaturationMonths, demography.JuvenileBinMonths, demography.InitialJuvenilesAreNewborn) : null));
                 }
             }
         }
@@ -45,12 +47,16 @@ public static class Simulation
         if (validate) Validation.State(w);
         int nr = w.Regions.Length, ns = w.Scenario.Species.Length, tick = checked(w.CurrentTick + 1);
         var rules = w.Scenario.Rules;
+        var demography = JuvenileAges.Options(w.Scenario); int quantum = demography.JuvenileBinMonths;
+        var ageBins = w.Cohorts.Select(c => c.JuvenileBins is null ? null : (long[])c.JuvenileBins.Clone()).ToArray();
         var regions = new RegionState[nr]; var food = new FoodFlow[nr];
         var memory = new GroupMemory[nr * ns]; var flows = new PopulationFlow[nr * ns];
         var counts = new long[w.Cohorts.Length]; var events = new List<SimEvent>();
         List<CohortAudit>? auditRows = audit ? [] : null;
         double Rand(int system, int r, int s = 0, int draw = 0) => DeterministicRandom.Unit(w.Seed, tick, system, r, s, draw);
         long Round(double expected, int system, int r, int s, int draw) => DeterministicRandom.Round(expected, Rand(system, r, s, draw));
+        long Sample(long n, double p, int system, int r, int s, int draw) => demography.BinomialEvents
+            ? EventSampling.Binomial(n, p, w.Seed, tick, system, r, s, draw) : Round(n * p, system, r, s, draw);
         long Total(int r, int s, long[]? source = null)
         {
             long sum = 0;
@@ -94,7 +100,7 @@ public static class Simulation
             for (int s = 0; s < ns; s++)
             {
                 int g = r * ns + s; var sp = w.Scenario.Species[s]; var previous = w.Memory[g];
-                long start = Total(r, s), deaths = 0, births = 0;
+                long start = Total(r, s), deaths = 0, births = 0, matured = 0;
                 int hungry = start == 0 ? 0 : nutrition < .8 ? Math.Min(120, previous.HungryMonths + 1) : Math.Max(0, previous.HungryMonths - 1);
                 bool famine = start > 0 && (previous.Famine ? nutrition < rules.FamineEnd : nutrition < rules.FamineStart);
                 memory[g] = new(new(r), new(s), hungry, famine);
@@ -106,7 +112,25 @@ public static class Simulation
                         + (a == 2 ? 1.0 / sp.ElderMonths : 0)
                         + rules.StarvationMortality * (1 - nutrition) * (1 + Math.Min(hungry, 12) / 12.0)
                         + rules.ClimateMortality * Exposure(r, s, v), 0, 1);
-                    long dead = Round(w.Cohorts[i].Count * deathRate, 2, r, s, slot);
+                    long dead;
+                    if (ageBins[i] is { } bins)
+                    {
+                        dead = 0;
+                        if (demography.BinomialEvents)
+                            for (int b = 0; b < bins.Length; b++)
+                            {
+                                if (bins[b] == 0) continue;
+                                long loss = Sample(bins[b], deathRate, 12, r, s, v * 12002 + b);
+                                bins[b] -= loss; dead += loss;
+                            }
+                        else
+                        {
+                            dead = Round(w.Cohorts[i].Count * deathRate, 2, r, s, slot);
+                            var losses = JuvenileAges.Allocate(bins, w.Cohorts[i].Count, dead, Rand(13, r, s, v));
+                            for (int b = 0; b < bins.Length; b++) bins[b] -= losses[b];
+                        }
+                    }
+                    else dead = Sample(w.Cohorts[i].Count, deathRate, 2, r, s, slot);
                     survivors[slot] = w.Cohorts[i].Count - dead; deaths += dead;
                     auditRows?.Add(new(w.Cohorts[i].Id, w.Cohorts[i].Count, Exposure(r, s, v), deathRate, dead, survivors[slot]));
                 }
@@ -114,13 +138,21 @@ public static class Simulation
                 for (int a = 0; a < 3; a++) for (int v = 0; v < 3; v++)
                 {
                     long alive = survivors[a * 3 + v];
-                    long age = a == 2 ? 0 : Round(alive / (double)(a == 0 ? sp.MaturationMonths : sp.AdultMonths), 3, r, s, a * 3 + v);
+                    long age;
+                    if (a == 0 && ageBins[Index(r, s, a, v, ns)] is { } bins)
+                    {
+                        int due = tick / quantum % bins.Length;
+                        age = tick % quantum == 0 ? bins[due] : 0;
+                        if (tick % quantum == 0) bins[due] = 0;
+                    }
+                    else age = a == 2 ? 0 : Round(alive / (double)(a == 0 ? sp.MaturationMonths : sp.AdultMonths), 3, r, s, a * 3 + v);
+                    if (a == 0) matured += age;
                     counts[Index(r, s, a, v, ns)] += alive - age;
                     if (a < 2) counts[Index(r, s, a + 1, v, ns)] += age;
                 }
                 for (int v = 0; v < 3; v++)
                 {
-                    long children = Round(survivors[3 + v] * sp.AnnualBirthRate / 12 * nutrition * nutrition
+                    long children = Sample(survivors[3 + v], sp.AnnualBirthRate / 12 * nutrition * nutrition
                         * Math.Clamp(1 - Exposure(r, s, v) / 30, 0, 1), 4, r, s, v);
                     long mutations = Math.Min(children, Round(children * rules.MutationRate, 5, r, s, v));
                     counts[Index(r, s, 0, v, ns)] += children - mutations;
@@ -129,7 +161,13 @@ public static class Simulation
                     counts[Index(r, s, 0, (v + 2) % 3, ns)] += mutations - left;
                     births += children;
                 }
-                flows[g] = new(new(r), new(s), start, births, deaths, 0, 0, 0, demands[s], demands[s] * nutrition, nutrition, hungry, []);
+                if (quantum > 0) for (int v = 0; v < 3; v++)
+                {
+                    int i = Index(r, s, 0, v, ns); var bins = ageBins[i]!;
+                    long born = counts[i] - bins.Sum();
+                    bins[JuvenileAges.DueSlot(tick, sp.MaturationMonths, quantum, bins.Length)] += born;
+                }
+                flows[g] = new(new(r), new(s), start, births, deaths, 0, 0, 0, demands[s], demands[s] * nutrition, nutrition, hungry, [], matured);
                 if (famine != previous.Famine)
                     Emit(famine ? "famine-start" : "famine-end", r, s, previous.Famine ? 1 : 0, famine ? 1 : 0,
                         [new("nutrition", nutrition), new("availableRations", available), new("regionalDemand", totalDemand), new("rainfallMm", rain), new("hungryMonths", hungry)],
@@ -148,6 +186,7 @@ public static class Simulation
             return Math.Min(2, forecasts[r].Available / Math.Max(1, forecastDemand[r])) - .04 * exposure;
         }
         var transfers = new List<Transfer>(); var delta = new long[counts.Length];
+        var ageDelta = ageBins.Select(b => b is null ? null : new long[b.Length]).ToArray();
         for (int r = 0; r < nr; r++) for (int s = 0; s < ns; s++) for (int v = 0; v < 3; v++)
         {
             var sp = w.Scenario.Species[s]; double originScore = Score(r, s, v), bestScore = originScore + rules.MigrationThreshold;
@@ -166,6 +205,11 @@ public static class Simulation
                 long movers = Math.Min(counts[i], Round(counts[i] * fraction, 7, r, s, a * 3 + v));
                 if (movers == 0) continue;
                 delta[i] -= movers; delta[to] += movers;
+                if (ageBins[i] is { } bins)
+                {
+                    var moved = JuvenileAges.Allocate(bins, counts[i], movers, Rand(14, r, s, v));
+                    for (int b = 0; b < bins.Length; b++) { ageDelta[i]![b] -= moved[b]; ageDelta[to]![b] += moved[b]; }
+                }
                 transfers.Add(new(w.Cohorts[i].Id, best.Destination, movers, best.Cost, originScore, bestScore));
                 int g = r * ns + s, dest = best.Destination.Value * ns + s;
                 flows[g] = flows[g] with { Outward = flows[g].Outward + movers };
@@ -173,7 +217,12 @@ public static class Simulation
             }
         }
         var cohorts = new Cohort[counts.Length];
-        for (int i = 0; i < counts.Length; i++) { counts[i] += delta[i]; cohorts[i] = w.Cohorts[i] with { Count = counts[i] }; }
+        for (int i = 0; i < counts.Length; i++)
+        {
+            counts[i] += delta[i];
+            if (ageBins[i] is { } bins) for (int b = 0; b < bins.Length; b++) bins[b] += ageDelta[i]![b];
+            cohorts[i] = w.Cohorts[i] with { Count = counts[i], JuvenileBins = ageBins[i] };
+        }
         for (int r = 0; r < nr; r++) for (int s = 0; s < ns; s++)
         {
             int g = r * ns + s; var f = flows[g];
@@ -195,13 +244,13 @@ public static class Simulation
             var f = flows[g]; var old = w.Windows[g];
             var sum = old with { Births = old.Births + f.Births, Deaths = old.Deaths + f.Deaths,
                 Inward = old.Inward + f.Inward, Outward = old.Outward + f.Outward,
-                Demand = old.Demand + f.Demand, Consumed = old.Consumed + f.Consumed };
+                Demand = old.Demand + f.Demand, Consumed = old.Consumed + f.Consumed, Matured = old.Matured + f.Matured };
             windows[g] = sum;
             if (tick % 12 != 0) continue;
             summaries.Add(new(sum, tick, f.End));
             Evidence[] evidence = [new("fromTick", sum.StartTick), new("births", sum.Births), new("deaths", sum.Deaths),
                 new("inward", sum.Inward), new("outward", sum.Outward), new("demandRations", sum.Demand),
-                new("consumedRations", sum.Consumed), new("nutrition", sum.Demand == 0 ? 1 : sum.Consumed / sum.Demand)];
+                new("consumedRations", sum.Consumed), new("nutrition", sum.Demand == 0 ? 1 : sum.Consumed / sum.Demand), new("matured", sum.Matured)];
             if (Math.Abs(f.End - sum.Start) >= Math.Max(50, sum.Start * .2))
                 Emit("population-change", f.Region.Value, f.Species.Value, sum.Start, f.End, evidence,
                     "annual-accounting", "annual-change-at-least-20-percent-and-50", "info");

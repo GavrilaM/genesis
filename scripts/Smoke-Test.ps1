@@ -13,6 +13,9 @@ $world = Invoke-Genesis @('inspect','world','--save',$save) | ConvertFrom-Json
 if ($world.currentTick -ne 12000) { throw 'Unexpected final tick' }; $checks++
 $region = Invoke-Genesis @('inspect','region','0','--save',$save) | ConvertFrom-Json
 if ($region.cohorts.Count -ne 36) { throw 'Missing regional cohorts' }; $checks++
+foreach ($cohort in @($region.cohorts | Where-Object { $_.id.stage -eq 0 })) {
+    if ($null -eq $cohort.juvenileBins -or ($cohort.juvenileBins | Measure-Object -Sum).Sum -ne $cohort.count) { throw 'Juvenile age bins do not partition population' }
+}; $checks++
 $species = Invoke-Genesis @('inspect','species','0','--save',$save) | ConvertFrom-Json
 if ($species.cohorts.Count -ne 108) { throw 'Missing species cohorts' }; $checks++
 $history = @(Invoke-Genesis @('history','--run',$RunDirectory,'--from','0','--to','2','--type','famine-start'))
@@ -33,6 +36,7 @@ $annual = @(Invoke-Genesis @('history-summary','--run',$RunDirectory,'--from','0
 if ($annual.Count -ne 1 -or $annual[0] -eq 'not recorded') { throw 'Missing annual accounting' }
 $entry = $annual[0] | ConvertFrom-Json
 if ($entry.end -ne $entry.window.start + $entry.window.births - $entry.window.deaths + $entry.window.inward - $entry.window.outward) { throw 'Annual accounting failed' }; $checks++
+if ($null -eq $entry.window.matured -or $entry.window.matured -lt 0) { throw 'Missing maturation accounting' }; $checks++
 $export = Join-Path (Split-Path $RunDirectory) ('smoke-export-' + [Guid]::NewGuid().ToString('N'))
 Invoke-Genesis @('export','--run',$RunDirectory,'--format','csv','--out',$export) | Out-Null
 if ((Get-FileHash (Join-Path $export 'population.csv')).Hash -ne (Get-FileHash (Join-Path $RunDirectory 'population.csv')).Hash) { throw 'CSV export mismatch' }; $checks++

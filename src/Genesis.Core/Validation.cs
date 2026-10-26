@@ -17,6 +17,7 @@ public static class Validation
         Require(s.SchemaVersion == 1, "Unsupported scenario schema version.");
         Require(s.Regions.Length is > 0 and <= 1000 && s.Species.Length is > 0 and <= 100,
             "Unsupported region/species count.");
+        Require(JuvenileAges.Options(s).JuvenileBinMonths is 0 or 1 or 12, "Juvenile bin months must be 0 (geometric reference), 1 or 12.");
         Require(s.InitialStageCounts.Length == 3 && s.InitialStageCounts.All(n => n is >= 0 and <= 1000000000), "Invalid initial life stages.");
         Require(s.InitialVariantWeights.Length == 3 && s.InitialVariantWeights.All(v => double.IsFinite(v) && v >= 0)
             && Math.Abs(s.InitialVariantWeights.Sum() - 1) < 1e-9, "Trait weights must sum to one.");
@@ -77,6 +78,9 @@ public static class Validation
             Range(d.HeatTolerance, d.ColdTolerance, 120, "heat tolerance");
         }
         var p = s.Rules;
+        int quantum = JuvenileAges.Options(s).JuvenileBinMonths;
+        if (quantum > 0) Require(s.Species.Sum(d => (long)JuvenileAges.Length(d.MaturationMonths, quantum)) * s.Regions.Length * 3 <= 2000000,
+            "Scenario exceeds the supported two million juvenile age cells.");
         Range(p.Productivity, 0, 100, "productivity"); Range(p.RainMultiplier, 0, 10, "rain multiplier");
         Range(p.DroughtMultiplier, 0, 1, "drought multiplier");
         Require(p.DroughtStart >= 0 && p.DroughtEnd >= p.DroughtStart, "Invalid drought interval.");
@@ -98,6 +102,7 @@ public static class Validation
         Require(w.RulesetHash == Persistence.Hash(w.Scenario), "Ruleset hash mismatch.");
         Require(w.CurrentTick >= 0 && w.EventCount >= 0 && w.EventHash.Length == 64 && w.EventHash.All(Uri.IsHexDigit), "Invalid clock/event cursor.");
         var nr = w.Scenario.Regions.Length; var ns = w.Scenario.Species.Length;
+        int quantum = JuvenileAges.Options(w.Scenario).JuvenileBinMonths;
         Require(w.Regions.Length == nr && w.Cohorts.Length == nr * ns * 9 && w.Memory.Length == nr * ns && w.Windows.Length == nr * ns, "Incomplete canonical state.");
         for (int r = 0; r < nr; r++)
         {
@@ -117,6 +122,15 @@ public static class Validation
                     var c = w.Cohorts[Simulation.Index(r, s, a, v, ns)];
                     if (c is null) throw new InvalidDataException("Cohort cannot be null.");
                     Require(c.Id == new CohortId(new(r), new(s), a, v) && c.Count is >= 0 and <= 1000000000000, "Invalid cohort identity or count.");
+                    if (a == 0 && quantum > 0)
+                    {
+                        Require(c.JuvenileBins is not null && c.JuvenileBins.Length == JuvenileAges.Length(w.Scenario.Species[s].MaturationMonths, quantum), "Invalid juvenile age queue length.");
+                        long total = 0;
+                        foreach (long n in c.JuvenileBins!) { Require(n is >= 0 and <= 1000000000000, "Invalid juvenile age count."); total += n; }
+                        Require(total == c.Count, "Juvenile bins must partition, not duplicate, the cohort count.");
+                        if (w.CurrentTick % quantum == 0) Require(c.JuvenileBins[w.CurrentTick / quantum % c.JuvenileBins.Length] == 0, "Expired juvenile deadline.");
+                    }
+                    else Require(c.JuvenileBins is null, "Unexpected age bins on a geometric or non-juvenile cohort.");
                     population += c.Count;
                 }
                 var window = w.Windows[r * ns + s];
@@ -127,6 +141,7 @@ public static class Validation
                     && window.Deaths is >= 0 and <= 1000000000000000 && window.Inward is >= 0 and <= 1000000000000000 && window.Outward is >= 0 and <= 1000000000000000
                     && population == window.Start + window.Births - window.Deaths + window.Inward - window.Outward, "Annual population accounting failed.");
                 Range(window.Demand, 0, 1e18, "window demand"); Range(window.Consumed, 0, window.Demand + 1e-6, "window consumed");
+                Require(window.Matured is >= 0 and <= 1000000000000000, "Invalid maturation accounting.");
             }
         }
     }
@@ -136,6 +151,7 @@ public static class Validation
         {
             Require(f.End == f.Start + f.Births - f.Deaths + f.Inward - f.Outward, "Population accounting failed.");
             Require(f.End >= 0 && f.Births >= 0 && f.Deaths >= 0 && f.Inward >= 0 && f.Outward >= 0, "Negative population flow.");
+            Require(f.Matured >= 0 && f.Matured <= f.Start - f.Deaths, "Invalid monthly maturation count.");
             Require(f.Consumed >= 0 && f.Consumed <= f.Demand + 1e-7, "Double consumption.");
             Require(f.TraitCounts.Sum() == f.End, "Trait accounting failed.");
         }
