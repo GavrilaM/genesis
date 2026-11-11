@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "name": "first-local-exploration",
+  "rules": {
+    "productivity": 100,
+    "rainMultiplier": 1,
+    "droughtStart": 120,
+    "droughtEnd": 240,
+    "droughtMultiplier": 1,
+    "temperatureOffset": 0,
+    "starvationMortality": 0,
+    "climateMortality": 0,
+    "mutationRate": 0,
+    "resistanceDegrees": 5,
+    "resistanceFoodCost": 0,
+    "famineStart": 0.65,
+    "famineEnd": 0.9,
+    "migrationThreshold": 0.1,
+    "travelPenalty": 0.03
+  },
+  "regions": [
+    {
+      "id": {
+        "value": 0
+      },
+      "name": "Region 0",
+      "terrain": "plain",
+      "area": 1,
+      "fertility": 1,
+      "baseTemperature": 25,
+      "baseRainfall": 1000,
+      "capacity": 10,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 1
+          },
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": 1
+      },
+      "name": "Region 1",
+      "terrain": "forest",
+      "area": 1,
+      "fertility": 1,
+      "baseTemperature": 25,
+      "baseRainfall": 1000,
+      "capacity": 100,
+      "neighbors": [
+        {
+          "destination": {
+            "value": 0
+          },
+          "cost": 1
+        }
+      ]
+    }
+  ],
+  "species": [
+    {
+      "id": {
+        "value": 0
+      },
+      "name": "human",
+      "foodDemand": 1,
+      "maturationMonths": 192,
+      "adultMonths": 12000,
+      "elderMonths": 180,
+      "annualBirthRate": 0,
+      "naturalMortality": 0,
+      "coldTolerance": -100,
+      "heatTolerance": 100,
+      "migrationRate": 0,
+      "maxTravelCost": 3
+    }
+  ],
+  "initialStageCounts": [
+    0,
+    20,
+    0
+  ],
+  "initialVariantWeights": [
+    1,
+    0,
+    0
+  ],
+  "initialStockFraction": 0,
+  "initialPopulations": [
+    {
+      "region": {
+        "value": 0
+      },
+      "species": {
+        "value": 0
+      },
+      "stageCounts": [
+        0,
+        20,
+        0
+      ],
+      "variantWeights": null,
+      "stageVariantCounts": null
+    }
+  ],
+  "demography": null
+}

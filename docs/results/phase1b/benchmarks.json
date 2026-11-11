@@ -1,0 +1,5375 @@
+{
+  "seed": 847192,
+  "years": 1000,
+  "repetitions": 3,
+  "serialProcesses": true,
+  "referenceCommit": "9bd958f",
+  "allArchivesVerified": true,
+  "noOverrideControlsPassed": true,
+  "summary": [
+    {
+      "case": "anonymous",
+      "mode": "Off",
+      "medianSeconds": 11.6083547,
+      "minimumSeconds": 11.5172897,
+      "maximumSeconds": 17.0632786,
+      "referenceMedianSeconds": 12.2476395,
+      "ratioToReference": 0.9478034277543848,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "identities64",
+      "mode": "Off",
+      "medianSeconds": 20.6061068,
+      "minimumSeconds": 20.0536451,
+      "maximumSeconds": 23.645734,
+      "referenceMedianSeconds": 21.5891936,
+      "ratioToReference": 0.9544639407004066,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "identities256",
+      "mode": "Off",
+      "medianSeconds": 37.6452548,
+      "minimumSeconds": 36.2029609,
+      "maximumSeconds": 38.0041052,
+      "referenceMedianSeconds": 38.401046,
+      "ratioToReference": 0.980318473616578,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "mind1",
+      "mode": "Off",
+      "medianSeconds": 21.6393097,
+      "minimumSeconds": 20.1191129,
+      "maximumSeconds": 22.3899934,
+      "referenceMedianSeconds": 22.5598582,
+      "ratioToReference": 0.9591952887363449,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "mind1",
+      "mode": "ObserveOnly",
+      "medianSeconds": 21.9656982,
+      "minimumSeconds": 21.6375441,
+      "maximumSeconds": 32.95257,
+      "referenceMedianSeconds": 22.5598582,
+      "ratioToReference": 0.9736629550269069,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "mind1",
+      "mode": "Decide",
+      "medianSeconds": 23.7499079,
+      "minimumSeconds": 23.2603463,
+      "maximumSeconds": 32.431248,
+      "referenceMedianSeconds": 22.5598582,
+      "ratioToReference": 1.052750761527393,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": false
+    },
+    {
+      "case": "minds64",
+      "mode": "Off",
+      "medianSeconds": 37.2593845,
+      "minimumSeconds": 36.7686342,
+      "maximumSeconds": 48.4038899,
+      "referenceMedianSeconds": 39.3896696,
+      "ratioToReference": 0.9459176702512886,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "minds64",
+      "mode": "ObserveOnly",
+      "medianSeconds": 62.2901688,
+      "minimumSeconds": 59.963858,
+      "maximumSeconds": 85.3048331,
+      "referenceMedianSeconds": 39.3896696,
+      "ratioToReference": 1.581383378752687,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": true
+    },
+    {
+      "case": "minds64",
+      "mode": "Decide",
+      "medianSeconds": 70.0261971,
+      "minimumSeconds": 68.8624382,
+      "maximumSeconds": 91.0442798,
+      "referenceMedianSeconds": 39.3896696,
+      "ratioToReference": 1.777780768691698,
+      "offRegressionReviewTriggered": false,
+      "noOverrideMatchesReference": false
+    }
+  ],
+  "observations": [
+    {
+      "name": "anonymous-Reference-r1",
+      "case": "anonymous",
+      "mode": "Reference",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "135207647D028375203EB8CBB28D0567654312E8BAED5F4A33E0DC788E96E02A",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 15.4450047,
+        "ticksPerSecond": 776.950232977268,
+        "peakWorkingSetBytes": 67567616,
+        "snapshotBytes": 125015,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "anonymous-Off-r1",
+      "case": "anonymous",
+      "mode": "Off",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D84FE1196750AAEEA7960522E979FBD98F1BCE190C274EE77807E0C02F080225",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 4.929375099999981,
+          "biologySeconds": 6.557889700000004,
+          "cognitionSeconds": 0.030525200000000148,
+          "migrationSeconds": 3.9811671999999834,
+          "identityCommitSeconds": 0.0008091999999999104,
+          "cognitionEvidenceSeconds": 0.0061670999999995126,
+          "cognitionWriteSeconds": 0.0012464999999999046
+        },
+        "allocatedBytes": 9945051768,
+        "retainedManagedBytes": 4268056,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 2,
+          "deceasedIdentities": 2,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 17.0632786,
+        "ticksPerSecond": 703.2646117610715,
+        "peakWorkingSetBytes": 72187904,
+        "snapshotBytes": 125239,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Reference-r1",
+      "case": "identities64",
+      "mode": "Reference",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "A460B3C95C05BE63534DCC8CAE976B2F8547C248B8396F49CB2A0FED7872CAE1",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 34.3111097,
+        "ticksPerSecond": 349.74094702626303,
+        "peakWorkingSetBytes": 108195840,
+        "snapshotBytes": 1148851,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Off-r1",
+      "case": "identities64",
+      "mode": "Off",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D03F72FE3EEA11897B6581753025D191AA65213C9B609A344D7EDF4D43BAC2DD",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 5.546617099999976,
+          "biologySeconds": 7.456355500000009,
+          "cognitionSeconds": 0.03272630000000079,
+          "migrationSeconds": 4.751645199999997,
+          "identityCommitSeconds": 0.4691707,
+          "cognitionEvidenceSeconds": 0.005406199999999555,
+          "cognitionWriteSeconds": 0.0007840999999998846
+        },
+        "allocatedBytes": 18356758144,
+        "retainedManagedBytes": 19829312,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12149,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 23.645734,
+        "ticksPerSecond": 507.4911186939682,
+        "peakWorkingSetBytes": 102551552,
+        "snapshotBytes": 1149075,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Reference-r1",
+      "case": "identities256",
+      "mode": "Reference",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "82E9A807FB7742FD4E4C92EFC66810538BA02D02B475B199C38B4249AB1F8A38",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 38.401046,
+        "ticksPerSecond": 312.4914878620754,
+        "peakWorkingSetBytes": 208347136,
+        "snapshotBytes": 4162252,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Off-r1",
+      "case": "identities256",
+      "mode": "Off",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "0B8E88AD43436CB1F1E502CF074D291E58B7328ECD95453F20A3D6B599FAE2D8",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 12.825119399999986,
+          "biologySeconds": 6.33603000000005,
+          "cognitionSeconds": 0.031762599999999676,
+          "migrationSeconds": 4.389855399999995,
+          "identityCommitSeconds": 2.941702700000007,
+          "cognitionEvidenceSeconds": 0.004842299999999676,
+          "cognitionWriteSeconds": 0.001612899999999804
+        },
+        "allocatedBytes": 21025289080,
+        "retainedManagedBytes": 73001960,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49187,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 36.2029609,
+        "ticksPerSecond": 331.4646012834823,
+        "peakWorkingSetBytes": 212631552,
+        "snapshotBytes": 4162476,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Reference-r1",
+      "case": "mind1",
+      "mode": "Reference",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "083E864DB6851DB6EB8FD64804418AB9E3C3699101DE2425E0CD504F1E49958B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 22.5598582,
+        "ticksPerSecond": 531.9182369683512,
+        "peakWorkingSetBytes": 100569088,
+        "snapshotBytes": 1148850,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Off-r1",
+      "case": "mind1",
+      "mode": "Off",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "EAC2396C6156B660BDC72485AD6A5C6E17DEDC5F2C1916BA2E73CE1A322B9B9B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 5.818167499999993,
+          "biologySeconds": 6.80962220000002,
+          "cognitionSeconds": 0.028332000000000024,
+          "migrationSeconds": 3.9065530000000095,
+          "identityCommitSeconds": 0.4782000000000003,
+          "cognitionEvidenceSeconds": 0.004611799999999615,
+          "cognitionWriteSeconds": 0.0013351999999999243
+        },
+        "allocatedBytes": 18208607672,
+        "retainedManagedBytes": 19829296,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 22.3899934,
+        "ticksPerSecond": 535.9537086777345,
+        "peakWorkingSetBytes": 106430464,
+        "snapshotBytes": 1149074,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-ObserveOnly-r1",
+      "case": "mind1",
+      "mode": "ObserveOnly",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "2BBA72DA2FA6A5AB03EF7D7A863D0C78B9709391F0281A96441CBC26EE181549",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11611,
+          "eventHash": "F16C4A60448AF3E773AC0C38B7980F9E8CF2D99C0654F26F0B9394F1529EEE49",
+          "eventBytes": 12765433,
+          "eventSha256": "44D4EB20B0CF2A4160CE6A763DA6A217219BBCDC820DA5CCA973FA9CD00BF4C4"
+        },
+        "profiling": {
+          "validationSeconds": 8.807539400000003,
+          "biologySeconds": 9.518806699999963,
+          "cognitionSeconds": 0.336436400000001,
+          "migrationSeconds": 5.333003500000004,
+          "identityCommitSeconds": 0.709316299999997,
+          "cognitionEvidenceSeconds": 0.5340258000000018,
+          "cognitionWriteSeconds": 0.40036920000000353
+        },
+        "allocatedBytes": 18515086888,
+        "retainedManagedBytes": 20048712,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 576,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 32.95257,
+        "ticksPerSecond": 364.1597605285415,
+        "peakWorkingSetBytes": 110952448,
+        "snapshotBytes": 1149652,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Decide-r1",
+      "case": "mind1",
+      "mode": "Decide",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11849,
+        "births": 471896,
+        "deaths": 498447,
+        "migrations": 2809741,
+        "foodProduced": 166962322.53890288,
+        "foodConsumed": 167041205.51110417,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 22
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11827
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "C0CBAF904BA712947A7C12A16C44C663FD3CB9171C6936FB6744D3056257DF60",
+        "eventHash": "3D8B2C273B0CFE01562C80D9164F34592837278C364B7C31B87EC0F895DA012D",
+        "eventCount": 21449,
+        "totalEventCount": 21449,
+        "biologicalProjectionHash": "1D5FD673ECA0674D85B92A9F4E63F7B6CA1F46D8FB12E14137A3BEF572B04E53",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11775,
+          "eventHash": "F4446E7EA61E1E9BBBB0D72C50ED10E25826F317E26C5EE554FC6C023A4507DA",
+          "eventBytes": 18104955,
+          "eventSha256": "9C5E4DF335B83A3B47A17F03915B0566A17A6AFC2E70A08258BE75EA2459EB9F"
+        },
+        "profiling": {
+          "validationSeconds": 7.921024100000011,
+          "biologySeconds": 9.10226590000001,
+          "cognitionSeconds": 1.5545579000000065,
+          "migrationSeconds": 5.299078600000018,
+          "identityCommitSeconds": 0.6164740000000026,
+          "cognitionEvidenceSeconds": 0.6230460999999996,
+          "cognitionWriteSeconds": 0.5004589000000005
+        },
+        "allocatedBytes": 21515710384,
+        "retainedManagedBytes": 20021992,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107222,
+          "livingIdentities": 12153,
+          "deceasedIdentities": 982503,
+          "minds": 488,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4745,
+          "anonymous": 11791,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "8BE8DC0ADF72FA1FEF596ED5398260420FDE8EE4E2D71F37464308E25C26EADB",
+          "identifiedPersonMonths": 749873,
+          "activeReservationMonths": 11828,
+          "meanLiving": 62.48941666666666,
+          "representationCommands": 4803,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 32.431248,
+        "ticksPerSecond": 370.0135128934909,
+        "peakWorkingSetBytes": 101138432,
+        "snapshotBytes": 1120387,
+        "eventBytes": 10412676,
+        "summarySha256": "5D8EA135C30991BFB9CCC21E6D54DD4951B0190E258553448A4D7F6786D90B7D",
+        "populationSha256": "28A7BFBE30EF4FC8802C6331BB6A1C6C162361E2DF1F9C0637F79DAA9E468BB4",
+        "foodSha256": "CB6F6B4CCBEDB89264A4709D119BABD1D265209650222DAF5C510D217D69FF9A",
+        "personEventBytes": 8094612,
+        "identityCommandSha256": "A7FDBD2C5950F9761433441A943741A667B8EF1F9B85599CAE9E81FE03828F1C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Reference-r1",
+      "case": "minds64",
+      "mode": "Reference",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "8C6FF0837F74844B1A4C8681054D77DD25448B415F09A3761A648E686164A2AA",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 49.3097589,
+        "ticksPerSecond": 243.35953506355514,
+        "peakWorkingSetBytes": 212123648,
+        "snapshotBytes": 4162192,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Off-r1",
+      "case": "minds64",
+      "mode": "Off",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "4E3BD22C6D14D54B38D591F0EDF7AAF504ED83BA9A989C7652EF3414F246B265",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 17.392160000000057,
+          "biologySeconds": 9.069779799999992,
+          "cognitionSeconds": 0.0384849999999996,
+          "migrationSeconds": 5.161175299999985,
+          "identityCommitSeconds": 3.734500999999986,
+          "cognitionEvidenceSeconds": 0.006705999999999435,
+          "cognitionWriteSeconds": 0.001972999999999733
+        },
+        "allocatedBytes": 20788240720,
+        "retainedManagedBytes": 73001952,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 48.4038899,
+        "ticksPerSecond": 247.91395949357366,
+        "peakWorkingSetBytes": 200265728,
+        "snapshotBytes": 4162416,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-ObserveOnly-r1",
+      "case": "minds64",
+      "mode": "ObserveOnly",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "B2C7BE69E9D583D78315EE13BF9430FEE62D4E74E645CF38E65825EF81EE7027",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 60,
+          "observations": 480,
+          "eventCount": 744328,
+          "eventHash": "5C0AAE5D7F98DD8F2D737E014A531DEDCB38E9B81D3FFC541C506F2035633DBD",
+          "eventBytes": 820074122,
+          "eventSha256": "F5146019CD3B1F8EDF5FD8E4BD4E8DDA8F9FB4E1044B177816C2F1B2E2BE28BE"
+        },
+        "profiling": {
+          "validationSeconds": 25.83199609999996,
+          "biologySeconds": 9.008816700000068,
+          "cognitionSeconds": 1.6740722000000088,
+          "migrationSeconds": 5.5201296999999885,
+          "identityCommitSeconds": 4.448221999999997,
+          "cognitionEvidenceSeconds": 12.900676699999984,
+          "cognitionWriteSeconds": 10.536332000000012
+        },
+        "allocatedBytes": 29701953616,
+        "retainedManagedBytes": 71540936,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 30165,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 85.3048331,
+        "ticksPerSecond": 140.67198262884827,
+        "peakWorkingSetBytes": 224866304,
+        "snapshotBytes": 4192584,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Decide-r1",
+      "case": "minds64",
+      "mode": "Decide",
+      "repetition": 1,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11833,
+        "births": 471741,
+        "deaths": 498308,
+        "migrations": 2809520,
+        "foodProduced": 166928370.31221908,
+        "foodConsumed": 167006949.5232844,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 92
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11741
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D6D7825DC5A344CC1D7C9E55A16CFE595F5EF12BFD2E6BD6570698AC6C7A5E53",
+        "eventHash": "179B0585DEC84EC88161C1EE19E1CEFF6E21765F431C3CFF99C7028E6CEEA704",
+        "eventCount": 22207,
+        "totalEventCount": 22207,
+        "biologicalProjectionHash": "E32A00EE913092B04F785A105452026BDA8E98FCFD79092D9BD5963CF3929B96",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 61,
+          "observations": 488,
+          "eventCount": 751328,
+          "eventHash": "32A66328AA0FEC04CFE3586E36A3D66186F6F2A47BEF69FE49DAD1922DD1E13B",
+          "eventBytes": 1156695967,
+          "eventSha256": "21C22134476A96D4F82B5301B984DC20683EACFA1F64A06CDB3FEF470356C90B"
+        },
+        "profiling": {
+          "validationSeconds": 23.95906179999994,
+          "biologySeconds": 9.14487660000003,
+          "cognitionSeconds": 3.6931284000000026,
+          "migrationSeconds": 5.889933399999973,
+          "identityCommitSeconds": 4.390928299999999,
+          "cognitionEvidenceSeconds": 16.04563869999996,
+          "cognitionWriteSeconds": 14.139424000000027
+        },
+        "allocatedBytes": 35517527928,
+        "retainedManagedBytes": 71409032,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107219,
+          "livingIdentities": 49731,
+          "deceasedIdentities": 3845356,
+          "minds": 30855,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 237,
+          "active": 61,
+          "deceased": 18523,
+          "anonymous": 11596,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 113304,
+          "eventHash": "9FEF49C1FAB51AE379EDE61DCCEB914A39FCA03B30D3452B487863F9B4191D6E",
+          "identifiedPersonMonths": 3003919,
+          "activeReservationMonths": 755329,
+          "meanLiving": 250.32658333333333,
+          "representationCommands": 18760,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 91.0442798,
+        "ticksPerSecond": 131.80399720180992,
+        "peakWorkingSetBytes": 272015360,
+        "snapshotBytes": 4051188,
+        "eventBytes": 10808649,
+        "summarySha256": "E3FFD18122ADE9E2EFCD756AB0B9F89BBB8E618FBA0DA8E94E091A6ED2788471",
+        "populationSha256": "6B465A1EB62D756A324159F707C9CD7EAFC78BA8DD181DB2AB438DCB9037BB1E",
+        "foodSha256": "CB855531DA5FF6630A0F87DE90F87286D5DDB58207B019F5DB0340DE6EE90DAE",
+        "personEventBytes": 31924686,
+        "identityCommandSha256": "4AE45B8E32672869B75DD34D75E20ECF367899A4EAA7F2C57D7FA1FFF58E3805",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "anonymous-Off-r2",
+      "case": "anonymous",
+      "mode": "Off",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D84FE1196750AAEEA7960522E979FBD98F1BCE190C274EE77807E0C02F080225",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 3.3500585000000047,
+          "biologySeconds": 4.548952199999976,
+          "cognitionSeconds": 0.01736100000000063,
+          "migrationSeconds": 2.4134926999999995,
+          "identityCommitSeconds": 0.0005658999999999854,
+          "cognitionEvidenceSeconds": 0.004928199999999508,
+          "cognitionWriteSeconds": 0.0007543999999999303
+        },
+        "allocatedBytes": 9930327624,
+        "retainedManagedBytes": 4294512,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 2,
+          "deceasedIdentities": 2,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 11.6083547,
+        "ticksPerSecond": 1033.738226486136,
+        "peakWorkingSetBytes": 69242880,
+        "snapshotBytes": 125239,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "anonymous-Reference-r2",
+      "case": "anonymous",
+      "mode": "Reference",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "135207647D028375203EB8CBB28D0567654312E8BAED5F4A33E0DC788E96E02A",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 12.2476395,
+        "ticksPerSecond": 979.7806344642981,
+        "peakWorkingSetBytes": 67727360,
+        "snapshotBytes": 125015,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Off-r2",
+      "case": "identities64",
+      "mode": "Off",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D03F72FE3EEA11897B6581753025D191AA65213C9B609A344D7EDF4D43BAC2DD",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 4.843059599999993,
+          "biologySeconds": 6.463052000000021,
+          "cognitionSeconds": 0.02508020000000008,
+          "migrationSeconds": 3.4482611999999895,
+          "identityCommitSeconds": 0.3894734999999997,
+          "cognitionEvidenceSeconds": 0.0040692999999995694,
+          "cognitionWriteSeconds": 0.0007535999999999283
+        },
+        "allocatedBytes": 18230644080,
+        "retainedManagedBytes": 19829608,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12149,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 20.0536451,
+        "ticksPerSecond": 598.3949521476272,
+        "peakWorkingSetBytes": 141058048,
+        "snapshotBytes": 1149075,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Reference-r2",
+      "case": "identities64",
+      "mode": "Reference",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "A460B3C95C05BE63534DCC8CAE976B2F8547C248B8396F49CB2A0FED7872CAE1",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 20.7859425,
+        "ticksPerSecond": 577.313249086492,
+        "peakWorkingSetBytes": 120406016,
+        "snapshotBytes": 1148851,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Off-r2",
+      "case": "identities256",
+      "mode": "Off",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "0B8E88AD43436CB1F1E502CF074D291E58B7328ECD95453F20A3D6B599FAE2D8",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 13.860290700000013,
+          "biologySeconds": 6.649613900000018,
+          "cognitionSeconds": 0.0317419999999997,
+          "migrationSeconds": 3.8426784999999883,
+          "identityCommitSeconds": 3.1023199000000012,
+          "cognitionEvidenceSeconds": 0.006281899999999403,
+          "cognitionWriteSeconds": 0.0013008999999998857
+        },
+        "allocatedBytes": 20773108584,
+        "retainedManagedBytes": 73001960,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49187,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 37.6452548,
+        "ticksPerSecond": 318.7652750327513,
+        "peakWorkingSetBytes": 207597568,
+        "snapshotBytes": 4162476,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Reference-r2",
+      "case": "identities256",
+      "mode": "Reference",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "82E9A807FB7742FD4E4C92EFC66810538BA02D02B475B199C38B4249AB1F8A38",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 39.1351569,
+        "ticksPerSecond": 306.62966372315736,
+        "peakWorkingSetBytes": 200097792,
+        "snapshotBytes": 4162252,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Decide-r2",
+      "case": "mind1",
+      "mode": "Decide",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11849,
+        "births": 471896,
+        "deaths": 498447,
+        "migrations": 2809741,
+        "foodProduced": 166962322.53890288,
+        "foodConsumed": 167041205.51110417,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 22
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11827
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "C0CBAF904BA712947A7C12A16C44C663FD3CB9171C6936FB6744D3056257DF60",
+        "eventHash": "3D8B2C273B0CFE01562C80D9164F34592837278C364B7C31B87EC0F895DA012D",
+        "eventCount": 21449,
+        "totalEventCount": 21449,
+        "biologicalProjectionHash": "1D5FD673ECA0674D85B92A9F4E63F7B6CA1F46D8FB12E14137A3BEF572B04E53",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11775,
+          "eventHash": "F4446E7EA61E1E9BBBB0D72C50ED10E25826F317E26C5EE554FC6C023A4507DA",
+          "eventBytes": 18104955,
+          "eventSha256": "9C5E4DF335B83A3B47A17F03915B0566A17A6AFC2E70A08258BE75EA2459EB9F"
+        },
+        "profiling": {
+          "validationSeconds": 5.3965256,
+          "biologySeconds": 6.738952600000007,
+          "cognitionSeconds": 1.2537548000000023,
+          "migrationSeconds": 4.189983200000005,
+          "identityCommitSeconds": 0.4535314999999986,
+          "cognitionEvidenceSeconds": 0.4499037000000011,
+          "cognitionWriteSeconds": 0.41201660000000306
+        },
+        "allocatedBytes": 21796261288,
+        "retainedManagedBytes": 20022288,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107222,
+          "livingIdentities": 12153,
+          "deceasedIdentities": 982503,
+          "minds": 488,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4745,
+          "anonymous": 11791,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "8BE8DC0ADF72FA1FEF596ED5398260420FDE8EE4E2D71F37464308E25C26EADB",
+          "identifiedPersonMonths": 749873,
+          "activeReservationMonths": 11828,
+          "meanLiving": 62.48941666666666,
+          "representationCommands": 4803,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 23.7499079,
+        "ticksPerSecond": 505.2651172596758,
+        "peakWorkingSetBytes": 100519936,
+        "snapshotBytes": 1120387,
+        "eventBytes": 10412676,
+        "summarySha256": "5D8EA135C30991BFB9CCC21E6D54DD4951B0190E258553448A4D7F6786D90B7D",
+        "populationSha256": "28A7BFBE30EF4FC8802C6331BB6A1C6C162361E2DF1F9C0637F79DAA9E468BB4",
+        "foodSha256": "CB6F6B4CCBEDB89264A4709D119BABD1D265209650222DAF5C510D217D69FF9A",
+        "personEventBytes": 8094612,
+        "identityCommandSha256": "A7FDBD2C5950F9761433441A943741A667B8EF1F9B85599CAE9E81FE03828F1C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-ObserveOnly-r2",
+      "case": "mind1",
+      "mode": "ObserveOnly",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "2BBA72DA2FA6A5AB03EF7D7A863D0C78B9709391F0281A96441CBC26EE181549",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11611,
+          "eventHash": "F16C4A60448AF3E773AC0C38B7980F9E8CF2D99C0654F26F0B9394F1529EEE49",
+          "eventBytes": 12765433,
+          "eventSha256": "44D4EB20B0CF2A4160CE6A763DA6A217219BBCDC820DA5CCA973FA9CD00BF4C4"
+        },
+        "profiling": {
+          "validationSeconds": 5.174300100000009,
+          "biologySeconds": 6.748693200000075,
+          "cognitionSeconds": 0.1986161999999996,
+          "migrationSeconds": 3.677122299999996,
+          "identityCommitSeconds": 0.4125412000000025,
+          "cognitionEvidenceSeconds": 0.3283765000000029,
+          "cognitionWriteSeconds": 0.28391120000000086
+        },
+        "allocatedBytes": 18509240600,
+        "retainedManagedBytes": 20022848,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 576,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 21.6375441,
+        "ticksPerSecond": 554.5915906417495,
+        "peakWorkingSetBytes": 123772928,
+        "snapshotBytes": 1149652,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Off-r2",
+      "case": "mind1",
+      "mode": "Off",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "EAC2396C6156B660BDC72485AD6A5C6E17DEDC5F2C1916BA2E73CE1A322B9B9B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 4.802817599999978,
+          "biologySeconds": 6.382651400000047,
+          "cognitionSeconds": 0.026607300000000198,
+          "migrationSeconds": 3.6019380999999875,
+          "identityCommitSeconds": 0.382695199999999,
+          "cognitionEvidenceSeconds": 0.0050755999999995225,
+          "cognitionWriteSeconds": 0.0006388999999999452
+        },
+        "allocatedBytes": 18215072680,
+        "retainedManagedBytes": 19829592,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 20.1191129,
+        "ticksPerSecond": 596.4477688278195,
+        "peakWorkingSetBytes": 129273856,
+        "snapshotBytes": 1149074,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Reference-r2",
+      "case": "mind1",
+      "mode": "Reference",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "083E864DB6851DB6EB8FD64804418AB9E3C3699101DE2425E0CD504F1E49958B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 25.1246797,
+        "ticksPerSecond": 477.61802909670524,
+        "peakWorkingSetBytes": 99332096,
+        "snapshotBytes": 1148850,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Decide-r2",
+      "case": "minds64",
+      "mode": "Decide",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11833,
+        "births": 471741,
+        "deaths": 498308,
+        "migrations": 2809520,
+        "foodProduced": 166928370.31221908,
+        "foodConsumed": 167006949.5232844,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 92
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11741
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D6D7825DC5A344CC1D7C9E55A16CFE595F5EF12BFD2E6BD6570698AC6C7A5E53",
+        "eventHash": "179B0585DEC84EC88161C1EE19E1CEFF6E21765F431C3CFF99C7028E6CEEA704",
+        "eventCount": 22207,
+        "totalEventCount": 22207,
+        "biologicalProjectionHash": "E32A00EE913092B04F785A105452026BDA8E98FCFD79092D9BD5963CF3929B96",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 61,
+          "observations": 488,
+          "eventCount": 751328,
+          "eventHash": "32A66328AA0FEC04CFE3586E36A3D66186F6F2A47BEF69FE49DAD1922DD1E13B",
+          "eventBytes": 1156695967,
+          "eventSha256": "21C22134476A96D4F82B5301B984DC20683EACFA1F64A06CDB3FEF470356C90B"
+        },
+        "profiling": {
+          "validationSeconds": 19.640555800000044,
+          "biologySeconds": 6.336155899999997,
+          "cognitionSeconds": 2.733679700000005,
+          "migrationSeconds": 4.345834100000014,
+          "identityCommitSeconds": 3.662713900000011,
+          "cognitionEvidenceSeconds": 10.590922499999985,
+          "cognitionWriteSeconds": 9.711896400000011
+        },
+        "allocatedBytes": 35526272224,
+        "retainedManagedBytes": 72457632,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107219,
+          "livingIdentities": 49731,
+          "deceasedIdentities": 3845356,
+          "minds": 30855,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 237,
+          "active": 61,
+          "deceased": 18523,
+          "anonymous": 11596,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 113304,
+          "eventHash": "9FEF49C1FAB51AE379EDE61DCCEB914A39FCA03B30D3452B487863F9B4191D6E",
+          "identifiedPersonMonths": 3003919,
+          "activeReservationMonths": 755329,
+          "meanLiving": 250.32658333333333,
+          "representationCommands": 18760,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 70.0261971,
+        "ticksPerSecond": 171.36443926640135,
+        "peakWorkingSetBytes": 218546176,
+        "snapshotBytes": 4051188,
+        "eventBytes": 10808649,
+        "summarySha256": "E3FFD18122ADE9E2EFCD756AB0B9F89BBB8E618FBA0DA8E94E091A6ED2788471",
+        "populationSha256": "6B465A1EB62D756A324159F707C9CD7EAFC78BA8DD181DB2AB438DCB9037BB1E",
+        "foodSha256": "CB855531DA5FF6630A0F87DE90F87286D5DDB58207B019F5DB0340DE6EE90DAE",
+        "personEventBytes": 31924686,
+        "identityCommandSha256": "4AE45B8E32672869B75DD34D75E20ECF367899A4EAA7F2C57D7FA1FFF58E3805",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-ObserveOnly-r2",
+      "case": "minds64",
+      "mode": "ObserveOnly",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "B2C7BE69E9D583D78315EE13BF9430FEE62D4E74E645CF38E65825EF81EE7027",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 60,
+          "observations": 480,
+          "eventCount": 744328,
+          "eventHash": "5C0AAE5D7F98DD8F2D737E014A531DEDCB38E9B81D3FFC541C506F2035633DBD",
+          "eventBytes": 820074122,
+          "eventSha256": "F5146019CD3B1F8EDF5FD8E4BD4E8DDA8F9FB4E1044B177816C2F1B2E2BE28BE"
+        },
+        "profiling": {
+          "validationSeconds": 19.01724439999993,
+          "biologySeconds": 6.367694500000032,
+          "cognitionSeconds": 1.151144000000002,
+          "migrationSeconds": 3.9964488000000125,
+          "identityCommitSeconds": 3.292931800000015,
+          "cognitionEvidenceSeconds": 9.381374200000012,
+          "cognitionWriteSeconds": 7.73709969999997
+        },
+        "allocatedBytes": 29770450640,
+        "retainedManagedBytes": 73113848,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 30165,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 62.2901688,
+        "ticksPerSecond": 192.64677285639337,
+        "peakWorkingSetBytes": 208015360,
+        "snapshotBytes": 4192584,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Off-r2",
+      "case": "minds64",
+      "mode": "Off",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "4E3BD22C6D14D54B38D591F0EDF7AAF504ED83BA9A989C7652EF3414F246B265",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 12.982731399999963,
+          "biologySeconds": 6.539650000000059,
+          "cognitionSeconds": 0.035982799999999454,
+          "migrationSeconds": 4.035273899999979,
+          "identityCommitSeconds": 3.028829000000004,
+          "cognitionEvidenceSeconds": 0.00614929999999943,
+          "cognitionWriteSeconds": 0.0011528999999998873
+        },
+        "allocatedBytes": 20848576304,
+        "retainedManagedBytes": 73001952,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 37.2593845,
+        "ticksPerSecond": 322.06651186092455,
+        "peakWorkingSetBytes": 210644992,
+        "snapshotBytes": 4162416,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Reference-r2",
+      "case": "minds64",
+      "mode": "Reference",
+      "repetition": 2,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "8C6FF0837F74844B1A4C8681054D77DD25448B415F09A3761A648E686164A2AA",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 39.3896696,
+        "ticksPerSecond": 304.64840456544476,
+        "peakWorkingSetBytes": 189083648,
+        "snapshotBytes": 4162192,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "anonymous-Reference-r3",
+      "case": "anonymous",
+      "mode": "Reference",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "135207647D028375203EB8CBB28D0567654312E8BAED5F4A33E0DC788E96E02A",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 11.7675173,
+        "ticksPerSecond": 1019.7563083251214,
+        "peakWorkingSetBytes": 67710976,
+        "snapshotBytes": 125015,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "anonymous-Off-r3",
+      "case": "anonymous",
+      "mode": "Off",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D84FE1196750AAEEA7960522E979FBD98F1BCE190C274EE77807E0C02F080225",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 3.1984137999999995,
+          "biologySeconds": 4.4564511000000095,
+          "cognitionSeconds": 0.015893200000000298,
+          "migrationSeconds": 2.613612099999998,
+          "identityCommitSeconds": 0.0005509999999999876,
+          "cognitionEvidenceSeconds": 0.003615499999999279,
+          "cognitionWriteSeconds": 0.0008920999999998927
+        },
+        "allocatedBytes": 9936500208,
+        "retainedManagedBytes": 4219200,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 2,
+          "deceasedIdentities": 2,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 0,
+          "initialActive": 0,
+          "living": 0,
+          "active": 0,
+          "deceased": 0,
+          "anonymous": 11883,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "identifiedPersonMonths": 0,
+          "activeReservationMonths": 0,
+          "meanLiving": 0,
+          "representationCommands": 0,
+          "replenishment": null
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 11.5172897,
+        "ticksPerSecond": 1041.9117963143708,
+        "peakWorkingSetBytes": 67076096,
+        "snapshotBytes": 125239,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 0,
+        "identityCommandSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Reference-r3",
+      "case": "identities64",
+      "mode": "Reference",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "A460B3C95C05BE63534DCC8CAE976B2F8547C248B8396F49CB2A0FED7872CAE1",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 21.5891936,
+        "ticksPerSecond": 555.8336370655363,
+        "peakWorkingSetBytes": 103546880,
+        "snapshotBytes": 1148851,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities64-Off-r3",
+      "case": "identities64",
+      "mode": "Off",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D03F72FE3EEA11897B6581753025D191AA65213C9B609A344D7EDF4D43BAC2DD",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 4.790093600000015,
+          "biologySeconds": 6.421630300000025,
+          "cognitionSeconds": 0.02306390000000048,
+          "migrationSeconds": 3.6835901000000217,
+          "identityCommitSeconds": 0.38556450000000025,
+          "cognitionEvidenceSeconds": 0.004737299999999649,
+          "cognitionWriteSeconds": 0.0005719999999999716
+        },
+        "allocatedBytes": 18286838456,
+        "retainedManagedBytes": 19855768,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12149,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 0,
+          "living": 58,
+          "active": 0,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "E5291A3B082A7E95EB27CEAC483F18100EC20095F850F509B87A7EBA160C558A",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 0,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 20.6061068,
+        "ticksPerSecond": 582.3516356811273,
+        "peakWorkingSetBytes": 123912192,
+        "snapshotBytes": 1149075,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094298,
+        "identityCommandSha256": "060C10D0D62E3989AB880A5A51AF5040ADC88D2126CDEEACE73DEE4B8B275FD8",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Reference-r3",
+      "case": "identities256",
+      "mode": "Reference",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "82E9A807FB7742FD4E4C92EFC66810538BA02D02B475B199C38B4249AB1F8A38",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 37.7382457,
+        "ticksPerSecond": 317.9798047687203,
+        "peakWorkingSetBytes": 232792064,
+        "snapshotBytes": 4162252,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "identities256-Off-r3",
+      "case": "identities256",
+      "mode": "Off",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "0B8E88AD43436CB1F1E502CF074D291E58B7328ECD95453F20A3D6B599FAE2D8",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 14.017686800000027,
+          "biologySeconds": 6.592763400000045,
+          "cognitionSeconds": 0.03342769999999997,
+          "migrationSeconds": 3.959119400000004,
+          "identityCommitSeconds": 3.154340199999997,
+          "cognitionEvidenceSeconds": 0.005860799999999507,
+          "cognitionWriteSeconds": 0.0015351999999998296
+        },
+        "allocatedBytes": 20761624056,
+        "retainedManagedBytes": 73001960,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49187,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 0,
+          "living": 234,
+          "active": 0,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "4F6D7999521A754339CB2FBD41874B6380013ED3540CC9D75A447311430CA1F1",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 0,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 0,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 38.0041052,
+        "ticksPerSecond": 315.7553621338781,
+        "peakWorkingSetBytes": 228745216,
+        "snapshotBytes": 4162476,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31559094,
+        "identityCommandSha256": "7E4927DB9333CD2441DB38BDFB3561813CF20AE894F587235A0806D5F8395AA1",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Reference-r3",
+      "case": "mind1",
+      "mode": "Reference",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "083E864DB6851DB6EB8FD64804418AB9E3C3699101DE2425E0CD504F1E49958B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 21.2204258,
+        "ticksPerSecond": 565.4928941152538,
+        "peakWorkingSetBytes": 94236672,
+        "snapshotBytes": 1148850,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Off-r3",
+      "case": "mind1",
+      "mode": "Off",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "EAC2396C6156B660BDC72485AD6A5C6E17DEDC5F2C1916BA2E73CE1A322B9B9B",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 5.318182199999992,
+          "biologySeconds": 6.659713400000007,
+          "cognitionSeconds": 0.02717460000000025,
+          "migrationSeconds": 4.159096000000002,
+          "identityCommitSeconds": 0.4580547999999997,
+          "cognitionEvidenceSeconds": 0.003986899999999644,
+          "cognitionWriteSeconds": 0.0005459999999999809
+        },
+        "allocatedBytes": 18444460120,
+        "retainedManagedBytes": 19829592,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 21.6393097,
+        "ticksPerSecond": 554.5463402651889,
+        "peakWorkingSetBytes": 118042624,
+        "snapshotBytes": 1149074,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-ObserveOnly-r3",
+      "case": "mind1",
+      "mode": "ObserveOnly",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "2BBA72DA2FA6A5AB03EF7D7A863D0C78B9709391F0281A96441CBC26EE181549",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11611,
+          "eventHash": "F16C4A60448AF3E773AC0C38B7980F9E8CF2D99C0654F26F0B9394F1529EEE49",
+          "eventBytes": 12765433,
+          "eventSha256": "44D4EB20B0CF2A4160CE6A763DA6A217219BBCDC820DA5CCA973FA9CD00BF4C4"
+        },
+        "profiling": {
+          "validationSeconds": 5.1418334999999855,
+          "biologySeconds": 6.652052000000047,
+          "cognitionSeconds": 0.1985942000000006,
+          "migrationSeconds": 4.0632605000000135,
+          "identityCommitSeconds": 0.40908329999999826,
+          "cognitionEvidenceSeconds": 0.3266567000000031,
+          "cognitionWriteSeconds": 0.28811160000000136
+        },
+        "allocatedBytes": 18649949888,
+        "retainedManagedBytes": 20049008,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 12148,
+          "deceasedIdentities": 1011681,
+          "minds": 576,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4886,
+          "anonymous": 11825,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "0B1616D4320ADDE2A1C7282FCEC418262309A8E7CD0977ACE3F574B08BF30437",
+          "identifiedPersonMonths": 749360,
+          "activeReservationMonths": 11684,
+          "meanLiving": 62.446666666666665,
+          "representationCommands": 4944,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 21.9656982,
+        "ticksPerSecond": 546.3063313871808,
+        "peakWorkingSetBytes": 107671552,
+        "snapshotBytes": 1149652,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 8094890,
+        "identityCommandSha256": "661DDDFC00A51E0EDBEA120A76E82988719200A641FCE217F4CF5E8F927A732C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "mind1-Decide-r3",
+      "case": "mind1",
+      "mode": "Decide",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11849,
+        "births": 471896,
+        "deaths": 498447,
+        "migrations": 2809741,
+        "foodProduced": 166962322.53890288,
+        "foodConsumed": 167041205.51110417,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 22
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11827
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "C0CBAF904BA712947A7C12A16C44C663FD3CB9171C6936FB6744D3056257DF60",
+        "eventHash": "3D8B2C273B0CFE01562C80D9164F34592837278C364B7C31B87EC0F895DA012D",
+        "eventCount": 21449,
+        "totalEventCount": 21449,
+        "biologicalProjectionHash": "1D5FD673ECA0674D85B92A9F4E63F7B6CA1F46D8FB12E14137A3BEF572B04E53",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 1,
+          "observations": 8,
+          "eventCount": 11775,
+          "eventHash": "F4446E7EA61E1E9BBBB0D72C50ED10E25826F317E26C5EE554FC6C023A4507DA",
+          "eventBytes": 18104955,
+          "eventSha256": "9C5E4DF335B83A3B47A17F03915B0566A17A6AFC2E70A08258BE75EA2459EB9F"
+        },
+        "profiling": {
+          "validationSeconds": 5.217646699999997,
+          "biologySeconds": 6.605382500000063,
+          "cognitionSeconds": 1.308143799999998,
+          "migrationSeconds": 3.4465329999999867,
+          "identityCommitSeconds": 0.43369050000000325,
+          "cognitionEvidenceSeconds": 0.44597720000000485,
+          "cognitionWriteSeconds": 0.41890329999999887
+        },
+        "allocatedBytes": 21472587264,
+        "retainedManagedBytes": 19996128,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107222,
+          "livingIdentities": 12153,
+          "deceasedIdentities": 982503,
+          "minds": 488,
+          "cognitionOptions": 94,
+          "cognitionCursor": 99
+        },
+        "identity": {
+          "initialIdentified": 64,
+          "initialActive": 1,
+          "living": 58,
+          "active": 1,
+          "deceased": 4745,
+          "anonymous": 11791,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 28700,
+          "eventHash": "8BE8DC0ADF72FA1FEF596ED5398260420FDE8EE4E2D71F37464308E25C26EADB",
+          "identifiedPersonMonths": 749873,
+          "activeReservationMonths": 11828,
+          "meanLiving": 62.48941666666666,
+          "representationCommands": 4803,
+          "replenishment": {
+            "target": 64,
+            "active": 1,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 23.2603463,
+        "ticksPerSecond": 515.8994558907319,
+        "peakWorkingSetBytes": 119967744,
+        "snapshotBytes": 1120387,
+        "eventBytes": 10412676,
+        "summarySha256": "5D8EA135C30991BFB9CCC21E6D54DD4951B0190E258553448A4D7F6786D90B7D",
+        "populationSha256": "28A7BFBE30EF4FC8802C6331BB6A1C6C162361E2DF1F9C0637F79DAA9E468BB4",
+        "foodSha256": "CB6F6B4CCBEDB89264A4709D119BABD1D265209650222DAF5C510D217D69FF9A",
+        "personEventBytes": 8094612,
+        "identityCommandSha256": "A7FDBD2C5950F9761433441A943741A667B8EF1F9B85599CAE9E81FE03828F1C",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Reference-r3",
+      "case": "minds64",
+      "mode": "Reference",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.4.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "8C6FF0837F74844B1A4C8681054D77DD25448B415F09A3761A648E686164A2AA",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 39.2834993,
+        "ticksPerSecond": 305.47176839717025,
+        "peakWorkingSetBytes": 214638592,
+        "snapshotBytes": 4162192,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Off-r3",
+      "case": "minds64",
+      "mode": "Off",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "4E3BD22C6D14D54B38D591F0EDF7AAF504ED83BA9A989C7652EF3414F246B265",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 0,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 0,
+          "observations": 0,
+          "eventCount": 0,
+          "eventHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "eventBytes": 0,
+          "eventSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        },
+        "profiling": {
+          "validationSeconds": 13.507081699999988,
+          "biologySeconds": 6.358431000000035,
+          "cognitionSeconds": 0.03127409999999983,
+          "migrationSeconds": 4.063133700000004,
+          "identityCommitSeconds": 3.047109600000007,
+          "cognitionEvidenceSeconds": 0.005947499999999444,
+          "cognitionWriteSeconds": 0.0012952999999998737
+        },
+        "allocatedBytes": 20843222184,
+        "retainedManagedBytes": 73001952,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 2,
+          "cognitionOptions": 94,
+          "cognitionCursor": 95
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 36.7686342,
+        "ticksPerSecond": 326.3651278077661,
+        "peakWorkingSetBytes": 212652032,
+        "snapshotBytes": 4162416,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-ObserveOnly-r3",
+      "case": "minds64",
+      "mode": "ObserveOnly",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11883,
+        "births": 472263,
+        "deaths": 498780,
+        "migrations": 2818689,
+        "foodProduced": 166943266.99750444,
+        "foodConsumed": 167022438.3245559,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 81
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11802
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "B2C7BE69E9D583D78315EE13BF9430FEE62D4E74E645CF38E65825EF81EE7027",
+        "eventHash": "E8857F1E5A128007EE3A4626833FA4043D44F519099639AF7429C4B166F715C4",
+        "eventCount": 21812,
+        "totalEventCount": 21812,
+        "biologicalProjectionHash": "68CD46ADC18DB58994A2291BDDBB41F56E4B248FA145F4134B88C74E2FD41105",
+        "cognition": {
+          "options": {
+            "mode": 1,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 60,
+          "observations": 480,
+          "eventCount": 744328,
+          "eventHash": "5C0AAE5D7F98DD8F2D737E014A531DEDCB38E9B81D3FFC541C506F2035633DBD",
+          "eventBytes": 820074122,
+          "eventSha256": "F5146019CD3B1F8EDF5FD8E4BD4E8DDA8F9FB4E1044B177816C2F1B2E2BE28BE"
+        },
+        "profiling": {
+          "validationSeconds": 18.70331820000002,
+          "biologySeconds": 6.273431499999973,
+          "cognitionSeconds": 1.1120480999999975,
+          "migrationSeconds": 4.055836299999987,
+          "identityCommitSeconds": 3.250967400000006,
+          "cognitionEvidenceSeconds": 8.320048100000001,
+          "cognitionWriteSeconds": 6.979097000000003
+        },
+        "allocatedBytes": 29774406744,
+        "retainedManagedBytes": 73218784,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107220,
+          "livingIdentities": 49127,
+          "deceasedIdentities": 3988041,
+          "minds": 30165,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 234,
+          "active": 60,
+          "deceased": 19206,
+          "anonymous": 11649,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 111502,
+          "eventHash": "904CC147BF1465EE90E83DC5CA88E9582BBFC5A8F5EC8B8034BDF92C116F3679",
+          "identifiedPersonMonths": 2998708,
+          "activeReservationMonths": 749250,
+          "meanLiving": 249.89233333333334,
+          "representationCommands": 19440,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 59.963858,
+        "ticksPerSecond": 200.12054594619312,
+        "peakWorkingSetBytes": 210468864,
+        "snapshotBytes": 4192584,
+        "eventBytes": 10572171,
+        "summarySha256": "14B2544450886B790FF19A0020996E6B72CFC7C6788F24366D42EC2E2FD403EF",
+        "populationSha256": "DC0A852BE679C2635BF5ACB1C1687B9C216EFFF0A31719AEE0197E0BDBCE2176",
+        "foodSha256": "143BB6AF1058B8426D30830E7B6DD5D28C9F9457D4D0432550D07FC7190BFD98",
+        "personEventBytes": 31598950,
+        "identityCommandSha256": "28E0A5DFB998B5FFFC1E95F35AE918AEDF9AA57F33AAFE46F93492839EB6D940",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    },
+    {
+      "name": "minds64-Decide-r3",
+      "case": "minds64",
+      "mode": "Decide",
+      "repetition": 3,
+      "report": {
+        "status": "complete",
+        "engineVersion": "0.5.0",
+        "rulesetHash": "0EB9F0D54557FCA59570C6E94A17AEA79481B6895C20C23D1EAEC78B11CEFEB8",
+        "seed": 847192,
+        "startTick": 0,
+        "endTick": 12000,
+        "months": 12000,
+        "regions": 12,
+        "cohorts": 432,
+        "initialPopulation": 38400,
+        "finalPopulation": 11833,
+        "births": 471741,
+        "deaths": 498308,
+        "migrations": 2809520,
+        "foodProduced": 166928370.31221908,
+        "foodConsumed": 167006949.5232844,
+        "species": [
+          {
+            "id": {
+              "value": 0
+            },
+            "name": "human",
+            "initialPopulation": 9600,
+            "finalPopulation": 92
+          },
+          {
+            "id": {
+              "value": 1
+            },
+            "name": "orc",
+            "initialPopulation": 9600,
+            "finalPopulation": 11741
+          },
+          {
+            "id": {
+              "value": 2
+            },
+            "name": "elf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          },
+          {
+            "id": {
+              "value": 3
+            },
+            "name": "dwarf",
+            "initialPopulation": 9600,
+            "finalPopulation": 0
+          }
+        ],
+        "extinctSpecies": 2,
+        "stateHash": "D6D7825DC5A344CC1D7C9E55A16CFE595F5EF12BFD2E6BD6570698AC6C7A5E53",
+        "eventHash": "179B0585DEC84EC88161C1EE19E1CEFF6E21765F431C3CFF99C7028E6CEEA704",
+        "eventCount": 22207,
+        "totalEventCount": 22207,
+        "biologicalProjectionHash": "E32A00EE913092B04F785A105452026BDA8E98FCFD79092D9BD5963CF3929B96",
+        "cognition": {
+          "options": {
+            "mode": 2,
+            "policy": "survival-v1",
+            "memoryCapacity": 8,
+            "memoryMaxAge": 12,
+            "adequateNutrition": 0.8
+          },
+          "minds": 61,
+          "observations": 488,
+          "eventCount": 751328,
+          "eventHash": "32A66328AA0FEC04CFE3586E36A3D66186F6F2A47BEF69FE49DAD1922DD1E13B",
+          "eventBytes": 1156695967,
+          "eventSha256": "21C22134476A96D4F82B5301B984DC20683EACFA1F64A06CDB3FEF470356C90B"
+        },
+        "profiling": {
+          "validationSeconds": 19.612614199999992,
+          "biologySeconds": 6.399667900000009,
+          "cognitionSeconds": 2.710245400000003,
+          "migrationSeconds": 4.268766500000003,
+          "identityCommitSeconds": 3.4971510999999986,
+          "cognitionEvidenceSeconds": 10.532328099999981,
+          "cognitionWriteSeconds": 9.705878399999953
+        },
+        "allocatedBytes": 35483669120,
+        "retainedManagedBytes": 72457632,
+        "serializedComponentBytes": {
+          "anonymousCohorts": 107219,
+          "livingIdentities": 49731,
+          "deceasedIdentities": 3845356,
+          "minds": 30855,
+          "cognitionOptions": 94,
+          "cognitionCursor": 100
+        },
+        "identity": {
+          "initialIdentified": 256,
+          "initialActive": 64,
+          "living": 237,
+          "active": 61,
+          "deceased": 18523,
+          "anonymous": 11596,
+          "options": {
+            "maxIdentified": 256,
+            "maxActiveMinds": 64
+          },
+          "eventCount": 113304,
+          "eventHash": "9FEF49C1FAB51AE379EDE61DCCEB914A39FCA03B30D3452B487863F9B4191D6E",
+          "identifiedPersonMonths": 3003919,
+          "activeReservationMonths": 755329,
+          "meanLiving": 250.32658333333333,
+          "representationCommands": 18760,
+          "replenishment": {
+            "target": 256,
+            "active": 64,
+            "everyMonths": 12
+          }
+        },
+        "sampleEveryMonths": 12,
+        "sampleSemantics": "monthly flows at sampled ticks; not interval totals",
+        "elapsedSeconds": 68.8624382,
+        "ticksPerSecond": 174.2604577135057,
+        "peakWorkingSetBytes": 255836160,
+        "snapshotBytes": 4051188,
+        "eventBytes": 10808649,
+        "summarySha256": "E3FFD18122ADE9E2EFCD756AB0B9F89BBB8E618FBA0DA8E94E091A6ED2788471",
+        "populationSha256": "6B465A1EB62D756A324159F707C9CD7EAFC78BA8DD181DB2AB438DCB9037BB1E",
+        "foodSha256": "CB855531DA5FF6630A0F87DE90F87286D5DDB58207B019F5DB0340DE6EE90DAE",
+        "personEventBytes": 31924686,
+        "identityCommandSha256": "4AE45B8E32672869B75DD34D75E20ECF367899A4EAA7F2C57D7FA1FFF58E3805",
+        "runtime": ".NET 10.0.1",
+        "os": "Microsoft Windows 10.0.26200",
+        "architecture": "X64",
+        "logicalProcessors": 8,
+        "validation": "full every tick; file IO included; process peak memory includes startup"
+      }
+    }
+  ],
+  "repeatedStatesAndHistoriesEqual": true
+}

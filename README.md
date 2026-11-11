@@ -1,8 +1,9 @@
 # Project Genesis — Prototype 001: The World Lives
 
-**Phase 1A:** engine 0.4.0 / snapshot schema 4. Persistent passive identities and
-exclusive population ownership; no individual decision-making yet. See
-`docs/PHASE1A_HANDOFF.md` for verification, benchmarks and Phase 1B interfaces.
+**Phase 1B:** engine 0.5.0 / snapshot schema 5. Persistent identity, bounded dated
+memory and deterministic local stay/move decisions. Cognition defaults to Off.
+See `docs/PHASE1B_HANDOFF.md` for current verification, benchmarks and limitations.
+`docs/PHASE1A_HANDOFF.md` retains the accepted ownership evidence.
 `docs/PHASE06_REPORT.md` retains the accepted demographic evidence.
 Phase 0.5 evidence remains in `docs/PHASE05_REPORT.md`.
 The initial Prototype 001 handoff remains a historical 0.1.0 record.
@@ -126,11 +127,12 @@ is an offline diagnostic: its binomial/fixed-age alternatives do not change the
 production world model. None of these commands automatically retunes the baseline.
 
 **Save compatibility:** new mechanics produce different future trajectories.
-Engine 0.4.0 requires snapshot schema 4; older snapshots are explicitly rejected
-before checksum verification. Use Git commit `d408813` for 0.3.0 saves,
+Engine 0.5.0 requires snapshot schema 5; older snapshots are explicitly rejected
+before checksum verification. Use Git commit `9bd958f` for 0.4.0 saves,
+`d408813` for 0.3.0 saves,
 `855c478` for 0.2.0 saves or `b0f8d4e`
 for 0.1.0 saves in a separate checkout, or create a fresh world with the old scenario
-and seed under 0.4.0. Existing scenario inputs and starting stage/variant counts
+and seed under 0.5.0. Existing scenario inputs and starting stage/variant counts
 remain supported; `maturationMonths` now specifies a minimum juvenile residence
 time instead of a geometric mean. Initial juveniles default to a uniform age mix.
 There is no silent save conversion or cross-version determinism claim.
@@ -181,8 +183,8 @@ Do not add combined cohorts to people again.
 Promotion is explicit and atomic. Read-only `inspect`, `compare`, history and local
 observation never create identities. Identified people remain retained until death;
 deceased records have zero population weight. Default budgets are 256 living
-identities and 64 active reservations. `active` reserves future mind capacity only;
-all Phase 1A individuals remain behaviorally passive. Births stay anonymous and
+identities and 64 active slots. In Off mode these are reservations; ObserveOnly
+records experiences and Decide executes the local policy. Births stay anonymous and
 continue normally when the identity budget is full.
 
 ```powershell
@@ -223,4 +225,55 @@ year interval. Histories are segment-local; retain earlier archives for earlier 
 `--replenish-every 12` is a benchmark driver issuing recorded boundary commands to
 maintain representation occupancy; it is not automatic simulation behavior. Limits
 are configurable at world creation, with a supported maximum of 10,000 identities.
-No Phase 1B policies, goals, memory or autonomous movement are implemented.
+## Phase 1B local minds
+
+Select `--cognition Off|ObserveOnly|Decide` when creating a world or benchmark.
+The selected mode and policy settings persist in its save. ObserveOnly records
+experience without migration overrides. Decide observes after shared feeding and
+demography; two consecutive local nutrition fractions below 0.8 can trigger a move
+to a remembered adequate or unfamiliar adjacent region. Unknown conditions remain
+unknown. The engine validates and commits the move, without feeding the person
+again at the destination. Explicit Stay also excludes a person from generic migration.
+
+Memory retains eight dated feeding observations per living mind by default, using
+destination knowledge for at most 12 months. Dormancy preserves old memory without
+inventing new experiences. Death removes live mind state but retains the identity
+and recorded events. Inspection does not teach a mind or materialize a person.
+
+```powershell
+dotnet $genesis cognition-demo --out artifacts/my-first-decision
+dotnet $genesis inspect mind 1 --save artifacts/my-first-decision/Decide/latest.json
+dotnet $genesis cognition-history --run artifacts/my-first-decision/Decide --person 1 --from 1 --to 3
+dotnet $genesis verify artifacts/my-first-decision/Decide
+
+dotnet $genesis new --seed 42 --cognition Decide --out artifacts/minds-world.json
+dotnet $genesis identify --save artifacts/minds-world.json --count 64 --active 16 --out artifacts/minds-promotion
+dotnet $genesis run --save artifacts/minds-promotion/latest.json --years 100 --out artifacts/minds-run --profile
+./scripts/Smoke-Test-Cognition.ps1 -OutputDirectory artifacts/new-cognition-smoke
+```
+
+`cognition-history` uses inclusive ticks and returns recorded inputs, memory,
+reason codes, requested choices and resolutions. `compare` separately reports
+canonical biology, identity history and cognition history equality; full save hashes
+include minds. `--profile` measures stage times and memory/serialized components
+without affecting state. `cognition-events.jsonl` has a separate verified hash chain.
+All snapshots are at completed monthly boundaries; no pending intent is carried
+across a save. Earlier segment archives are needed for earlier event details.
+
+For reproducible reference and performance studies (new output directories):
+
+```powershell
+git worktree add --detach artifacts/phase1b/reference 9bd958f
+dotnet build artifacts/phase1b/reference/Genesis.slnx -c Release
+./scripts/Compare-Phase1A.ps1 -OutputDirectory artifacts/new-cognition-controls
+./scripts/Benchmark-Cognition.ps1 -OutputDirectory artifacts/new-cognition-benchmarks
+dotnet $genesis cognition-profile --warm-months 0 --out artifacts/new-profile-zero.json
+dotnet $genesis cognition-profile --save artifacts/new-cognition-benchmarks/minds64-Off-r1/snapshot-00003000.json --out artifacts/new-profile-history.json
+dotnet $genesis continue-benchmark --run artifacts/new-cognition-benchmarks/minds64-Decide-r1 --from-tick 10800 --out artifacts/new-active-continuation
+```
+
+The comparison script builds isolated harnesses against the pinned and current
+engines; no old save is silently loaded. Benchmark continuation reproduces its
+logged replenishment workload, including commands at the resume boundary. Ordinary
+`run` has no automatic promotion behavior. No social, inventory or civilization
+systems are included in Phase 1B.

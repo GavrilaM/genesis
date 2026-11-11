@@ -1,11 +1,15 @@
 # Phase 1 — The First Minds: architecture proposal
 
-Status: **architecture approved with refinements; Phase 1A authorized, Phase 1B deferred**.
+Status: **architecture approved with refinements; Phase 1A delivered and Phase 1B authorized**.
 Date: 2026-10-26. The original proposal below includes later decision-making work;
 the user's approval authorizes persistent identity/ownership first. See
-`PHASE1A_HANDOFF.md` for delivered scope, evidence and the remaining boundary.
+`PHASE1A_HANDOFF.md` for the ownership milestone. The later instruction to execute
+`PHASE1B_PLAN.md` authorized its scoped local-decision implementation; see
+`PHASE1B_HANDOFF.md` for delivered behavior and measured evidence. The original
+staged proposal below is retained as design history.
 Prepared after Phase 0.6 passed 60 automated tests, 17 CLI checks and its
-reproducibility/benchmark gates. Phase 1B still requires further authorization.
+reproducibility/benchmark gates. Features beyond the authorized Phase 1B scope
+still require further authorization.
 
 ## Recommendation
 
@@ -234,4 +238,6 @@ retain identities until death, use configurable budgets of 256 living identities
 and 64 active reservations, and version incompatible snapshots. Exact passive
 biological/resource equivalence and observation neutrality are mandatory. Future
 exploration must permit unfamiliar destinations without omniscient knowledge.
-**Implement and validate Phase 1A only; do not implement Phase 1B yet.**
+The original review authorized Phase 1A first. The subsequent approved Phase 1B
+plan and execution instruction extend that boundary to the measured local-decision
+slice. They do not authorize additional Phase 1 features.

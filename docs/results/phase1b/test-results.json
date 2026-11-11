@@ -1,0 +1,631 @@
+{
+  "date": "2026-11-11",
+  "timeZone": "Asia/Jakarta",
+  "engineVersion": "0.5.0",
+  "snapshotSchema": 5,
+  "scenarioSchema": 1,
+  "implementationCommit": "824261ff5756beb5ff0c44508edbeae20f30f15c",
+  "referenceCommit": "9bd958ff6b4b213ad0f0a09c1be3e0e270ed277a",
+  "lockedRestore": "passed",
+  "releaseBuild": {
+    "status": "passed",
+    "warnings": 0,
+    "errors": 0
+  },
+  "automatedTests": {
+    "total": 110,
+    "passed": 110,
+    "failed": 0,
+    "skipped": 0,
+    "started": "2026-11-11T23:07:34.4132406+07:00",
+    "finished": "2026-11-11T23:08:27.1804098+07:00",
+    "rawEvidence": "artifacts/phase1b/tests/phase1b-release-final.trx",
+    "sha256": "4747917DC5722BFA81A009054083BDE9C9F58173A111E41FF3F465954E4FCE54"
+  },
+  "cli": {
+    "legacyPassed": 17,
+    "identityPassed": 18,
+    "cognitionPassed": 18,
+    "total": 53,
+    "failed": 0
+  },
+  "controls": {
+    "seeds": 8,
+    "cases": 10,
+    "monthlyRowsPerMode": 77184,
+    "finalIdentityRowsPerMode": 80,
+    "modes": [
+      "Reference",
+      "Off",
+      "ObserveOnly"
+    ],
+    "sameDigest": "06002AA74CC52770797A9CF28B708D072B2A22F422DF747C4027D1D85E3D4D39"
+  },
+  "benchmarks": {
+    "archivesVerified": 42,
+    "repetitions": 3,
+    "years": 1000,
+    "seed": 847192,
+    "allNoOverrideControlsPassed": true,
+    "repeatedStatesAndHistoriesEqual": true,
+    "offRegressionReviewTriggers": 0
+  },
+  "continuation": {
+    "checkpointTick": 10800,
+    "finalTick": 12000,
+    "sameFullState": true,
+    "sameBiology": true,
+    "allThreeConcatenatedHistoriesEqual": true,
+    "archiveVerified": true
+  },
+  "matchedProfiles": {
+    "iterationsPerMode": 32,
+    "sourceDeceasedCounts": [
+      0,
+      5036,
+      19206
+    ],
+    "measuredInputDeceasedCounts": [
+      0,
+      5043,
+      19213
+    ],
+    "sameBiologyAndIdentity": true
+  },
+  "measuredBinaries": {
+    "coreSha256": "033C23C243DAA843801045375B02E951CC41829F90E6DE99CFAAA0BCE8945ABA",
+    "cliSha256": "B5C736A8F4403610C354CDECBFE923AE122FD1AB452A637D35C104F5D346CF05"
+  },
+  "testCases": [
+    {
+      "name": "Genesis.Tests.CognitionTests.AllNamedJuvenileOverridesPreserveDeadlineAndDoNotAgeOrMigrateTwice(maturation: 25)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0214561"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ControlledChangesHaveCoherentPairedEffects(treatment: \"food-loss\")",
+      "outcome": "Passed",
+      "duration": "00:00:03.3433220"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.BaselineHasTwelveConnectedRegionsAndFourSpecies",
+      "outcome": "Passed",
+      "duration": "00:00:00.0020647"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.EmptyWorldCannotReproduce",
+      "outcome": "Passed",
+      "duration": "00:00:00.4287717"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.DisabledIdentityBudgetsAndUnsupportedAgeModelsFailWithoutLimitingPopulation",
+      "outcome": "Passed",
+      "duration": "00:00:00.0086233"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ActiveResumePreservesFullStateAndAllEventStreams(split: 24)",
+      "outcome": "Passed",
+      "duration": "00:00:00.8577443"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.HiddenDestinationResourcesNeverEnterPolicyInputs",
+      "outcome": "Passed",
+      "duration": "00:00:00.0078763"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.SustainedIdentityBenchmarkResumesWithTheSameBoundaryCommands",
+      "outcome": "Passed",
+      "duration": "00:00:02.5426388"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 1, p: 0,10000000000000001)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0017866"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.DeadPersonCannotObserveDecideOrAvoidDeathOnMaturationTick",
+      "outcome": "Passed",
+      "duration": "00:00:00.0018576"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.DormancyDoesNotInventExperiencesOrSatisfyConsecutiveMonthRule",
+      "outcome": "Passed",
+      "duration": "00:00:00.0114351"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 1000000000000, p: 0,5)",
+      "outcome": "Passed",
+      "duration": "00:00:00.1130033"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.DeathRemovesPreviouslyObservedMindButRetainsItsIdentity",
+      "outcome": "Passed",
+      "duration": "00:00:00.1660843"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.PassiveDetailPreservesFullMonthlyProjectionsAcrossSeeds(seed: 2)",
+      "outcome": "Passed",
+      "duration": "00:00:02.1605094"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ExplicitStaysExcludeExactlyTheActivePeopleFromGenericMigration(active: 16, identified: 32, expectedMoves: 64)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0072159"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(schema: 2, engine: \"0.2.0\")",
+      "outcome": "Passed",
+      "duration": "00:00:00.0085157"
+    },
+    {
+      "name": "Genesis.Tests.MigrationForecastTests.ForecastUsesNextMonthsDroughtAndRegrowsNewlyFreedStorage",
+      "outcome": "Passed",
+      "duration": "00:00:00.0052319"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.ExplicitTraitCountsAreExactAndRejectAmbiguousOrUnbalancedInputs",
+      "outcome": "Passed",
+      "duration": "00:00:00.0057777"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.AFullMealDoesNotLookLikeStarvationWhenRegionalForageWasConsumed",
+      "outcome": "Passed",
+      "duration": "00:00:00.0006759"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ExplicitStaysCanEmptyAnOtherwiseFullyMovingGenericPool",
+      "outcome": "Passed",
+      "duration": "00:00:00.0192078"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.AnnualSummariesEqualAllTwelveMonthlyFlows",
+      "outcome": "Passed",
+      "duration": "00:00:00.1530187"
+    },
+    {
+      "name": "Genesis.Tests.PersistenceTests.RunArchiveVerifiesAndRejectsTamperedLedger",
+      "outcome": "Passed",
+      "duration": "00:00:01.5750985"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.CognitionArchiveReplaysPolicyAndRejectsCorruptHistory",
+      "outcome": "Passed",
+      "duration": "00:00:01.0902442"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 20, p: 0,20000000000000001)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0036994"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.DoubledSparseScenarioDoublesPopulationAndPreservesCopies",
+      "outcome": "Passed",
+      "duration": "00:00:00.0086034"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.LateAccountingFailureLeavesInputMindsPeopleFoodAndCursorsUntouched",
+      "outcome": "Passed",
+      "duration": "00:00:00.0060665"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.GeographyControlsPreserveEachSpeciesAndLeaveEightRegionsEmpty",
+      "outcome": "Passed",
+      "duration": "00:00:00.0597081"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.IdentityArchiveReplaysCommandsAndDetectsTamperingAndRejectedTransactionsPublishNothing",
+      "outcome": "Passed",
+      "duration": "00:00:00.5345958"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.BadMindOwnershipDatesAndHistoryAreRejected",
+      "outcome": "Passed",
+      "duration": "00:00:00.0072889"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ControlledChangesHaveCoherentPairedEffects(treatment: \"productivity\")",
+      "outcome": "Passed",
+      "duration": "00:00:05.2472355"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.AllNamedJuvenileOverridesPreserveDeadlineAndDoNotAgeOrMigrateTwice(maturation: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0145884"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.ExplicitEmptyListCreatesAnEmptyWorldDespiteNonzeroDefaults",
+      "outcome": "Passed",
+      "duration": "00:00:00.0905791"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ExplicitStaysExcludeExactlyTheActivePeopleFromGenericMigration(active: 64, identified: 80, expectedMoves: 16)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0100075"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.SparseEntriesOverrideDefaultsAndKeepUninhabitedCohorts",
+      "outcome": "Passed",
+      "duration": "00:00:00.1535684"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.DatedKnownAdequateExitBeatsUnknownButExpiredOrEvictedKnowledgeDoesNot",
+      "outcome": "Passed",
+      "duration": "00:00:00.0041295"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.PromotionPartitionsPeopleAndPreservesEveryBiologicalField",
+      "outcome": "Passed",
+      "duration": "00:00:00.0646846"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.KnownMassMigrationEmitsOneMeasuredAnnualWave",
+      "outcome": "Passed",
+      "duration": "00:00:00.0211194"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.MidYearResumePreservesAnnualEvidenceAndEventHashes",
+      "outcome": "Passed",
+      "duration": "00:00:09.4293848"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.MigrationCarriesIdentityAndDeadlineExactlyOnceEvenWhenEveryMoverIsIdentified",
+      "outcome": "Passed",
+      "duration": "00:00:00.0050773"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.InvalidNullAndUnknownScenarioFieldsAreRejected",
+      "outcome": "Passed",
+      "duration": "00:00:00.0055063"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.SamplerEndpointsComplementsAndStreamIsolationHold",
+      "outcome": "Passed",
+      "duration": "00:00:00.0061035"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ActiveResumePreservesFullStateAndAllEventStreams(split: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:01.7871325"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.DeathOnlyExtinctionMatchesIndependentSurvivalProbability",
+      "outcome": "Passed",
+      "duration": "00:00:06.5382176"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.AllIdentifiedColoniesStillHaveAnonymousBirthsAndSharedDeaths(binomial: True)",
+      "outcome": "Passed",
+      "duration": "00:00:00.9784902"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.InvalidConfigurationAndIncompatibleSnapshotsAreRejected",
+      "outcome": "Passed",
+      "duration": "00:00:00.0034949"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.ProductionBirthsAndDeathsRetainBinomialVariance",
+      "outcome": "Passed",
+      "duration": "00:00:03.2189064"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.JuvenilesKeepDeadlinesAndCannotAgeTwiceOrReproduceOnMaturation(maturation: 25)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0445148"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.PassiveDetailPreservesFullMonthlyProjectionsAcrossSeeds(seed: 3)",
+      "outcome": "Passed",
+      "duration": "00:00:01.5248829"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.OneThousandYearsPreserveAllMechanicalInvariants",
+      "outcome": "Passed",
+      "duration": "00:00:24.8931182"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.PassiveDetailPreservesFullMonthlyProjectionsAcrossSeeds(seed: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:04.1953324"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.MovementRequiresAnAffordableEdge",
+      "outcome": "Passed",
+      "duration": "00:00:00.0455507"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 1000, p: 0,02)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0429514"
+    },
+    {
+      "name": "Genesis.Tests.PersistenceTests.SnapshotCorruptionAndFailedReplacementPreserveExistingSave",
+      "outcome": "Passed",
+      "duration": "00:00:00.4419187"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ActiveResumePreservesFullStateAndAllEventStreams(split: 12)",
+      "outcome": "Passed",
+      "duration": "00:00:01.5736816"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.StudySerializesSingletonExtinctionTimeAsUndefinedStandardDeviation",
+      "outcome": "Passed",
+      "duration": "00:00:00.1238797"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.NewbornPulseCannotMatureOrReproduceEarly(quantum: 12, maturation: 24)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0021268"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(schema: 4, engine: \"0.4.0\")",
+      "outcome": "Passed",
+      "duration": "00:00:00.0057352"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 100, p: 0,5)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0094851"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.AllIdentifiedColoniesStillHaveAnonymousBirthsAndSharedDeaths(binomial: False)",
+      "outcome": "Passed",
+      "duration": "00:00:01.0145610"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.JuvenilesCannotReproduceDuringTheirMaturationStep",
+      "outcome": "Passed",
+      "duration": "00:00:00.1793962"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 100, p: 0,01)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0085396"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.BadReferencesDuplicatesOrderAndCountsAreRejected",
+      "outcome": "Passed",
+      "duration": "00:00:00.0117682"
+    },
+    {
+      "name": "Genesis.Tests.PersistenceTests.FamineHysteresisDoesNotRepeatStartEveryMonth",
+      "outcome": "Passed",
+      "duration": "00:00:00.1513778"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ColdSelectsInheritedResistanceWithoutSpeciesStatChanges",
+      "outcome": "Passed",
+      "duration": "00:00:02.9604717"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.JuvenilesKeepDeadlinesAndCannotAgeTwiceOrReproduceOnMaturation(maturation: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0079788"
+    },
+    {
+      "name": "Genesis.Tests.MigrationForecastTests.ForecastIsAnEstimateAndDoesNotReadFutureRandomWeather",
+      "outcome": "Passed",
+      "duration": "00:00:00.0044847"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.ActivationIsOnlyABudgetedReservationAndDeactivationRetainsOwnership",
+      "outcome": "Passed",
+      "duration": "00:00:00.1421144"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.AuditIsBoundedAndDoesNotChangeCanonicalResults",
+      "outcome": "Passed",
+      "duration": "00:00:00.0069685"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.PassiveDetailPreservesFullMonthlyProjectionsAcrossSeeds(seed: 4)",
+      "outcome": "Passed",
+      "duration": "00:00:01.8982258"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.ConservationAndReferencesHoldAcrossSeeds",
+      "outcome": "Passed",
+      "duration": "00:00:04.8455807"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.TraitInheritancePreservesVariantWithoutMutation",
+      "outcome": "Passed",
+      "duration": "00:00:00.1406843"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.InitialAgeQueuesPartitionCountsAndCorruptionIsRejected",
+      "outcome": "Passed",
+      "duration": "00:00:00.0048245"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ControlledChangesHaveCoherentPairedEffects(treatment: \"connectivity\")",
+      "outcome": "Passed",
+      "duration": "00:00:04.4223982"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.MigrationPreservesEveryDeadlineAndCannotMoveArrivalsTwice",
+      "outcome": "Passed",
+      "duration": "00:00:00.0039923"
+    },
+    {
+      "name": "Genesis.Tests.MigrationForecastTests.MigrationCannotForecastMoreFoodThanStorageCanHold",
+      "outcome": "Passed",
+      "duration": "00:00:00.2076474"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.DemographyAssaysConservePeopleAndDistinguishEarlyMaturity",
+      "outcome": "Passed",
+      "duration": "00:00:00.2074071"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.NewbornPulseCannotMatureOrReproduceEarly(quantum: 1, maturation: 24)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0042813"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialTailsAndPartitionedCountsAgreeWithExactProbabilities",
+      "outcome": "Passed",
+      "duration": "00:00:00.0621439"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.SaveResumePreservesIdentitiesAllocatorsHistoryAndCommands",
+      "outcome": "Passed",
+      "duration": "00:00:00.5716966"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(schema: 1, engine: \"0.1.0\")",
+      "outcome": "Passed",
+      "duration": "00:00:00.0084905"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.StateValidationRejectsDuplicatedOwnershipLostIdsAndCorruptDeadlines",
+      "outcome": "Passed",
+      "duration": "00:00:00.3301011"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.CommandsAreAtomicSequencedAndCannotSpendTheSameAnonymousPersonTwice",
+      "outcome": "Passed",
+      "duration": "00:00:00.0039257"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 1000000, p: 0,20000000000000001)",
+      "outcome": "Passed",
+      "duration": "00:00:00.1110211"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.EqualCohortsUnderColdHaveDifferentialThermalMortality",
+      "outcome": "Passed",
+      "duration": "00:00:00.0048803"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.SimultaneousOpposingMovesAndChainsUseFrozenOrigins",
+      "outcome": "Passed",
+      "duration": "00:00:00.0048178"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.RealUnknownExplorationChangesOnlyMovementAfterSharedFeedingAndDemography",
+      "outcome": "Passed",
+      "duration": "00:00:00.0174873"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.ReadOnlyViewsCannotMaterializeMutateOrInventNeighborKnowledge",
+      "outcome": "Passed",
+      "duration": "00:00:00.0110762"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.DeathOnMaturationTickProducesOneRetainedDeadIdentityAndFreesCapacity",
+      "outcome": "Passed",
+      "duration": "00:00:00.0260050"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.BoundedMemoryIsDatedAndReadOnlyPolicyDoesNotMutateItsInput",
+      "outcome": "Passed",
+      "duration": "00:00:00.0014126"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.BinomialMomentsMatchAnalyticDistribution(n: 1000000000000, p: 9,9999999999999998E-13)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0114736"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.NewbornPulseCannotMatureOrReproduceEarly(quantum: 12, maturation: 25)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0056829"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.ScarcityAndExtinctionRemainIdenticalWithAllPeopleIdentified",
+      "outcome": "Passed",
+      "duration": "00:00:00.1213340"
+    },
+    {
+      "name": "Genesis.Tests.MechanicsTests.SameSeedAndSnapshotContinuationAreExactForOneHundredYears",
+      "outcome": "Passed",
+      "duration": "00:00:16.1990703"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.EveryBirthKeepsItsDeadlineAcrossRingWrapAndMidMonthResume(quantum: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0736721"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.CostIdTiesAndExitEnumerationDoNotChangeDecision",
+      "outcome": "Passed",
+      "duration": "00:00:00.0097269"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ProfilingAndRepeatedInspectionDoNotChangeTruth",
+      "outcome": "Passed",
+      "duration": "00:00:00.0062618"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.LegacyScenarioFallbackPreservesAllStartingCohorts",
+      "outcome": "Passed",
+      "duration": "00:00:00.0394273"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.ConditionalDeathAssignmentHasCorrectMarginalProbability",
+      "outcome": "Passed",
+      "duration": "00:00:00.7494340"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ActiveResumePreservesFullStateAndAllEventStreams(split: 2)",
+      "outcome": "Passed",
+      "duration": "00:00:02.0061332"
+    },
+    {
+      "name": "Genesis.Tests.InitializationTests.MigrationColonizesAnEmptyRegionWithoutCreatingPeople",
+      "outcome": "Passed",
+      "duration": "00:00:00.0328966"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ControlledChangesHaveCoherentPairedEffects(treatment: \"cold-resistance\")",
+      "outcome": "Passed",
+      "duration": "00:00:05.7861890"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.PartialMigrationAllocationIsBoundedAndExact",
+      "outcome": "Passed",
+      "duration": "00:00:00.0302123"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.FullBudgetDoesNotBlockBirthsOrDeleteAnonymousPeople",
+      "outcome": "Passed",
+      "duration": "00:00:00.0113753"
+    },
+    {
+      "name": "Genesis.Tests.ReportingTests.LegacySnapshotGetsCompatibilityErrorBeforeChecksumError(schema: 3, engine: \"0.3.0\")",
+      "outcome": "Passed",
+      "duration": "00:00:00.0099170"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.EveryBirthKeepsItsDeadlineAcrossRingWrapAndMidMonthResume(quantum: 12)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0948779"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.ActiveResumePreservesFullStateAndAllEventStreams(split: 5)",
+      "outcome": "Passed",
+      "duration": "00:00:01.5712227"
+    },
+    {
+      "name": "Genesis.Tests.CognitionTests.InvalidAndDuplicateIntentsNeverReserveLivingOrDeadPeople",
+      "outcome": "Passed",
+      "duration": "00:00:00.0152209"
+    },
+    {
+      "name": "Genesis.Tests.IdentityTests.NewlyBornPromotedJuvenilesHaveSimulatedDatesAndSurviveRingWrapWithoutInventedHistory",
+      "outcome": "Passed",
+      "duration": "00:00:00.0046940"
+    },
+    {
+      "name": "Genesis.Tests.ExperimentTests.ControlledChangesHaveCoherentPairedEffects(treatment: \"drought\")",
+      "outcome": "Passed",
+      "duration": "00:00:04.2625275"
+    },
+    {
+      "name": "Genesis.Tests.DemographicIntegrityTests.NewbornPulseCannotMatureOrReproduceEarly(quantum: 1, maturation: 1)",
+      "outcome": "Passed",
+      "duration": "00:00:00.0040112"
+    }
+  ]
+}

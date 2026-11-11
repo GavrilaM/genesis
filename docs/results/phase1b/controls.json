@@ -1,0 +1,39 @@
+{
+  "referenceCommit": "9bd958ff6b4b213ad0f0a09c1be3e0e270ed277a",
+  "allMonthlyProjectionsAndIdentityHistoriesEqual": true,
+  "results": [
+    {
+      "mode": "Reference",
+      "protocol": {
+        "rows": 77264,
+        "seeds": 8,
+        "years": 100,
+        "cases": 10,
+        "mode": "Off"
+      },
+      "sha256": "06002AA74CC52770797A9CF28B708D072B2A22F422DF747C4027D1D85E3D4D39"
+    },
+    {
+      "mode": "Off",
+      "protocol": {
+        "rows": 77264,
+        "seeds": 8,
+        "years": 100,
+        "cases": 10,
+        "mode": "Off"
+      },
+      "sha256": "06002AA74CC52770797A9CF28B708D072B2A22F422DF747C4027D1D85E3D4D39"
+    },
+    {
+      "mode": "ObserveOnly",
+      "protocol": {
+        "rows": 77264,
+        "seeds": 8,
+        "years": 100,
+        "cases": 10,
+        "mode": "ObserveOnly"
+      },
+      "sha256": "06002AA74CC52770797A9CF28B708D072B2A22F422DF747C4027D1D85E3D4D39"
+    }
+  ]
+}

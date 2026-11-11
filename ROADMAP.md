@@ -76,9 +76,16 @@ persistent lifecycle records, passive biological equivalence, read-only inspecti
 and local-only observation. Budgets reserve representation capacity; no cognition
 executes. See `docs/PHASE1A_HANDOFF.md` for verification and benchmarks.
 
-## Phase 1B — First decisions (not implemented)
+## Phase 1B — First decisions
 
-Use the Phase 1A interfaces and invariants in the handoff. Future perception,
-memory, uncertain exploration and intentions must not mint people, consume food
-twice, bypass biological deadlines or query omniscient destination conditions.
-Phase 1A completion does not authorize Phase 1B implementation.
+The user approved execution of `docs/PHASE1B_PLAN.md`. Implemented: post-demography
+local observations and descriptive feeding receipts, bounded dated memory,
+deterministic survival-v1 stay/move choices, explicit reservation from generic
+migration, simultaneous movement, a separate cognition ledger and exact active
+continuation. Default mode is Off; ObserveOnly is the biological neutrality control.
+Engine 0.5.0 / snapshot schema 5 explicitly rejects older saves.
+
+See `docs/PHASE1B_HANDOFF.md` for tests, reference comparisons, benchmark costs and
+known limits. A move to an unfamiliar region is legal without knowing its resources.
+No additional civilization, social, individual physiology or inventory work is
+authorized by this milestone's completion.

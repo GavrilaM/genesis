@@ -1,11 +1,13 @@
 # Architecture and blueprint validation
 
-Current engine: **0.4.0**, snapshot schema **4** (Phase 1A). Scenario schema 1
+Current engine: **0.5.0**, snapshot schema **5** (Phase 1B). Scenario schema 1
 continues to load; omitted `initialPopulations` retains the original stage/variant
-counts. Juveniles retain minimum ages. The 0.3.0 engine at `d408813`, 0.2.0 at `855c478` and 0.1.0
+counts. Juveniles retain minimum ages. The 0.4.0 engine at `9bd958f`, 0.3.0 at
+`d408813`, 0.2.0 at `855c478` and 0.1.0
 at `b0f8d4e` remain available for their saves. No silent age reconstruction of an
 old save is supported. See `docs/PHASE06_REPORT.md` for the experiments.
 Phase 1A ownership and interfaces are documented in `docs/PHASE1A_HANDOFF.md`.
+Phase 1B implementation and evidence are documented in `docs/PHASE1B_HANDOFF.md`.
 
 The blueprint is internally compatible with a small single-threaded monthly
 engine. Its equations, thresholds, initialization and age transition distributions
@@ -39,8 +41,9 @@ All births enter anonymous queues; parent/family assignments are deliberately ab
 `PopulationOwnership.Apply` stages an entire consecutive command batch against
 copies. It validates source availability, deadlines, budgets and exact biological
 projection preservation before returning the candidate. No rejection advances the
-ID or command allocator. `set-active` changes only future cognition reservations;
-no mind executes in Phase 1A. Death clears the reservation and retains a tombstone.
+ID or command allocator. `set-active` reserves a cognition slot; Off mode executes
+no minds, ObserveOnly records experience, and Decide generates stay/move intents.
+Death clears the slot and retains a tombstone.
 Identity events use an independent canonical chain, leaving biological event IDs
 and hashes unchanged. Identity archives retain commands for deterministic replay.
 
@@ -49,6 +52,30 @@ group memory, annual accounting and biological events; its TickResult overload a
 includes exact monthly flows, transfers and summaries. It excludes identities,
 representation budgets, schema/engine labels and identity events. Equal projections
 are a deliberate biological equivalence claim, not a full-save compatibility claim.
+
+Phase 1B stages all feeding/demography before building any decision observation.
+`MindPolicy.Advance` receives only detached local values, the existing nutrition
+fraction and bounded personal memory. It cannot query world state or aggregate
+forecasts. Memory defaults to eight chronological records; usable destination
+knowledge expires after 12 months. The deterministic `survival-v1` policy confirms
+two consecutive poor local allocations before choosing a remembered adequate exit
+or an unknown exit; cost/ID ties are explicit. No cognition RNG is needed.
+
+Accepted Stay and Move actors are reserved once. Generic eligibility is G=C-R,
+including exact juvenile-bin subtraction. Generic forecasts still use full C and
+shared demand. Generic mover sampling/identity assignment uses G and excludes the
+reserved IDs. Explicit moves add one source/destination delta; stays add none.
+Commit C plus generic and explicit deltas together, then derive anonymous ownership.
+Incoming people never migrate twice and ages never reset. Empty reservations take
+the original Phase 1A path with identical arithmetic and ordering.
+
+Cognition has its own persisted options, bounded living/dormant minds and event
+chain, outside the biological Scenario. One record per active survivor-month carries
+the observation, prior bounded memory, policy reason, intent and resolved movement
+link. Existing biological/generic identity event schemas remain unchanged. Query
+methods never update memory; death removes live mind state while recorded history
+and the identity remain. Rejected live-person intents reserve nobody and therefore
+retain generic eligibility. There is no asynchronous or delayed-action queue.
 
 Randomness: versioned counter-based SplitMix64, keyed by seed, month,
 system, entity and draw. The seed and next month are the complete RNG cursor.
@@ -110,7 +137,9 @@ Disconnected and directed graphs are allowed for controlled experiments.
    a Bernoulli fractional remainder. Only births and deaths switch to binomial
    event sampling. This intentionally leaves their other distributional limitations
    explicit instead of changing unrelated mechanics in this pass.
-6. **Migration.** After births/deaths/aging, freeze all regional demand. Forecast
+6. **Migration.** After births/deaths/aging and staged survivor decisions, freeze
+   all regional demand. Reserved explicit stays/moves are excluded from generic
+   mover counts, but included in shared demand. Forecast
    score per region/species/variant = min(2, forecast available food
    / max(1, post-demography demand)) - 0.04 x forecast thermal exposure. Forecast
    available food = remaining food + min(capacity - remaining food, next month's
@@ -248,7 +277,7 @@ This avoids re-rounding traits when several regional cohorts are concentrated.
 Zero cohorts are always retained. See `scenarios/sparse-frontier.json`.
 Initial trait allocation uses
 floors and gives the final bucket the remainder; this introduces at most two
-persons' rounding imbalance per stage. No genealogy, sex model, individual cognition,
+persons' rounding imbalance per stage. No genealogy, sex model, social cognition,
 settlement simulation or narrative generation is implemented. Juvenile bins track
 residence age; adult/elder exact ages and lifetime histories are still absent.
 
