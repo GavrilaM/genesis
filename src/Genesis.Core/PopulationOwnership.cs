@@ -40,6 +40,12 @@ public static class PopulationOwnership
     public static IdentifiedPerson? InspectPerson(WorldState w, PersonId id) =>
         w.Identity.Living.FirstOrDefault(p => p.Id == id) ?? w.Identity.Deceased.FirstOrDefault(p => p.Id == id);
 
+    public static MindState? InspectMind(WorldState w, PersonId id)
+    {
+        var mind = w.Cognition.Minds.FirstOrDefault(m => m.Person == id);
+        return mind is null ? null : mind with { Memory = (MemoryObservation[])mind.Memory.Clone() };
+    }
+
     // Explicit command planning for CLI/benchmarks; calling this is read-only.
     // Round-robin cohorts, earliest available deadline within each juvenile cohort.
     public static IdentityCommand[] PlanPromotions(WorldState w, int count, int active = 0)

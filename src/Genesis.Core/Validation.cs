@@ -2,7 +2,7 @@ namespace Genesis.Core;
 
 public static class Validation
 {
-    public static void Require(bool condition, string message)
+    public static void Require([System.Diagnostics.CodeAnalysis.DoesNotReturnIf(false)] bool condition, string message)
     {
         if (!condition) throw new InvalidDataException(message);
     }
@@ -105,6 +105,7 @@ public static class Validation
         int quantum = JuvenileAges.Options(w.Scenario).JuvenileBinMonths;
         Require(w.Regions.Length == nr && w.Cohorts.Length == nr * ns * 9 && w.Memory.Length == nr * ns && w.Windows.Length == nr * ns, "Incomplete canonical state.");
         IdentityValidation.State(w);
+        CognitionValidation.State(w);
         var identified = new int[w.Cohorts.Length];
         foreach (var person in w.Identity.Living)
         {

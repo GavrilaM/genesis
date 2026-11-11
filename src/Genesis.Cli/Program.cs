@@ -11,6 +11,8 @@ try
     cli.ExpectPositionals(verb switch { "inspect" => cli.Pos(1) == "world" ? 2 : 3, "explain" or "compare" => 3, "verify" => 2, _ => 1 });
     Scenario Scenario() => Persistence.ReadScenario(cli.Get("scenario", "scenarios/baseline.json"));
     WorldState Save() => Persistence.Load(cli.Required("save"));
+    CognitionOptions Cognition() => Enum.TryParse<CognitionMode>(cli.Get("cognition", "Off"), true, out var mode) && Enum.IsDefined(mode)
+        ? new(mode) : throw new ArgumentException("cognition must be Off, ObserveOnly or Decide.");
     void Print(object value) => Console.WriteLine(Persistence.Encode(value));
     string RunPath(string file) => Path.Combine(cli.Required("run"), file);
     IEnumerable<SimEvent> Events() => File.Exists(RunPath("events.jsonl"))
@@ -18,22 +20,31 @@ try
     switch (verb)
     {
         case "new":
-            cli.Allow("seed", "scenario", "out", "max-identified", "max-active");
+            cli.Allow("seed", "scenario", "out", "max-identified", "max-active", "cognition");
             var path = cli.Required("out");
             Validation.Require(!File.Exists(path), "Save exists; choose another path.");
-            var created = Simulation.Create(Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64))); Persistence.Save(path, created);
+            var created = Simulation.Create(Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64)), Cognition()); Persistence.Save(path, created);
             Print(new { save = Path.GetFullPath(path), population = created.Population, stateHash = Persistence.Hash(created) }); break;
         case "run":
         case "benchmark":
-            if (verb == "run") cli.Allow("save", "years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region");
-            else cli.Allow("years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region", "seed", "scenario", "double-regions", "identities", "active", "max-identified", "max-active", "replenish-every");
-            var initial = verb == "run" ? Save() : Simulation.Create(cli.Has("double-regions") ? Experiments.DoubleRegions(Scenario()) : Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64)));
+            if (verb == "run") cli.Allow("save", "years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region", "profile");
+            else cli.Allow("years", "out", "sample-every", "snapshot-every", "trace-tick", "trace-region", "seed", "scenario", "double-regions", "identities", "active", "max-identified", "max-active", "replenish-every", "cognition", "profile");
+            var initial = verb == "run" ? Save() : Simulation.Create(cli.Has("double-regions") ? Experiments.DoubleRegions(Scenario()) : Scenario(), cli.Seed(), new(cli.Int("max-identified", 256), cli.Int("max-active", 64)), Cognition());
             int identities = cli.Int("identities", 0), active = cli.Int("active", 0);
             Validation.Require(identities >= 0 && active >= 0 && active <= identities, "Invalid identity benchmark counts.");
             var setupCommands = identities == 0 ? null : PopulationOwnership.PlanPromotions(initial, identities, active);
             var replenishment = cli.Has("replenish-every") ? new IdentityBenchmarkPlan(identities, active, cli.Int("replenish-every", 12)) : null;
             Print(RunArchive.Run(initial, checked(cli.Int("years", 1000) * 12), cli.Required("out"), cli.Int("sample-every", 12),
-                checked(cli.Int("snapshot-every", 25) * 12), cli.OptionalInt("trace-tick"), cli.OptionalInt("trace-region"), setupCommands, replenishment)); break;
+                checked(cli.Int("snapshot-every", 25) * 12), cli.OptionalInt("trace-tick"), cli.OptionalInt("trace-region"), setupCommands, replenishment, cli.Has("profile"))); break;
+        case "cognition-demo":
+            cli.Allow("scenario", "out"); Print(CognitionDemo.Run(Scenario(), cli.Required("out"))); break;
+        case "continue-benchmark":
+            cli.Allow("run", "from-tick", "out"); Print(CognitionContinuation.Run(cli.Required("run"), cli.Int("from-tick", 10800), cli.Required("out"))); break;
+        case "cognition-profile":
+            cli.Allow("scenario", "save", "out", "iterations", "warm-months");
+            var profileSource = cli.Has("save") ? Save() : Simulation.Create(Scenario(), 847192);
+            if (!cli.Has("save")) profileSource = PopulationOwnership.Apply(profileSource, PopulationOwnership.PlanPromotions(profileSource, 256, 64)).State;
+            Print(CognitionProfile.Run(profileSource, cli.Int("iterations", 32), cli.Required("out"), cli.Int("warm-months", 8))); break;
         case "identify":
         case "identity":
             if (verb == "identify") cli.Allow("save", "count", "active", "out");
@@ -59,9 +70,19 @@ try
                     var person = PopulationOwnership.InspectPerson(w, new(long.Parse(cli.Pos(2))));
                     if (person is null) Console.WriteLine("not recorded"); else Print(person); break;
                 case "local": Print(PopulationOwnership.ObserveLocal(w, new(long.Parse(cli.Pos(2))))); break;
+                case "mind":
+                    var mind = PopulationOwnership.InspectMind(w, new(long.Parse(cli.Pos(2))));
+                    if (mind is null) Console.WriteLine("not recorded"); else Print(mind); break;
                 default: throw new ArgumentException("inspect requires world, region/species/person/local <id>.");
             }
             break;
+        case "cognition-history":
+            cli.Allow("run", "person", "from", "to");
+            var cognitionHistory = File.Exists(RunPath("cognition-events.jsonl"))
+                ? File.ReadLines(RunPath("cognition-events.jsonl")).Select(Persistence.Decode<CognitionEvent>) : [];
+            var cognitionMatches = cognitionHistory.Where(e => (!cli.Has("person") || e.Person.Value == long.Parse(cli.Required("person")))
+                && e.Tick >= cli.Int("from", 0) && e.Tick <= cli.Int("to", int.MaxValue)).ToArray();
+            if (cognitionMatches.Length == 0) Console.WriteLine("not recorded"); else foreach (var ev in cognitionMatches) Print(ev); break;
         case "identity-history":
             cli.Allow("run", "person", "from", "to");
             var personHistory = File.Exists(RunPath("person-events.jsonl"))
@@ -110,7 +131,7 @@ try
                 populationA = a.Population, populationB = b.Population, difference = b.Population - a.Population,
                 sameState = Persistence.Hash(a) == Persistence.Hash(b), sameEventHistory = a.EventHash == b.EventHash,
                 sameBiology = PopulationOwnership.BiologicalHash(a) == PopulationOwnership.BiologicalHash(b),
-                sameIdentityHistory = a.Identity.EventHash == b.Identity.EventHash }); break;
+                sameIdentityHistory = a.Identity.EventHash == b.Identity.EventHash, sameCognitionHistory = a.Cognition.EventHash == b.Cognition.EventHash }); break;
         case "export":
             cli.Allow("run", "format", "out"); Validation.Require(cli.Get("format", "csv") == "csv", "Only csv export is supported.");
             var dest = cli.Required("out"); Validation.Require(!Directory.Exists(dest), "Export directory exists.");
@@ -139,7 +160,8 @@ try
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(assayPath))!);
             File.WriteAllText(assayPath, Persistence.Encode(assay)); Print(new { output = Path.GetFullPath(assayPath) }); break;
         case "help":
-            Console.WriteLine("Phase 1A identity commands (passive; active only reserves future mind capacity):\nnew ... [--max-identified 256 --max-active 64]\nidentify --save SAVE --count N [--active N] --out NEW_DIRECTORY\nidentity --save SAVE --commands COMMANDS_JSON --out NEW_DIRECTORY\ninspect person|local ID --save SAVE\nidentity-history --run DIRECTORY [--person ID --from TICK --to TICK]\nbenchmark ... [--identities N --active N --max-identified N --max-active N --replenish-every MONTHS]\nReplenishment is benchmark-only explicit commands, retained in identity-commands.json.\ncompare includes canonical biological/resource equivalence. Identity commands never advance time.");
+            Console.WriteLine("Phase 1B: new/benchmark ... [--cognition Off|ObserveOnly|Decide]; run/benchmark ... [--profile]\ncognition-demo --out NEW_DIRECTORY\ninspect mind ID --save SAVE\ncognition-history --run DIRECTORY [--person ID --from TICK --to TICK]\nCognition defaults to Off. Save/resume preserves the selected mode and dated memory.");
+            Console.WriteLine("Persistent identity commands (Off reserves mind capacity; ObserveOnly/Decide process survivors):\nnew ... [--max-identified 256 --max-active 64]\nidentify --save SAVE --count N [--active N] --out NEW_DIRECTORY\nidentity --save SAVE --commands COMMANDS_JSON --out NEW_DIRECTORY\ninspect person|local ID --save SAVE\nidentity-history --run DIRECTORY [--person ID --from TICK --to TICK]\nbenchmark ... [--identities N --active N --max-identified N --max-active N --replenish-every MONTHS]\nReplenishment is benchmark-only explicit commands, retained in identity-commands.json.\ncompare includes canonical biological/resource equivalence. Identity commands never advance time.");
             Console.WriteLine("Genesis Prototype 001\nnew --seed N --scenario FILE --out SAVE\nrun --save SAVE --years N --out NEW_DIRECTORY [--sample-every MONTHS --snapshot-every YEARS --trace-tick T --trace-region ID]\ninspect world|region ID|species ID --save SAVE\nhistory --run DIRECTORY [--from YEAR --to YEAR --type TYPE]\nexplain event ID --run DIRECTORY\ntrace --run DIRECTORY --year Y --month M [--region ID]\nverify SAVE_OR_RUN_DIRECTORY\ncompare SAVE_A SAVE_B\nexport --run DIRECTORY --format csv --out NEW_DIRECTORY\nbenchmark --seed N --years N --out NEW_DIRECTORY [--double-regions]\nexperiments --seeds N --years N --out JSONL\nhistory-summary --run DIRECTORY [--from YEAR --to YEAR --region ID --species ID]\ncalibrate --seeds N --years N --out NEW_DIRECTORY [--cases baseline,swap-birth,...]\ndemography-assay --seeds N --out JSON\ndemography-study --suite worlds|pulse|extinction|bottleneck|death-only --seeds N --years N --out NEW_DIRECTORY [--models geometric-rounding,monthly-binomial]\nAll scenario defaults: scenarios/baseline.json. All years are integers; months are 1..12, years start at 0."); break;
         default: throw new ArgumentException($"Unknown command '{verb}'. Use help.");
     }
@@ -160,7 +182,7 @@ internal sealed class Arguments
             if (args[i].StartsWith("--", StringComparison.Ordinal))
             {
                 var key = args[i][2..];
-                var value = key == "double-regions" ? "true" : ++i < args.Length && !args[i].StartsWith("--", StringComparison.Ordinal) ? args[i] : throw new ArgumentException($"Missing value for --{key}.");
+                var value = key is "double-regions" or "profile" ? "true" : ++i < args.Length && !args[i].StartsWith("--", StringComparison.Ordinal) ? args[i] : throw new ArgumentException($"Missing value for --{key}.");
                 if (!options.TryAdd(key, value)) throw new ArgumentException($"Duplicate --{key}.");
             }
             else Positionals.Add(args[i]);

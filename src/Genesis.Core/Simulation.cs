@@ -2,11 +2,11 @@ namespace Genesis.Core;
 
 public static class Simulation
 {
-    public const string Version = "0.4.0";
-    public const int SnapshotSchema = 4;
+    public const string Version = "0.5.0";
+    public const int SnapshotSchema = 5;
     public static int Index(int r, int s, int a, int v, int ns) => ((r * ns + s) * 3 + a) * 3 + v;
 
-    public static WorldState Create(Scenario scenario, ulong seed, IdentityOptions? identityOptions = null)
+    public static WorldState Create(Scenario scenario, ulong seed, IdentityOptions? identityOptions = null, CognitionOptions? cognitionOptions = null)
     {
         // Own a detached copy: caller edits to configuration cannot alter a running world.
         var s = Persistence.Decode<Scenario>(Persistence.Encode(scenario));
@@ -37,14 +37,18 @@ public static class Simulation
         }
         var w = new WorldState(SnapshotSchema, Version, Persistence.Hash(s), seed, 0, DeterministicRandom.Algorithm, s,
             s.Regions.Select(r => new RegionState(r.Id, r.BaseTemperature, r.BaseRainfall, r.Capacity * s.InitialStockFraction)).ToArray(),
-            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash, windows.ToArray(), IdentityState.Empty(identityOptions));
+            cohorts.ToArray(), memory.ToArray(), 0, Persistence.EmptyEventHash, windows.ToArray(), IdentityState.Empty(identityOptions), CognitionState.Empty(cognitionOptions));
         Validation.State(w);
         return w;
     }
 
-    public static TickResult Step(WorldState w, bool validate = true, bool audit = false)
+    public static TickResult Step(WorldState w, bool validate = true, bool audit = false, bool profile = false)
     {
+        long Stamp() => profile ? System.Diagnostics.Stopwatch.GetTimestamp() : 0;
+        double Seconds(long elapsed) => elapsed / (double)System.Diagnostics.Stopwatch.Frequency;
+        long begin = Stamp();
         if (validate) Validation.State(w);
+        long afterInputValidation = Stamp();
         // One temporary combined view feeds the unchanged biological algorithms.
         // Only anonymous remainders + exclusive identities are committed below.
         var ownership = w.Identity.Living.Length == 0 ? null : new IdentityEvolution(w);
@@ -189,6 +193,34 @@ public static class Simulation
             }
         }
 
+        long afterBiology = Stamp();
+        var cognition = CognitionFrame.Prepare(w,
+            w.Cognition.Options.Mode == CognitionMode.Off && w.Cognition.Minds.Length == 0 ? [] : ownership?.Survivors ?? [], regions, counts, flows, tick);
+        var accepted = cognition.Resolutions.Where(r => r.Accepted).Select(r => r.Intent).ToArray();
+        // Eligibility only: all score/demand calculations below still use full counts.
+        var eligible = counts;
+        var eligibleBins = ageBins;
+        HashSet<PersonId>? reserved = null;
+        if (accepted.Length > 0)
+        {
+            reserved = accepted.Select(i => i.Person).ToHashSet();
+            eligible = (long[])counts.Clone();
+            eligibleBins = ageBins.Select(b => b is null ? null : (long[])b.Clone()).ToArray();
+            foreach (var intent in accepted)
+            {
+                var c = intent.Source; int i = Index(c.Region.Value, c.Species.Value, c.Stage, c.Variant, ns);
+                eligible[i]--;
+                Validation.Require(eligible[i] >= 0, "Migration reservation exhausted its cohort.");
+                if (c.Stage == 0)
+                {
+                    var person = w.Identity.Living.Single(p => p.Id == intent.Person);
+                    int bin = (int)(person.MaturationTick!.Value % eligibleBins[i]!.Length);
+                    eligibleBins[i]![bin]--;
+                    Validation.Require(eligibleBins[i]![bin] >= 0, "Migration reservation exhausted its deadline bucket.");
+                }
+            }
+        }
+        long afterCognition = Stamp();
         // Forecast is frozen for all origins; incoming migrants cannot migrate again this month.
         var forecastDemand = Enumerable.Range(0, nr).Select(r => Enumerable.Range(0, ns).Sum(s => Demand(r, s, counts))).ToArray();
         var forecasts = Enumerable.Range(0, nr).Select(r => EnvironmentModel.Forecast(w.Scenario.Regions[r], rules, regions[r], checked(tick + 1))).ToArray();
@@ -201,7 +233,7 @@ public static class Simulation
         }
         var transfers = new List<Transfer>(); var delta = new long[counts.Length];
         var ageDelta = ageBins.Select(b => b is null ? null : new long[b.Length]).ToArray();
-        ownership?.FreezeMigration();
+        ownership?.FreezeMigration(reserved);
         for (int r = 0; r < nr; r++) for (int s = 0; s < ns; s++) for (int v = 0; v < 3; v++)
         {
             var sp = w.Scenario.Species[s]; double originScore = Score(r, s, v), bestScore = originScore + rules.MigrationThreshold;
@@ -217,24 +249,43 @@ public static class Simulation
             for (int a = 0; a < 3; a++)
             {
                 int i = Index(r, s, a, v, ns), to = Index(best.Destination.Value, s, a, v, ns);
-                long movers = Math.Min(counts[i], Round(counts[i] * fraction, 7, r, s, a * 3 + v));
+                long movers = Math.Min(eligible[i], Round(eligible[i] * fraction, 7, r, s, a * 3 + v));
                 if (movers == 0) continue;
                 delta[i] -= movers; delta[to] += movers;
-                if (ageBins[i] is { } bins)
+                if (eligibleBins[i] is { } bins)
                 {
-                    var moved = JuvenileAges.Allocate(bins, counts[i], movers, Rand(14, r, s, v));
+                    var moved = JuvenileAges.Allocate(bins, eligible[i], movers, Rand(14, r, s, v));
                     for (int b = 0; b < bins.Length; b++)
                     {
                         ownership?.Move(i, b, bins[b], moved[b], best.Destination);
                         ageDelta[i]![b] -= moved[b]; ageDelta[to]![b] += moved[b];
                     }
                 }
-                else ownership?.Move(i, -1, counts[i], movers, best.Destination);
+                else ownership?.Move(i, -1, eligible[i], movers, best.Destination);
                 transfers.Add(new(w.Cohorts[i].Id, best.Destination, movers, best.Cost, originScore, bestScore));
                 int g = r * ns + s, dest = best.Destination.Value * ns + s;
                 flows[g] = flows[g] with { Outward = flows[g].Outward + movers };
                 flows[dest] = flows[dest] with { Inward = flows[dest].Inward + movers };
             }
+        }
+        foreach (var intent in accepted.Where(i => i.Choice == MovementChoice.Move))
+        {
+            var c = intent.Source; var destination = intent.Destination!.Value;
+            int i = Index(c.Region.Value, c.Species.Value, c.Stage, c.Variant, ns), to = Index(destination.Value, c.Species.Value, c.Stage, c.Variant, ns);
+            delta[i]--; delta[to]++;
+            if (c.Stage == 0)
+            {
+                var person = w.Identity.Living.Single(p => p.Id == intent.Person);
+                int bin = (int)(person.MaturationTick!.Value % ageBins[i]!.Length);
+                ageDelta[i]![bin]--; ageDelta[to]![bin]++;
+            }
+            ownership!.MoveExplicit(intent);
+            var edge = w.Scenario.Regions[c.Region.Value].Neighbors.Single(e => e.Destination == destination);
+            // Scores are diagnostic engine facts only; never passed to a mind.
+            transfers.Add(new(c, destination, 1, edge.Cost, Score(c.Region.Value, c.Species.Value, c.Variant), Score(destination.Value, c.Species.Value, c.Variant) - edge.Cost * rules.TravelPenalty));
+            int g = c.Region.Value * ns + c.Species.Value, dest = destination.Value * ns + c.Species.Value;
+            flows[g] = flows[g] with { Outward = flows[g].Outward + 1 };
+            flows[dest] = flows[dest] with { Inward = flows[dest].Inward + 1 };
         }
         var cohorts = new Cohort[counts.Length];
         for (int i = 0; i < counts.Length; i++)
@@ -282,10 +333,16 @@ public static class Simulation
         }
         string eventHash = w.EventHash;
         foreach (var ev in events) eventHash = Persistence.Chain(eventHash, ev);
+        long afterMigration = Stamp();
         var (identity, personEvents) = ownership is null ? (w.Identity, Array.Empty<PersonEvent>()) : ownership.Commit(cohorts);
-        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash, Windows = windows, Identity = identity };
-        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? [], audit ? forecasts : [], summaries.ToArray(), personEvents);
+        long beforeCognitionEvidence = Stamp();
+        var cognitionEvents = cognition.Complete(personEvents);
+        var state = w with { CurrentTick = tick, Regions = regions, Cohorts = cohorts, Memory = memory, EventCount = w.EventCount + events.Count, EventHash = eventHash, Windows = windows, Identity = identity, Cognition = cognition.State };
+        long afterCommit = Stamp();
+        var result = new TickResult(state, flows, food, transfers.ToArray(), events.ToArray(), auditRows?.ToArray() ?? [], audit ? forecasts : [], summaries.ToArray(), personEvents, cognitionEvents);
         if (validate) { Validation.State(state); Validation.Transition(result); }
+        if (profile) result = result with { Timing = new(Seconds(afterInputValidation - begin + Stamp() - afterCommit), Seconds(afterBiology - afterInputValidation),
+            Seconds(afterCognition - afterBiology), Seconds(afterMigration - afterCognition), Seconds(beforeCognitionEvidence - afterMigration), Seconds(afterCommit - beforeCognitionEvidence)) };
         return result;
     }
 }

@@ -18,8 +18,9 @@ internal sealed class IdentityEvolution
         biological = Groups();
     }
 
-    private Dictionary<(int, int), int[]> Groups() => Enumerable.Range(0, people.Length)
-        .Where(i => people[i].DeathTick is null).GroupBy(i =>
+    public IdentifiedPerson[] Survivors => people.Where(p => p.DeathTick is null).ToArray();
+    private Dictionary<(int, int), int[]> Groups(HashSet<PersonId>? excluded = null) => Enumerable.Range(0, people.Length)
+        .Where(i => people[i].DeathTick is null && (excluded is null || !excluded.Contains(people[i].Id))).GroupBy(i =>
         {
             var p = people[i]; var c = p.Cohort;
             int index = Simulation.Index(c.Region.Value, c.Species.Value, c.Stage, c.Variant, input.Scenario.Species.Length);
@@ -64,7 +65,17 @@ internal sealed class IdentityEvolution
             p => p with { Cohort = p.Cohort with { Stage = 2 } }, "elder-transition");
     }
 
-    public void FreezeMigration() => migration = Groups();
+    public void FreezeMigration(HashSet<PersonId>? excluded = null) => migration = Groups(excluded);
+    public void MoveExplicit(MovementIntent intent)
+    {
+        int index = Array.FindIndex(people, p => p.Id == intent.Person && p.DeathTick is null);
+        Validation.Require(index >= 0, "Explicit mover lost its living owner.");
+        var before = people[index];
+        Validation.Require(before.Cohort == intent.Source && before.Active && intent.Destination is not null, "Reserved mover changed before commit.");
+        var after = before with { Cohort = before.Cohort with { Region = intent.Destination.Value } };
+        people[index] = after;
+        events.Add(new(input.Identity.EventCount + events.Count + 1, tick, intent.Person, "migration", before.Cohort, after.Cohort, "explicit-intent"));
+    }
     public void Move(int cohort, int bin, long total, long movers, RegionId destination) =>
         Select(migration, cohort, bin, total, movers, 103,
             p => p with { Cohort = p.Cohort with { Region = destination } }, "migration");

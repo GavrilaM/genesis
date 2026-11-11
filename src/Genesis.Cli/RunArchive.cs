@@ -12,7 +12,7 @@ public sealed record IdentityBenchmarkPlan(int Target, int Active, int EveryMont
 public static class RunArchive
 {
     public static object Run(WorldState start, int months, string output, int sampleEvery, int snapshotEvery, int? traceTick, int? traceRegion,
-        IdentityCommand[]? initialCommands = null, IdentityBenchmarkPlan? replenishment = null)
+        IdentityCommand[]? initialCommands = null, IdentityBenchmarkPlan? replenishment = null, bool profile = false)
     {
         Validation.Require(months > 0 && sampleEvery > 0 && snapshotEvery > 0, "Durations and intervals must be positive.");
         _ = checked(start.CurrentTick + months);
@@ -30,6 +30,8 @@ public static class RunArchive
         File.WriteAllText(Path.Combine(output, "status.json"), Persistence.Encode(new { status = "incomplete", startTick = start.CurrentTick }));
         Persistence.Save(Path.Combine(output, "initial.json"), start);
         var watch = Stopwatch.StartNew();
+        long allocationStart = GC.GetTotalAllocatedBytes(false);
+        double validationSeconds = 0, biologySeconds = 0, cognitionSeconds = 0, migrationSeconds = 0, identityCommitSeconds = 0, cognitionEvidenceSeconds = 0, cognitionWriteSeconds = 0;
         var w = setup?.State ?? start; long births = 0, deaths = 0, migrations = 0; int eventCount = 0;
         int initialIdentified = w.Identity.Living.Length, initialActive = w.Identity.Living.Count(p => p.Active);
         long identifiedPersonMonths = 0, activeReservationMonths = 0;
@@ -38,6 +40,7 @@ public static class RunArchive
         double produced = 0, consumed = 0;
         using (var events = new StreamWriter(Path.Combine(output, "events.jsonl")))
         using (var personEvents = new StreamWriter(Path.Combine(output, "person-events.jsonl")))
+        using (var cognitionEvents = new StreamWriter(Path.Combine(output, "cognition-events.jsonl")))
         using (var population = new StreamWriter(Path.Combine(output, "population.csv")))
         using (var food = new StreamWriter(Path.Combine(output, "food.csv")))
         using (var summaries = new StreamWriter(Path.Combine(output, "summaries.jsonl")))
@@ -61,9 +64,18 @@ public static class RunArchive
                 }
                 identifiedPersonMonths += w.Identity.Living.Length;
                 activeReservationMonths += w.Identity.Living.Count(p => p.Active);
-                var step = Simulation.Step(w, audit: traceTick == w.CurrentTick + 1); w = step.State;
+                var step = Simulation.Step(w, audit: traceTick == w.CurrentTick + 1, profile: profile); w = step.State;
+                if (step.Timing is { } timing)
+                {
+                    validationSeconds += timing.ValidationSeconds; biologySeconds += timing.BiologySeconds;
+                    cognitionSeconds += timing.CognitionSeconds; migrationSeconds += timing.MigrationSeconds;
+                    identityCommitSeconds += timing.IdentityCommitSeconds; cognitionEvidenceSeconds += timing.CognitionEvidenceSeconds;
+                }
                 foreach (var ev in step.Events) { events.WriteLine(Persistence.Encode(ev)); eventCount++; }
                 foreach (var ev in step.PersonEvents) personEvents.WriteLine(Persistence.Encode(ev));
+                long writeStart = profile ? Stopwatch.GetTimestamp() : 0;
+                foreach (var ev in step.CognitionEvents) cognitionEvents.WriteLine(Persistence.Encode(ev));
+                if (profile) cognitionWriteSeconds += (Stopwatch.GetTimestamp() - writeStart) / (double)Stopwatch.Frequency;
                 foreach (var summary in step.Summaries) summaries.WriteLine(Persistence.Encode(summary));
                 births += step.Populations.Sum(f => f.Births); deaths += step.Populations.Sum(f => f.Deaths);
                 migrations += step.Populations.Sum(f => f.Outward);
@@ -89,6 +101,8 @@ public static class RunArchive
         Persistence.Save(Path.Combine(output, "latest.json"), w);
         File.WriteAllText(Path.Combine(output, "identity-commands.json"), Persistence.Encode(executedCommands));
         watch.Stop();
+        long allocatedBytes = GC.GetTotalAllocatedBytes(false) - allocationStart;
+        long retainedManagedBytes = GC.GetTotalMemory(profile);
         using var process = Process.GetCurrentProcess(); process.Refresh();
         var initialCohorts = PopulationOwnership.CombinedCohorts(start);
         var finalCohorts = PopulationOwnership.CombinedCohorts(w);
@@ -102,6 +116,14 @@ public static class RunArchive
             extinctSpecies = w.Scenario.Species.Count(s => finalCohorts.Where(c => c.Id.Species == s.Id).Sum(c => c.Count) == 0),
             stateHash = Persistence.Hash(w), w.EventHash, eventCount, totalEventCount = w.EventCount,
             biologicalProjectionHash = PopulationOwnership.BiologicalHash(w),
+            cognition = new { w.Cognition.Options, minds = w.Cognition.Minds.Length,
+                observations = w.Cognition.Minds.Sum(m => m.Memory.Length), w.Cognition.EventCount, w.Cognition.EventHash,
+                eventBytes = new FileInfo(Path.Combine(output, "cognition-events.jsonl")).Length,
+                eventSha256 = FileHash(Path.Combine(output, "cognition-events.jsonl")) },
+            profiling = profile ? new { validationSeconds, biologySeconds, cognitionSeconds, migrationSeconds, identityCommitSeconds, cognitionEvidenceSeconds, cognitionWriteSeconds } : null,
+            allocatedBytes, retainedManagedBytes,
+            serializedComponentBytes = new { anonymousCohorts = Bytes(w.Cohorts), livingIdentities = Bytes(w.Identity.Living), deceasedIdentities = Bytes(w.Identity.Deceased),
+                minds = Bytes(w.Cognition.Minds), cognitionOptions = Bytes(w.Cognition.Options), cognitionCursor = Bytes(new { w.Cognition.EventCount, w.Cognition.EventHash }) },
             identity = new { initialIdentified, initialActive, living = w.Identity.Living.Length,
                 active = w.Identity.Living.Count(p => p.Active), deceased = w.Identity.Deceased.Length,
                 anonymous = w.Cohorts.Sum(c => c.Count), w.Identity.Options, w.Identity.EventCount, w.Identity.EventHash,
@@ -124,6 +146,7 @@ public static class RunArchive
         return report;
     }
     public static string Csv(params object[] fields) => string.Join(',', fields.Select(f => Convert.ToString(f, CultureInfo.InvariantCulture)));
+    private static int Bytes<T>(T value) => System.Text.Encoding.UTF8.GetByteCount(Persistence.Encode(value));
     private static string FileHash(string path)
     {
         using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream));
@@ -147,6 +170,7 @@ public static class RunArchive
         }
         Validation.Require(hash == final.EventHash && count == final.EventCount, "Event ledger hash/count mismatch.");
         IdentityArchive.VerifyLedger(directory, initial, final);
+        CognitionArchive.Verify(directory, initial, final);
         Validation.Require(initial.RulesetHash == final.RulesetHash && initial.Seed == final.Seed && final.CurrentTick >= initial.CurrentTick, "Run inputs changed.");
         using var report = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "report.json")));
         Validation.Require(report.RootElement.GetProperty("summarySha256").GetString() == FileHash(Path.Combine(directory, "summaries.jsonl")),
@@ -156,5 +180,9 @@ public static class RunArchive
         foreach (var name in new[] { "population", "food" })
             Validation.Require(report.RootElement.GetProperty(name + "Sha256").GetString() == FileHash(Path.Combine(directory, name + ".csv")), "Metric checksum mismatch.");
         Validation.Require(report.RootElement.GetProperty("identityCommandSha256").GetString() == FileHash(Path.Combine(directory, "identity-commands.json")), "Identity command checksum mismatch.");
+        var cognition = report.RootElement.GetProperty("cognition");
+        Validation.Require(cognition.GetProperty("eventSha256").GetString() == FileHash(Path.Combine(directory, "cognition-events.jsonl"))
+            && cognition.GetProperty("eventCount").GetInt64() == final.Cognition.EventCount
+            && cognition.GetProperty("eventHash").GetString() == final.Cognition.EventHash, "Cognition report/ledger mismatch.");
     }
 }
